@@ -27,3 +27,7 @@ export class AppComponent {
 // $(document).ready(() => {
 //   console.log("jquery başarılı bir şekilde çalışıyor");
 // });
+
+// $.get("https://localhost:7234/WeatherForecast", (data: any) => {
+//   console.log(data);
+// });

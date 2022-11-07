@@ -24,7 +24,7 @@ export class HttpClientService {
     if (requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint;
     else
-      url = `${this.generateURL(requestParameters)}${id ? `/${id}` : ""}`;
+      url = `${this.generateURL(requestParameters)}${id ? `/${id}` : ""}${requestParameters.queryString ? `?${requestParameters.queryString}`: ""}`;
 
     return this.httpClient.get<T>(url, { headers: requestParameters.headers });
   }
@@ -36,7 +36,7 @@ export class HttpClientService {
     if (requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint;
     else
-      url = `${this.generateURL(requestParameters)}`;
+      url = `${this.generateURL(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}`: ""}`;
 
     return this.httpClient.post<T>(url, body, { headers: requestParameters.headers });
   }
@@ -48,7 +48,7 @@ export class HttpClientService {
     if (requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint;
     else
-      url = `${this.generateURL(requestParameters)}`;
+      url = `${this.generateURL(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}`: ""}`;
 
     return this.httpClient.put<T>(url, body, { headers: requestParameters.headers });
 
@@ -61,7 +61,7 @@ export class HttpClientService {
     if (requestParameters.fullEndPoint)
       url = requestParameters.fullEndPoint
     else
-      url = `${this.generateURL(requestParameters)}/${id}`;
+      url = `${this.generateURL(requestParameters)}/${id}${requestParameters.queryString ? `?${requestParameters.queryString}`: ""}`;
 
     return this.httpClient.delete<T>(url, { headers: requestParameters.headers });
 
@@ -72,6 +72,7 @@ export class RequestParameters {
   controller?: string;
   action?: string;
 
+  queryString?: string;
   headers?: HttpHeaders;
   baseURL?: string; // Olurda baseUrl'den farklı bir url'e istek atmak istersek
   fullEndPoint?: string; // Olurda tamamen farklı bir adrese istek atmak istersek

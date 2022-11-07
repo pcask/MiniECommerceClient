@@ -17,12 +17,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.alertify.Notify("denek", {
-    //   dismissOther: true,
-    //   messageType: MessageType.Success,
-    //   position: Position.BottomLeft,
-    //   delay: 3
-    // });
+
   }
 
   createProduct(name: HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement) {
@@ -39,6 +34,13 @@ export class CreateComponent extends BaseComponent implements OnInit {
         messageType: MessageType.Success,
         position: Position.TopRight,
         delay: 3
+      })
+    }, (ErrorMessage: string) => {
+      this.alertify.Notify(ErrorMessage, {
+        dismissOther: true,
+        messageType: MessageType.Error,
+        position: Position.BottomLeft,
+        delay: 5
       })
     });
   }

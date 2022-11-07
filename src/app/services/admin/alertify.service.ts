@@ -41,17 +41,8 @@ export enum Position {
 }
 
 export class AlertifyOptions {
-  messageType: MessageType;
-  position: Position;
-  delay: number;
-  dismissOther: boolean;
-
-  constructor() {
-    this.messageType = MessageType.Success;
-    this.position = Position.BottomRight;
-    this.delay = 3;
-    this.dismissOther = false;
-  }
-
-
+  messageType: MessageType = MessageType.Success;
+  position: Position = Position.BottomRight;
+  delay: number = 2;
+  dismissOther: boolean = true;
 }

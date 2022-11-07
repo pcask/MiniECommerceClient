@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-full-width {
+    width: 100%;
+}
+
+.mat-raised-button {
+    float: right;
+}

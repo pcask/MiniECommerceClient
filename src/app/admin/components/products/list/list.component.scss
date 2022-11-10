@@ -1,3 +1,14 @@
 table {
     width: 100%;
   }
+
+  td.mat-cell:last-of-type {
+    padding-right: 10px;
+}
+
+.seperator{
+  font-size: 25px;
+  font-weight: lighter;
+  text-align: center;
+  padding: 0px 3px 0px 3px;
+}

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Dikkat!</h1>
+<div mat-dialog-content>
+  <p>Ürünü kalıcı olarak silmek istediğinizden emin misiniz?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Vazgeç</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial id="deleteBtn">Sil</button>
+</div>

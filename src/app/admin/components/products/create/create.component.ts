@@ -2,7 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { Create_Product } from 'src/app/contracts/create_product';
-import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -23,6 +24,13 @@ export class CreateComponent extends BaseComponent implements OnInit {
 
   @Output() createProductEvent: EventEmitter<Create_Product> = new EventEmitter();
 
+  @Output() fileUploadOptions: FileUploadOptions = {
+    controller:"products",
+    action:"Upload",
+    explanation:"Yüklemek istediğiniz dosyaları buraya sürükleyebilir veya seçebilirsiniz. -->",
+    isAdminPage: true,
+    accept:".png, .jpg, .jpeg"
+  }
 
   createProduct(name: HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement) {
     this.showSpinner(SpinnerType.BallScaleMultiple);
@@ -35,16 +43,16 @@ export class CreateComponent extends BaseComponent implements OnInit {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
       this.alertify.Notify("Ürün başarıyla eklendi.", {
         dismissOther: true,
-        messageType: MessageType.Success,
-        position: Position.TopRight,
+        messageType: AlertifyMessageType.Success,
+        position: AlertifyPosition.TopRight,
         delay: 3
       });
       this.createProductEvent.emit();
     }, (ErrorMessage: string) => {
       this.alertify.Notify(ErrorMessage, {
         dismissOther: true,
-        messageType: MessageType.Error,
-        position: Position.BottomLeft,
+        messageType: AlertifyMessageType.Error,
+        position: AlertifyPosition.BottomLeft,
         delay: 5
       })
     });

@@ -20,15 +20,9 @@ export class CustomToastrService {
 }
 
 export class ToastrOptions {
-  messageType: ToastrMessageType;
-  position: ToastrPosition;
-  timeOut: number;
-
-  constructor() {
-    this.messageType = ToastrMessageType.Info,
-      this.position = ToastrPosition.BottomRight,
-      this.timeOut = 3000
-  }
+  messageType: ToastrMessageType = ToastrMessageType.Success;
+  position: ToastrPosition = ToastrPosition.TopRight;
+  timeOut: number = 3000;
 }
 
 export enum ToastrMessageType {

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, DialogOptions } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
-import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 
 declare var $: any;
@@ -47,8 +47,8 @@ export class DeleteDirective {
           setTimeout(() => {
             this.alertify.Notify("Ürün silme işlemi başarılı.", {
               dismissOther: true,
-              messageType: MessageType.Success,
-              position: Position.TopRight,
+              messageType: AlertifyMessageType.Success,
+              position: AlertifyPosition.TopRight,
               delay: 2
             });
             this.deleteProductEvent.emit();
@@ -57,8 +57,8 @@ export class DeleteDirective {
         }, error: (errorResponse: HttpErrorResponse) => {
           this.alertify.Notify(errorResponse.message, {
             dismissOther: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight,
+            messageType: AlertifyMessageType.Error,
+            position: AlertifyPosition.TopRight,
             delay: 2
           });
         }

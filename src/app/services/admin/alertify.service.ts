@@ -13,7 +13,7 @@ export class AlertifyService {
   Notify(message: string, options: Partial<AlertifyOptions>) {
     alertify.set('notifier', 'delay', options.delay);
     alertify.set('notifier', 'position', options.position);
-    const msg = alertify[options.messageType ?? MessageType.Error](message);
+    const msg = alertify[options.messageType ?? AlertifyMessageType.Error](message);
     if (options.dismissOther)
       msg.dismissOthers();
   }
@@ -23,7 +23,7 @@ export class AlertifyService {
   }
 }
 
-export enum MessageType {
+export enum AlertifyMessageType {
   Error = "error",
   Message = "message",
   Notify = "notify",
@@ -31,7 +31,7 @@ export enum MessageType {
   Warning = "warning"
 }
 
-export enum Position {
+export enum AlertifyPosition {
   TopCenter = "top-center",
   TopRight = "top-right",
   TopLeft = "top-left",
@@ -41,8 +41,8 @@ export enum Position {
 }
 
 export class AlertifyOptions {
-  messageType: MessageType = MessageType.Success;
-  position: Position = Position.BottomRight;
+  messageType: AlertifyMessageType = AlertifyMessageType.Success;
+  position: AlertifyPosition = AlertifyPosition.TopRight;
   delay: number = 2;
   dismissOther: boolean = true;
 }

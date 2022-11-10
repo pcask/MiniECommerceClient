@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Product } from 'src/app/contracts/list_product';
-import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -37,8 +37,8 @@ export class ListComponent extends BaseComponent implements OnInit {
     }, (errorMessage) => {
       this.alertify.Notify(errorMessage, {
         dismissOther: true,
-        messageType: MessageType.Error,
-        position: Position.TopRight,
+        messageType: AlertifyMessageType.Error,
+        position: AlertifyPosition.TopRight,
         delay: 3
       })
     });

@@ -3,6 +3,6 @@
   <p>Ürünü kalıcı olarak silmek istediğinizden emin misiniz?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancelClick()">Vazgeç</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial id="deleteBtn">Sil</button>
+  <button mat-button (click)="close()">Vazgeç</button>
+  <button mat-button class="dialog-button-yes" [mat-dialog-close]="'yes'" cdkFocusInitial id="deleteBtn">Sil</button>
 </div>

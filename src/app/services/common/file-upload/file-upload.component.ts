@@ -1,8 +1,11 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { NgxFileDropEntry } from 'ngx-file-drop';
+import { DialogResults } from 'src/app/dialogs/base/base-dialog';
+import { FileUploadDialogComponent } from 'src/app/dialogs/file-upload-dialog/file-upload-dialog.component';
 import { AlertifyService, AlertifyMessageType, AlertifyPosition } from '../../admin/alertify.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
+import { DialogService } from '../dialog.service';
 import { HttpClientService } from '../http-client.service';
 
 @Component({
@@ -12,7 +15,11 @@ import { HttpClientService } from '../http-client.service';
 })
 export class FileUploadComponent {
 
-  constructor(private httpClientService: HttpClientService, private alertify: AlertifyService, private toastr: CustomToastrService) {
+  constructor(
+    private httpClientService: HttpClientService,
+    private alertify: AlertifyService,
+    private toastr: CustomToastrService,
+    private dialogService: DialogService) {
 
   }
 
@@ -34,48 +41,58 @@ export class FileUploadComponent {
 
     }
 
-    this.httpClientService.post({
-      controller: this.options.controller,
-      action: this.options.action,
-      headers: new HttpHeaders({ "responseType": "blob" })
-    }, formData).subscribe({
-      complete: () => {
+    this.dialogService.openDialog({
+      componentType: FileUploadDialogComponent,
+      data: DialogResults.Yes,
+      options: { width: "450px" },
+      afterClosedCallBack: () => {
 
-        const succesMessage: string = "Dosya yükleme işlemi başarılı.";
-        
-        if (this.options.isAdminPage) {
-          this.alertify.Notify(succesMessage, {
-            dismissOther: true,
-            messageType: AlertifyMessageType.Success,
-            position: AlertifyPosition.TopRight,
-            delay: 2
-          });
-        }
-        else {
-          this.toastr.Notify(succesMessage, "Tebrikler", {
-            messageType: ToastrMessageType.Success,
-            timeOut: 2000,
-            position: ToastrPosition.TopRight
-          })
-        }
-      },
-      error: (errorResponse: HttpErrorResponse) => {
-        const errorMessage: string = "Dosya yükleme işlemi başarısız! Lütfen sayfayı yenileyip tekrar deneyiniz."
-        
-        if (this.options.isAdminPage) {
-          this.alertify.Notify(errorMessage, {
-            messageType: AlertifyMessageType.Error,
-            position:AlertifyPosition.TopRight
-          });
-        }
-        else {
-          this.toastr.Notify(errorMessage, "Upss!", {
-            messageType: ToastrMessageType.Error,
-            position: ToastrPosition.TopRight,
-            timeOut: 2000
-          })
-        }
+        this.httpClientService.post({
+          controller: this.options.controller,
+          action: this.options.action,
+          headers: new HttpHeaders({ "responseType": "blob" })
+        }, formData).subscribe({
+          complete: () => {
+
+            const succesMessage: string = "Dosya yükleme işlemi başarılı.";
+
+            if (this.options.isAdminPage) {
+              this.alertify.Notify(succesMessage, {
+                dismissOther: true,
+                messageType: AlertifyMessageType.Success,
+                position: AlertifyPosition.TopRight,
+                delay: 2
+              });
+            }
+            else {
+              this.toastr.Notify(succesMessage, "Tebrikler", {
+                messageType: ToastrMessageType.Success,
+                timeOut: 2000,
+                position: ToastrPosition.TopRight
+              })
+            }
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            const errorMessage: string = "Dosya yükleme işlemi başarısız! Lütfen sayfayı yenileyip tekrar deneyiniz."
+
+            if (this.options.isAdminPage) {
+              this.alertify.Notify(errorMessage, {
+                messageType: AlertifyMessageType.Error,
+                position: AlertifyPosition.TopRight
+              });
+            }
+            else {
+              this.toastr.Notify(errorMessage, "Upss!", {
+                messageType: ToastrMessageType.Error,
+                position: ToastrPosition.TopRight,
+                timeOut: 2000
+              })
+            }
+          }
+        });
+
       }
+
     });
   }
 

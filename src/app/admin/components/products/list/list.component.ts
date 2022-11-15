@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Product } from 'src/app/contracts/list_product';
+import { SelectProductImagesDialogComponent } from 'src/app/dialogs/select-product-images-dialog/select-product-images-dialog.component';
 import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -14,11 +16,15 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 })
 export class ListComponent extends BaseComponent implements OnInit {
 
-  constructor(spinnerService: NgxSpinnerService, private productService: ProductService, private alertify: AlertifyService) {
+  constructor(
+    spinnerService: NgxSpinnerService,
+    private productService: ProductService,
+    private alertify: AlertifyService,
+    private dialogService: DialogService) {
     super(spinnerService)
   }
 
-  displayedColumns: string[] = ['name', 'amountOfStock', 'price', 'createdDate', 'updatedDate', 'edit', 'seperator', 'delete'];
+  displayedColumns: string[] = ['name', 'amountOfStock', 'price', 'createdDate', 'updatedDate', 'uploadImage', 'seperator2', 'edit', 'seperator2', 'delete'];
   dataSource: MatTableDataSource<List_Product>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -27,11 +33,20 @@ export class ListComponent extends BaseComponent implements OnInit {
     await this.getProducts()
   }
 
+  uploadProductImages(id: string) {
+    this.dialogService.openDialog({
+      componentType: SelectProductImagesDialogComponent,
+      data: id,
+      options: { width: "1400px" }
+    });
+  }
+
   async pageChanged() {
     await this.getProducts();
   }
 
   async getProducts() {
+    this.showSpinner(SpinnerType.BallScaleMultiple);
     const allProducts: { totalCount: number; products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
     }, (errorMessage) => {

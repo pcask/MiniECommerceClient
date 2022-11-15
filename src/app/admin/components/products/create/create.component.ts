@@ -17,20 +17,11 @@ export class CreateComponent extends BaseComponent implements OnInit {
     super(spinner);
   }
 
-
   ngOnInit(): void {
 
   }
 
   @Output() createProductEvent: EventEmitter<Create_Product> = new EventEmitter();
-
-  @Output() fileUploadOptions: FileUploadOptions = {
-    controller:"products",
-    action:"Upload",
-    explanation:"Yüklemek istediğiniz dosyaları buraya sürükleyebilir veya seçebilirsiniz. -->",
-    isAdminPage: true,
-    accept:".png, .jpg, .jpeg"
-  }
 
   createProduct(name: HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement) {
     this.showSpinner(SpinnerType.BallScaleMultiple);

@@ -50,6 +50,7 @@ export class FileUploadComponent {
         this.httpClientService.post({
           controller: this.options.controller,
           action: this.options.action,
+          queryString: this.options.queryString,
           headers: new HttpHeaders({ "responseType": "blob" })
         }, formData).subscribe({
           complete: () => {

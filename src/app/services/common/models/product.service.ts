@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { Create_Product } from 'src/app/contracts/create_product';
 import { List_Product } from 'src/app/contracts/list_product';
+import { List_Product_Image } from 'src/app/contracts/list_product_Image';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({
@@ -35,22 +36,53 @@ export class ProductService {
   async read(page: number = 0, size: number = 5, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)
     : Promise<{ totalCount: number; products: List_Product[] }> {
 
-    const allProduct: Promise<{ totalCount: number; products: List_Product[] }> = lastValueFrom(this.httpClientService.get<{ totalCount: number; products: List_Product[] }>({
+    const products$: Observable<{ totalCount: number; products: List_Product[] }> = this.httpClientService.get<{ totalCount: number; products: List_Product[] }>({
       controller: "products",
       queryString: `page=${page}&size=${size}`
-    }));
+    });
 
-    allProduct
-      .then(r => successCallBack?.())
-      .catch((err: HttpErrorResponse) => errorCallBack?.(err.message));
+    var allProducts: { totalCount: number; products: List_Product[] };
 
-    return await allProduct;
+    try {
+      allProducts = await lastValueFrom(products$);
+      successCallBack?.();
+    } catch (error) {
+      errorCallBack?.(error.message);
+    }
 
+    return allProducts;
   }
 
   async delete(id: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     const delete$: Observable<any> = this.httpClientService.delete<any>({
       controller: "products"
+    }, id);
+
+    await lastValueFrom(delete$)
+      .then(r => successCallBack?.())
+      .catch((err: HttpErrorResponse) => errorCallBack(err.message));
+  }
+
+  async getImagesByProductId(id: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void): Promise<List_Product_Image[]> {
+
+    const allImages: Promise<List_Product_Image[]> = lastValueFrom(this.httpClientService.get<List_Product_Image[]>({
+      controller: "products",
+      action: "getImages"
+    }, id));
+
+    allImages
+      .then(r => successCallBack?.())
+      .catch((err: HttpErrorResponse) => errorCallBack?.(err.message));
+
+    return await allImages;
+
+  }
+
+  async deleteImage(id: string, imageId: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const delete$ = this.httpClientService.delete({
+      controller: "products",
+      action: "deleteImage",
+      queryString: `imageId=${imageId}`
     }, id);
 
     await lastValueFrom(delete$)

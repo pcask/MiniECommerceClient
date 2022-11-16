@@ -30,7 +30,8 @@ export class ListComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   async ngOnInit() {
-    await this.getProducts()
+    
+    await this.getProducts();
   }
 
   uploadProductImages(id: string) {
@@ -46,20 +47,27 @@ export class ListComponent extends BaseComponent implements OnInit {
   }
 
   async getProducts() {
+
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    const allProducts: { totalCount: number; products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => {
-      this.hideSpinner(SpinnerType.BallScaleMultiple);
-    }, (errorMessage) => {
-      this.alertify.Notify(errorMessage, {
-        dismissOther: true,
-        messageType: AlertifyMessageType.Error,
-        position: AlertifyPosition.TopRight,
-        delay: 3
-      })
-    });
+
+    const allProducts: { totalCount: number; products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0,
+      this.paginator ? this.paginator.pageSize : 5, () => {
+
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
+      }, (errorMessage) => {
+
+        this.alertify.Notify(errorMessage, {
+          dismissOther: true,
+          messageType: AlertifyMessageType.Error,
+          position: AlertifyPosition.TopRight,
+          delay: 3
+        });
+      });
+
 
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
     this.paginator.length = allProducts.totalCount;
+
   }
 }
 

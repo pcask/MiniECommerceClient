@@ -18,7 +18,7 @@ export class DialogService {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result == dialogParameters.data) {
+      if (result == dialogParameters.data[0]) {
         dialogParameters.afterClosedCallBack();
       }
     });

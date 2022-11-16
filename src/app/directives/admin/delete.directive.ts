@@ -41,7 +41,7 @@ export class DeleteDirective {
 
     this.dialogService.openDialog({
       componentType: DeleteDialogComponent,
-      data: DialogResults.Yes,
+      data: [DialogResults.Yes, "Ürünü kalıcı olarak silmek üzeresiniz!"],
       options: { width: "450px" },
       afterClosedCallBack: () => {
         this.httpClientService.delete({

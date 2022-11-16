@@ -43,7 +43,7 @@ export class FileUploadComponent {
 
     this.dialogService.openDialog({
       componentType: FileUploadDialogComponent,
-      data: DialogResults.Yes,
+      data: [DialogResults.Yes],
       options: { width: "450px" },
       afterClosedCallBack: () => {
 
@@ -54,7 +54,8 @@ export class FileUploadComponent {
           headers: new HttpHeaders({ "responseType": "blob" })
         }, formData).subscribe({
           complete: () => {
-
+            this.files = null;
+            this.options.successCallBack?.();
             const succesMessage: string = "Dosya yükleme işlemi başarılı.";
 
             if (this.options.isAdminPage) {
@@ -114,4 +115,5 @@ export class FileUploadOptions {
   explanation?: string;
   accept?: string;
   isAdminPage?: boolean = false;
+  successCallBack?: () => Promise<void>;
 }

@@ -1,11 +1,11 @@
 <mat-drawer-container class="product-container">
 
     <mat-drawer mode="side" opened>
-        <app-create (createProductEvent)="reloadTable()"></app-create>
+        <app-create (createProductEvent)="reloadTable()" (updateProductEvent)="reloadTable()"></app-create>
     </mat-drawer>
 
     <mat-drawer-content>
-        <app-list></app-list>
+        <app-list (updateProductEvent)="passUpdateFormData($event)"></app-list>
     </mat-drawer-content>
 
 </mat-drawer-container>

@@ -4,6 +4,7 @@ import { lastValueFrom, Observable } from 'rxjs';
 import { Create_Product } from 'src/app/contracts/create_product';
 import { List_Product } from 'src/app/contracts/list_product';
 import { List_Product_Image } from 'src/app/contracts/list_product_Image';
+import { Update_Product } from 'src/app/contracts/update_product';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({
@@ -31,6 +32,16 @@ export class ProductService {
         errorCallBack?.(message);
       }
     });
+  }
+
+  async update(updateProduct: Update_Product, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const update$ = this.httpClientService.put({
+      controller: "products"
+    }, updateProduct);
+
+    await lastValueFrom(update$)
+      .then(r => successCallBack?.())
+      .catch((err: HttpErrorResponse) => errorCallBack(err.message))
   }
 
   async read(page: number = 0, size: number = 5, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)

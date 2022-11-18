@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
+import { Update_Product } from 'src/app/contracts/update_product';
+import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 
 @Component({
@@ -15,6 +17,7 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
   @ViewChild(ListComponent) listComponent: ListComponent;
+  @ViewChild(CreateComponent) createComponent: CreateComponent;
 
   ngOnInit(): void {
 
@@ -23,4 +26,9 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   async reloadTable() {
     await this.listComponent.getProducts();
   }
+
+  passUpdateFormData(product: Update_Product) {
+    this.createComponent.loadUpdateForm(product);
+  }
+
 }

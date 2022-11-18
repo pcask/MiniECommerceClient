@@ -83,6 +83,7 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
             delay: 2
           });
         }, (errorMessage: string) => {
+          this.spinner.hide(SpinnerType.BallScaleMultiple);
           this.alertify.Notify("Görsel silme işlemi başarısız. Lütfen sayfayı yenileyip tekrar deneyiniz.", {
             dismissOther: true,
             messageType: AlertifyMessageType.Error,

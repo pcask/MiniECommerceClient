@@ -11,3 +11,18 @@
 .mat-raised-button {
     float: right;
 }
+
+.invisible{
+    display: none;
+}
+
+#btnCancel{
+    background-color: rgb(118 118 118);
+    color: white;
+}
+
+#btnUpdate{
+    background-color: rgb(33, 156, 64);
+    color: white;
+    margin-left: 20px;
+}

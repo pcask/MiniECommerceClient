@@ -1,6 +1,128 @@
+
 .container {
     max-width: 1650px;
 }
+
+.header {
+    padding: 0;
+}
+
+.header-top {
+    line-height: 35px;
+    padding: 0px 30px 0px 30px;
+    background-color: rgb(241, 241, 241);
+}
+
+.header-top .bi-truck {
+    position: relative;
+    top: 2px;
+    font-size: 18px;
+    color: black;
+}
+
+.header-top a {
+    text-decoration: none;
+    color: rgb(46, 46, 46);
+}
+
+.header-top a:hover {
+    text-decoration: underline !important;
+    color: black;
+}
+
+.header-middle {
+    background-color: white;
+}
+
+.header-middle-left {
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.header-middle-left a {
+    font-size: 35px;
+    color: #673ab7;
+}
+
+.search {
+    padding: 10px;
+}
+
+.search-input {
+    border-top-left-radius: 18px !important;
+    border-bottom-left-radius: 18px !important;
+    height: 30px;
+    font-size: 14px;
+}
+
+.search-btn{
+    border-top-right-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+    height: 30px;
+    line-height: 15px;
+}
+
+
+.input-group {
+    padding: 20px 0px 20px 0px;
+}
+
+.inner-addon {
+    position: relative;
+}
+
+.inner-addon .bi {
+    color: rgb(122 122 122);
+    font-weight: 900;
+    font-size: 18px;
+    z-index: 10;
+    position: absolute;
+    padding: 6px 6px 6px 10px;
+    pointer-events: none;
+}
+
+/* align bi */
+.left-addon .bi {
+    left: 0px;
+}
+
+.right-addon .bi {
+    right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+    padding-left: 35px;
+}
+
+.header-middle-right{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.hmr-item{
+    float: right;
+    width: 100px;
+    text-align: center;
+}
+.hmr-item i{
+    font-size: 24px;
+    display: block;
+    color: #673ab7;
+}
+.hmr-item a {
+    text-decoration: none;
+    font-size: 12px;
+    color: #333;
+    font-weight: 100;
+    font-family: "Open Sans",sans-serif;
+}
+.hmr-item a:hover{
+    text-decoration: underline;
+}
+
 
 .bg-light {
     background-color: #673ab7 !important;
@@ -14,3 +136,25 @@
     color: white;
     font-weight: 500;
 }
+
+.navbar-toggler {
+    border: solid 1px;
+}
+
+.navbar-toggler span {
+    margin-bottom: 10px;
+    height: 28px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+.navbar-toggler .menu-txt {
+    position: relative;
+    top: 21px;
+    right: 1px;
+    font-size: 13px;
+    color: white;
+}
+

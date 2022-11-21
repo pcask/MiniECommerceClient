@@ -24,10 +24,14 @@ export class AppComponent {
   }
 }
 
-// $(document).ready(() => {
-//   console.log("jquery başarılı bir şekilde çalışıyor");
-// });
+$(window).scroll(function (event) {
+  var scroll = $(window).scrollTop();
+  if(scroll < 90){
+    $("#header-middle").removeClass("shadow-sm");
+  }
+  else
+  {
+    $("#header-middle").addClass("shadow-sm");
+  }
+});
 
-// $.get("https://localhost:7234/WeatherForecast", (data: any) => {
-//   console.log(data);
-// });

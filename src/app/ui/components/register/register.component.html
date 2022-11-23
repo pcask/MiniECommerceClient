@@ -12,8 +12,8 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="signUpTab" data-bs-toggle="tab" data-bs-target="#signUpPane" type="button"
-                        role="tab" aria-controls="signUpPane" aria-selected="false">Sign Up</button>
+                    <button class="nav-link" id="signUpTab" data-bs-toggle="tab" data-bs-target="#signUpPane"
+                        type="button" role="tab" aria-controls="signUpPane" aria-selected="false">Sign Up</button>
                 </li>
 
             </ul>
@@ -44,7 +44,7 @@
                 </div>
 
 
-                
+
                 <div class="tab-pane fade" id="signUpPane" role="tabpanel" aria-labelledby="signUp" tabindex="0">
 
                     <div class="sign-up-form-container m-4">
@@ -54,42 +54,94 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
                                 <input type="email" formControlName="email" class="form-control" id="email"
-                                    aria-describedby="emailHelp"
-                                    [ngClass]="{'is-invalid': submitted && Controls['email'].errors}">
-                                <div id="emailHelp" class="form-text invalid-feedback"
-                                    *ngIf="submitted && Controls['email'].errors?.['email']">
-                                    Please check the email address.
+                                    aria-describedby="emailHelp" 
+                                    [ngClass]="{'is-valid': submitted && !Controls['email'].errors, 
+                                                'is-invalid': submitted && Controls['email'].errors}">
+
+                                <div class="form-text invalid-feedback" *ngIf="submitted">
+                                    <span id="emailHelp" *ngIf="Controls['email'].errors?.['email']">
+                                        Please check the email address.
+                                    </span>
+                                    <span id="emailHelp" *ngIf="Controls['email'].errors?.['required']">
+                                        Email address can not be empty.
+                                    </span>
                                 </div>
-                                <div id="emailHelp" class="form-text invalid-feedback"
-                                    *ngIf="submitted && Controls['email'].errors?.['required']">
-                                    Email address can not be empty.
-                                </div>
+
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" formControlName="password" class="form-control" id="password"
-                                    placeholder="At least 6 characters" aria-describedby="emailHelp"
-                                    [ngClass]="{'is-invalid': submitted && Controls['password'].errors}">
-                                <div id="emailHelp" class="form-text invalid-feedback"
-                                    *ngIf="submitted && Controls['password'].errors?.['required']">
-                                    Password can not be empty.
-                                </div>
-                                <div id="emailHelp" class="form-text invalid-feedback"
-                                    *ngIf="submitted && Controls['password'].errors?.['minlength']">
-                                    Password must be at least 6 characters
+                                    placeholder="At least 6 characters" aria-describedby="passwordHelp"
+                                    [ngClass]="{ 'is-valid': (Controls['password'].dirty || submitted) && 
+                                        passwordValid, 'is-invalid': (Controls['password'].dirty || submitted) && !passwordValid }">
+                                <div id="passwordHelp" class="form-text invalid-feedback">
+
+                                    <span class="text-danger"
+                                        *ngIf="(Controls['password'].dirty || submitted) && !requiredValid">
+                                        Password can not be empty
+                                    </span>
+
+                                    <!-- password validation rules -->
+                                    <div class="mt-3" *ngIf="requiredValid">
+                                        <!-- minlength -->
+                                        <div
+                                            [ngClass]="{ 'text-success': minLengthValid, 'text-danger': !minLengthValid }">
+                                            <i
+                                                [attr.class]="minLengthValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+                                            Must be at least 6 characters long
+                                        </div>
+
+                                        <!-- requires digit -->
+                                        <div
+                                            [ngClass]="{ 'text-success': requiresDigitValid, 'text-danger': !requiresDigitValid }">
+                                            <i
+                                                [attr.class]="requiresDigitValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+                                            Must contain at least 1 digit
+                                        </div>
+
+                                        <!-- requires uppercase -->
+                                        <div
+                                            [ngClass]="{ 'text-success': requiresUppercaseValid, 'text-danger': !requiresUppercaseValid }">
+                                            <i
+                                                [attr.class]="requiresUppercaseValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+                                            Must contain at least 1 uppercase character
+                                        </div>
+
+                                        <!-- requires lowercase -->
+                                        <div
+                                            [ngClass]="{ 'text-success': requiresLowercaseValid, 'text-danger': !requiresLowercaseValid }">
+                                            <i
+                                                [attr.class]="requiresLowercaseValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+                                            Must contain at least 1 lowercase character
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="rePassword" class="form-label">Re-enter password</label>
                                 <input type="password" formControlName="rePassword" class="form-control" id="rePassword"
-                                    aria-describedby="emailHelp"
-                                    [ngClass]="{'is-invalid': submitted && Controls['rePassword'].errors}">
-                                <div id="emailHelp" class="form-text invalid-feedback"
-                                    *ngIf="submitted && Controls['rePassword'].errors?.['notSame']">
-                                    Passwords do not match.
+                                    placeholder="Confirm your password" aria-describedby="rePasswordHelp"
+                                    [ngClass]="{'is-valid': (submitted || Controls['rePassword'].dirty) && !Controls['rePassword'].errors,
+                                                'is-invalid': (submitted || Controls['rePassword'].dirty) && Controls['rePassword'].errors}">
+                                <div id="rePasswordHelp" class="form-text invalid-feedback"
+                                    *ngIf="(submitted || Controls['rePassword'].dirty) && Controls['rePassword'].errors">
+
+                                    <span *ngIf="Controls['rePassword'].errors?.['required']">
+                                        Password can not be empty
+                                    </span>
+
+                                    <span *ngIf="Controls['rePassword'].errors?.['mismatch']">
+                                        Passwords do not match.
+                                    </span>
+
+                                    <span *ngIf="Controls['rePassword'].errors?.['minlength']">
+                                        Password must be at least 6 characters long
+                                    </span>
+
                                 </div>
+
                             </div>
 
                             <div class="mb-3 form-check">
@@ -109,7 +161,8 @@
                             <div class="d-grid gap-2 col-6 mx-auto" style="text-align: center;">
                                 <button type="submit" class="btn btnSignUp">Sign Up</button>
                                 <span>Or</span>
-                                <button id="btnOrSignIn" type="button" class="btn btn-secondary" (click)="changeTab()">Sign In</button>
+                                <button id="btnOrSignIn" type="button" class="btn btn-secondary"
+                                    (click)="changeTab()">Sign In</button>
                             </div>
 
                         </form>

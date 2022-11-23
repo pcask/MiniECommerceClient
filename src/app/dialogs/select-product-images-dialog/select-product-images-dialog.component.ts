@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
-import { List_Product_Image } from 'src/app/contracts/list_product_Image';
+import { List_Product_Image } from 'src/app/contracts/products/list_product_Image';
 import { AlertifyMessageType, AlertifyPosition, AlertifyService } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';

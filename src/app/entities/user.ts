@@ -1,6 +1,5 @@
-export class User_Register {
+export class User {
     email: string;
     password: string;
     rePassword: string;
-    termOfUse: boolean;
 }

@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { Create_Product } from 'src/app/contracts/create_product';
-import { List_Product } from 'src/app/contracts/list_product';
-import { List_Product_Image } from 'src/app/contracts/list_product_Image';
-import { Update_Product } from 'src/app/contracts/update_product';
+import { Create_Product } from 'src/app/contracts/products/create_product';
+import { List_Product } from 'src/app/contracts/products/list_product';
+import { List_Product_Image } from 'src/app/contracts/products/list_product_Image';
+import { Update_Product } from 'src/app/contracts/products/update_product';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({

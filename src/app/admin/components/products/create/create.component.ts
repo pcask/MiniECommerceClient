@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
-import { Create_Product } from 'src/app/contracts/create_product';
-import { Update_Product } from 'src/app/contracts/update_product';
+import { Create_Product } from 'src/app/contracts/products/create_product';
+import { Update_Product } from 'src/app/contracts/products/update_product';
 import { DialogResults } from 'src/app/dialogs/base/base-dialog';
 import { UpdateDialogComponent } from 'src/app/dialogs/update-dialog/update-dialog.component';
 import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';

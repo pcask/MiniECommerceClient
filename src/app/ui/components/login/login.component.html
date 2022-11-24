@@ -1,0 +1,71 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="login-container">
+
+            <ul class="nav nav-tabs m-4" id="signInUpTab" role="tablist">
+
+                <li>
+                    <a href="login" class="nav-link active" id="loginTab">Sign In</a>
+                </li>
+
+                <li>
+                    <a href="register" class="nav-link" id="registerTab">Sign Up</a>
+                </li>
+
+            </ul>
+
+            <div id="loginContent">
+
+                <div class="login-form-container m-4">
+
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+
+                        <div class="errors-container" *ngIf="submitted && loginForm.invalid">
+                            <span *ngIf="Controls['email'].errors?.['email']">
+                                Please check the email address.
+                            </span>
+                            <span *ngIf="Controls['email'].errors?.['required']">
+                                Email address can not be empty.
+                            </span>
+                            <span
+                                *ngIf="Controls['password'].errors?.['required'] && (Controls['email'].errors === null)">
+                                Password can not be empty.
+                            </span>
+                            <span *ngIf="errorMessage && (Controls['email'].errors === null) && (Controls['password'].errors === null)">
+                                {{errorMessage}}
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" formControlName="email" class="form-control" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" formControlName="password" class="form-control" id="password">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember Me</label>
+                        </div>
+
+                        <div class="d-grid gap-2 col-6 mx-auto" style="text-align: center;">
+
+                            <button type="submit" class="btn btnSignIn">Sign In</button>
+                            <span>Or</span>
+                            <a href="register" id="btnSignUp" type="button" class="btn btn-secondary">Sign Up</a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

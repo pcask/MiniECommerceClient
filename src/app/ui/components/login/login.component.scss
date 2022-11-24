@@ -1,4 +1,4 @@
-.register-container {
+.login-container {
     margin: 0 auto;
     // align-items: center;
     justify-content: center;
@@ -26,30 +26,37 @@
     box-shadow: #683ab749 5px 6px 6px -5px inset;
 }
 
-.register-form-container label {
+.errors-container{
+    color: red;
+    border: 1px solid;
+    padding: 10px;
+    background-color: #fff0f0;
+    margin-bottom: 15px;
+}
+
+.login-form-container label {
     margin-bottom: 3px;
 
 }
 
-.register-form-container ::placeholder {
+.login-form-container ::placeholder {
     font-family: "Open Sans", sans-serif;
     font-weight: 100;
     font-size: 14px;
 }
 
-.btnSignUp {
+.btnSignIn {
     background-color: #673ab7;
     color: white;
     float: right;
     margin-top: 30px;
 }
 
-.btnSignUp:hover{
+.btnSignIn:hover{
     background-color: #7437dd;
 }
 
-.btnSignUp:active {
+.btnSignIn:active {
     background-color: #5f2db6;
     color: white;
 }
-

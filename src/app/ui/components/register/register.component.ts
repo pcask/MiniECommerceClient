@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
 import { UserService } from 'src/app/services/common/models/user.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
@@ -11,15 +13,17 @@ declare var $: any;
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends BaseComponent implements OnInit {
   submitted: boolean = false;
-  signUpForm: FormGroup;
+  registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastrService: CustomToastrService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastrService: CustomToastrService, spinner: NgxSpinnerService) {
+    super(spinner)
+  }
 
   ngOnInit(): void {
 
-    this.signUpForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       email: ["", [
         Validators.required,
         Validators.email]],
@@ -50,7 +54,7 @@ export class RegisterComponent implements OnInit {
   }
 
   get Controls() {
-    return this.signUpForm.controls
+    return this.registerForm.controls
   }
 
   get passwordValid() {
@@ -77,49 +81,25 @@ export class RegisterComponent implements OnInit {
 
   async onSubmit(user: User) {
     this.submitted = true;
-    if (this.signUpForm.invalid)
+    if (this.registerForm.invalid)
       return;
 
+    this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.userService.create(user, () => {
+      this.hideSpinner(SpinnerType.BallScaleMultiple);
       this.toastrService.Notify("Kayıt işleminiz başarıyla gerçekleştirildi.", "Tebrikler", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,
         timeOut: 2000
       })
     }, (errorMessage: string) => {
+      this.hideSpinner(SpinnerType.BallScaleMultiple);
       this.toastrService.Notify(errorMessage, "Upsss", {
         messageType: ToastrMessageType.Error,
         position: ToastrPosition.TopRight,
         timeOut: 3000
       })
     })
-  }
-
-  changeTab() {
-    var signIn = $('#signInPane');
-    var signUp = $('#signUpPane');
-    var signInTab = $('#signInTab');
-    var signUpTab = $('#signUpTab');
-
-    if (signUp.hasClass('active')) {
-      signInTab.addClass('active');
-      signIn.addClass('active');
-      signIn.addClass('show');
-
-
-      signUpTab.removeClass('active');
-      signUp.removeClass('active');
-      signUp.removeClass('show');
-    }
-    else {
-      signUpTab.addClass('active');
-      signUp.addClass('active');
-      signUp.addClass('show');
-
-      signInTab.removeClass('active');
-      signIn.removeClass('active');
-      signIn.removeClass('show');
-    }
   }
 
 }

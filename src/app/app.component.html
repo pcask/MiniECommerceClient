@@ -30,22 +30,61 @@
                     </div>
 
                     <div class="header-middle-right col-sm-3">
-                        <div class="sign-in hmr-item">
-                            <a href="" routerLink="login">
-                                <i class="bi bi-person-up"></i>
-                                <span>Sign in</span>
-                            </a>
+                        <div class="sign-in-container hmr-item">
+                            <div class="sign-in-item login-dropdown">
+
+                                <a href="" routerLink="login" class="login-dropbtn hmr-item-btn">
+                                    <i class="bi bi-person-up"></i>
+                                    <span style="padding:16px;" *ngIf="!authService.isAuthenticated">Sign in</span>
+                                    <span style="padding:16px;" *ngIf="authService.isAuthenticated">My Account</span>
+                                </a>
+
+                                <div class="login-dropdown-content">
+                                    <div class="user-notloggedin-container" *ngIf="!authService.isAuthenticated">
+                                        <span style="margin-bottom:10px;">We will be happy to see you among us</span>
+
+                                        <a href="register" class="user-notloggedin-item btn btn-register">Sign Up</a>
+                                        <a href="login" class="user-notloggedin-item btn btn-login">Sign In</a>
+
+                                    </div>
+                                    <div class="user-loggedin-container" *ngIf="authService.isAuthenticated">
+                                        <p>Sezer.Ayran@Gmail.Com</p>
+
+                                        <a href="" class="user-loggedin-item">
+                                            <span class="icon myicon-box"></span>
+                                            Orders
+                                        </a>
+                                        <a href="" class="user-loggedin-item">
+                                            <span class="icon myicon-envelope"></span>
+                                            Messages
+                                        </a>
+                                        <a href="" class="user-loggedin-item">
+                                            <span class="icon myicon-discount-coupon"></span>
+                                            Discount Coupons
+                                        </a>
+                                        <a href="" class="user-loggedin-item">
+                                            <span class="icon myicon-user"></span>
+                                            User Information
+                                        </a>
+                                        <a class="user-loggedin-item" (click)="signOut()">
+                                            <span class="icon myicon-sign-out"></span>
+                                            Sign Out
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="my-favorite hmr-item">
-                            <a href="">
+                            <a href="" class="hmr-item-btn">
                                 <i class="bi bi-heart"></i>
                                 <span>Favorites</span>
                             </a>
                         </div>
 
                         <div class="my-cart hmr-item">
-                            <a href="">
+                            <a href="" class="hmr-item-btn">
                                 <i class="bi bi-cart3"></i>
                                 <span>Cart</span>
                             </a>
@@ -70,27 +109,37 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">WOMEN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">MEN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">CHILD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">COSMETIC</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">ELEKTRONIC</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">SHOES</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">ACCESSORY</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" routerLink="">SPORTS</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" routerLink="">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" routerLink="products">Products</a>
+                                <a class="nav-link" aria-current="page" routerLink="products">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" routerLink="baskets">Baskets</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
+                                <a class="nav-link" aria-current="page" routerLink="baskets">Baskets</a>
                             </li>
                             <li>
                                 <a class="btn btn-outline-warning" type="submit" routerLink="admin">Admin Panel</a>
@@ -111,9 +160,8 @@
     </div>
 </div>
 
-   
+
 
 <ngx-spinner name="s1" size="medium" type="ball-scale-multiple"></ngx-spinner>
 <ngx-spinner name="s2" size="medium" type="ball-spin-clockwise"></ngx-spinner>
 <ngx-spinner name="s3" size="medium" type="line-scale"></ngx-spinner>
-

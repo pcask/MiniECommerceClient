@@ -1,4 +1,3 @@
-
 .container {
     max-width: 1650px;
 }
@@ -56,7 +55,7 @@
     font-size: 14px;
 }
 
-.search-btn{
+.search-btn {
     border-top-right-radius: 18px !important;
     border-bottom-right-radius: 18px !important;
     height: 30px;
@@ -96,36 +95,153 @@
     padding-left: 35px;
 }
 
-.header-middle-right{
+.header-middle-right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.hmr-item{
+.hmr-item {
     float: right;
     width: 100px;
     text-align: center;
 }
-.hmr-item i{
+
+.hmr-item i {
     font-size: 24px;
     display: block;
     color: #673ab7;
 }
+
 .hmr-item a {
     text-decoration: none;
     font-size: 12px;
-    color: #333;
     font-weight: 100;
-    font-family: "Open Sans",sans-serif;
-}
-.hmr-item a:hover{
-    text-decoration: underline;
+    font-family: "Open Sans", sans-serif;
 }
 
+.hmr-item a:hover {
+    color: #673ab7;
+}
+
+.hmr-item-btn{
+    color: #333;
+}
+
+.login-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.login-dropdown-content {
+    display: none;
+    font-weight: 400;
+    background-color: #fff;
+    box-shadow: 0 3px 10px 0 rgb(0 0 0 / 7%);
+    border: solid 1px #e6e6e6;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 10;
+    right: -66px;
+    width: 196px;
+    height: auto;
+    top: 52px;
+    cursor: pointer;
+}
+
+.login-dropdown-content::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-bottom: 0.6em solid white;
+    position: absolute;
+    bottom: 100%;
+    left: 88px;
+    z-index: 1;
+
+}
+
+.login-dropdown-content::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 0.75em solid transparent;
+    border-right: 0.75em solid transparent;
+    border-bottom: 0.75em solid #ebebeb;
+    position: absolute;
+    bottom: 100%;
+    left: 86px;
+
+}
+
+.login-dropdown:hover .login-dropdown-content {
+    display: block;
+}
+
+
+.user-notloggedin-container{
+    padding: 16px;
+}
+
+.user-notloggedin-container span{
+    font-size: 12px;
+    font-weight: normal;
+    display: block;
+}
+
+.btn-login {
+    background-color: #673ab7;
+    color: white !important;
+    display: block;
+    font-weight: 600 !important;
+}
+.btn-login:active {
+    background-color: #5f2db6;
+    color: white;
+}
+
+
+.btn-register {
+    background-color: white;
+    border: 1px solid #673ab7;
+    color: #673ab7 !important;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600 !important;
+}
+
+.user-loggedin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px;
+}
+
+.user-loggedin-container p {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #673ab7;
+}
+
+.user-loggedin-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 32px;
+    line-height: 32px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
 .bg-light {
     background-color: #673ab7 !important;
+}
+
+.nav-item{
+    padding: 0px 10px 0px 10px;
 }
 
 .nav-item a:not(.dropdown-item) {
@@ -157,4 +273,3 @@
     font-size: 13px;
     color: white;
 }
-

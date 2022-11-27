@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
+import { AuthService } from 'src/app/services/common/auth.service';
 import { UserService } from 'src/app/services/common/models/user.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
 
@@ -16,7 +18,15 @@ export class LoginComponent extends BaseComponent implements OnInit {
   errorMessage: string = null;
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastrService: CustomToastrService, spinner: NgxSpinnerService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastrService: CustomToastrService,
+    spinner: NgxSpinnerService,
+    private router: Router,
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute
+  ) {
     super(spinner);
   }
 
@@ -43,17 +53,26 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.BallScaleMultiple);
 
     await this.userService.login(user, () => {
+      this.authService.identityCheck();
       this.hideSpinner(SpinnerType.BallScaleMultiple);
+
+      this.activatedRoute.queryParams.subscribe(params => {
+        const url = params["returnUrl"]
+        if (url)
+          this.router.navigate([url]);
+        else
+          this.router.navigate([""]);
+      });
+
       this.toastrService.Notify("", "Hoşgeldin", {
         messageType: ToastrMessageType.Info,
         position: ToastrPosition.TopCenter,
         timeOut: 1500
       });
     }, (errMessage: string) => {
-      this.hideSpinner(SpinnerType.BallScaleMultiple);
-      debugger;
       this.loginForm.setErrors({ general: true });
       this.errorMessage = errMessage;
+      this.hideSpinner(SpinnerType.BallScaleMultiple);
     });
 
   }

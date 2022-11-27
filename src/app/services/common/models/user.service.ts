@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { GlobalRes } from 'src/app/contracts/globalRes';
 import { Create_User } from 'src/app/contracts/users/create_user';
+import { Login_User } from 'src/app/contracts/users/login_user';
 import { User } from 'src/app/entities/user';
 import { HttpClientService } from '../http-client.service';
 
@@ -34,22 +34,22 @@ export class UserService {
 
   async login(user: User, successCallBack?: () => void, errorCallBack?: (errMessage: string) => void) {
 
-    const response = lastValueFrom(this.httpClientService.post<User | GlobalRes>({
+    const response = lastValueFrom(this.httpClientService.post<User | Login_User>({
       controller: "users",
       action: "loginUser"
     }, user));
 
-    response.then((r: GlobalRes) => {
-      if (r.succeeded)
+    response.then((r: Login_User) => {
+      if (r.token)
+      {
+        localStorage.setItem("accessToken", r.token.accessToken);
         successCallBack?.();
-      else
-        errorCallBack?.(r.errorMessage);
+      }
     }).catch((err: HttpErrorResponse) => {
-      errorCallBack?.(err.message);
+      errorCallBack?.("Your email and/or password is incorrect.");
     })
 
     await response;
-
   }
 
 }

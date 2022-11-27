@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { CustomToastrService, ToastrMessageType, ToastrOptions, ToastrPosition } from './services/ui/custom-toastr.service';
+import { Router } from '@angular/router';
+import { AuthService } from './services/common/auth.service';
 
 declare var $: any
 
@@ -10,27 +10,26 @@ declare var $: any
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'eCommerceClient';
-  constructor(private toastr: CustomToastrService) {
 
-    // toastr.Notify("Meraba cnım", "Heyyo", new ToastrOptions());
+  constructor(public authService: AuthService, private router: Router) {
 
-    // toastr.Notify("Meraba cnım", "Heyyo",
-    //   {
-    //     messageType: ToastrMessageType.Success,
-    //     position: ToastrPosition.TopFullWidth,
-    //     timeOut: 3000
-    //   });
+    authService.identityCheck();
+
+  }
+
+  signOut() {
+    localStorage.removeItem("accessToken");
+    this.authService.identityCheck();
+    this.router.navigate([""]);
   }
 }
 
 $(window).scroll(function (event) {
   var scroll = $(window).scrollTop();
-  if(scroll < 90){
+  if (scroll < 90) {
     $("#header-middle").removeClass("shadow-sm");
   }
-  else
-  {
+  else {
     $("#header-middle").addClass("shadow-sm");
   }
 });

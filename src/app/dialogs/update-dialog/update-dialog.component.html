@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Dikkat!</h1>
+<h1 mat-dialog-title>Attention!</h1>
 <div mat-dialog-content>
   <p>{{data[1]}}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="close()">Vazgeç</button>
-  <button mat-button class="updateBtn" [mat-dialog-close]="'yes'" cdkFocusInitial id="updateBtn">Güncelle</button>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button class="updateBtn" [mat-dialog-close]="'yes'" cdkFocusInitial id="updateBtn">Update</button>
 </div>

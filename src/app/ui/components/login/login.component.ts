@@ -64,7 +64,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
           this.router.navigate([""]);
       });
 
-      this.toastrService.Notify("", "Hoşgeldin", {
+      this.toastrService.Notify("", "Welcome!", {
         messageType: ToastrMessageType.Info,
         position: ToastrPosition.TopCenter,
         timeOut: 1500

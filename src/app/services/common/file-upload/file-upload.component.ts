@@ -56,7 +56,7 @@ export class FileUploadComponent {
           complete: () => {
             this.files = null;
             this.options.successCallBack?.();
-            const succesMessage: string = "Dosya yükleme işlemi başarılı.";
+            const succesMessage: string = "File upload successful.";
 
             if (this.options.isAdminPage) {
               this.alertify.Notify(succesMessage, {
@@ -67,7 +67,7 @@ export class FileUploadComponent {
               });
             }
             else {
-              this.toastr.Notify(succesMessage, "Tebrikler", {
+              this.toastr.Notify(succesMessage, "Congratulations!", {
                 messageType: ToastrMessageType.Success,
                 timeOut: 2000,
                 position: ToastrPosition.TopRight
@@ -75,7 +75,7 @@ export class FileUploadComponent {
             }
           },
           error: (errorResponse: HttpErrorResponse) => {
-            const errorMessage: string = "Dosya yükleme işlemi başarısız! Lütfen sayfayı yenileyip tekrar deneyiniz."
+            const errorMessage: string = "An unexpected error has occurred. Please refresh the page and try again."
 
             if (this.options.isAdminPage) {
               this.alertify.Notify(errorMessage, {

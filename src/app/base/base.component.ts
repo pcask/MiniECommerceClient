@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-
 
 export class BaseComponent {
 

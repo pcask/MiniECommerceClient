@@ -1,16 +1,13 @@
-import { outputAst } from '@angular/compiler';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { Component, EventEmitter, Injectable, OnInit, Output, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
-import { Create_Product } from 'src/app/contracts/products/create_product';
 import { List_Product } from 'src/app/contracts/products/list_product';
 import { Update_Product } from 'src/app/contracts/products/update_product';
 import { SelectProductImagesDialogComponent } from 'src/app/dialogs/select-product-images-dialog/select-product-images-dialog.component';
 import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
-import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 declare var $: any
@@ -20,18 +17,19 @@ declare var $: any
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
+
+@Injectable()
 export class ListComponent extends BaseComponent implements OnInit {
 
   constructor(
     spinnerService: NgxSpinnerService,
     private productService: ProductService,
     private alertify: AlertifyService,
-    private dialogService: DialogService,
-    private httpClientService: HttpClientService) {
+    private dialogService: DialogService) {
     super(spinnerService)
   }
 
-  displayedColumns: string[] = ['name', 'amountOfStock', 'price', 'createdDate', 'updatedDate', 'uploadImage', 'seperator2', 'edit', 'seperator2', 'delete'];
+  displayedColumns: string[] = ['name', 'amountOfStock', 'price', 'createdDate', 'updatedDate', 'uploadImage', 'edit', 'delete'];
   dataSource: MatTableDataSource<List_Product>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,8 +43,9 @@ export class ListComponent extends BaseComponent implements OnInit {
   @Output() updateProductEvent: EventEmitter<Update_Product> = new EventEmitter();
 
   updateProduct(_id: string, event: any) {
+    
+    var tr = $(event.srcElement).parent().parent().parent();
 
-    var tr = $(event.srcElement).parent().parent();
     var _name = tr[0].children[0].innerText;
     var _stock = tr[0].children[1].innerText;
     var _price = tr[0].children[2].innerText;

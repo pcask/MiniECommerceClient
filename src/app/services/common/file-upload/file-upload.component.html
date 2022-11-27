@@ -4,8 +4,7 @@
         <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
             <div class="fileDropArea">
                 {{options.explanation}}
-                <button mat-raised-button class="ChooseFileBtn" type="button" (click)="openFileSelector()">Dosya
-                    Seç</button>
+                <button mat-raised-button class="ChooseFileBtn" type="button" (click)="openFileSelector()">Choose File</button>
             </div>
 
         </ng-template>
@@ -14,7 +13,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="font-weight: 500;">Seçilen Dosyalar;</th>
+                    <th style="font-weight: 500;">Selected files;</th>
                 </tr>
             </thead>
             <tbody class="upload-name-style">

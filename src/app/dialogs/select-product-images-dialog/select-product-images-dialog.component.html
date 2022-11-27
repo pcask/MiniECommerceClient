@@ -2,7 +2,7 @@
 <mat-dialog-content class="mat-typography">
     <app-file-upload [options]="options"></app-file-upload>
 
-    <mat-card class="product-card" *ngFor="let img of productImages">
+    <mat-card appearance="outlined" class="product-card" *ngFor="let img of productImages">
         <mat-card-header>
 
         </mat-card-header>
@@ -12,20 +12,20 @@
         <mat-card-content>
 
         </mat-card-content>
-        <mat-card-actions style="text-align: right;">
+        <mat-card-actions class="image-detail-container">
 
             <div class="image-detail">
                 <p><img src="/assets/icons/clock.png">{{img.createdDate | date:'medium'}}</p>
                 <p><img src="/assets/icons/image.png">{{img.fileName}}</p>
             </div>
 
-            <button class="deleteBtn" (click)="deleteImage(img.id, $event)">Sil</button>
+            <button class="deleteBtn" (click)="deleteImage(img.id, $event)">Delete</button>
         </mat-card-actions>
     </mat-card>
 
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Kapat</button>
+    <button mat-raised-button mat-dialog-close class="btn-cancel">Cancel</button>
     <!-- <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Yükle</button> -->
 </mat-dialog-actions>

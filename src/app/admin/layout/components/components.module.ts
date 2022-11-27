@@ -4,7 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
-import {MatLegacyListModule as MatListModule} from '@angular/material/legacy-list';
+import {MatListModule} from '@angular/material/list';
 
 
 

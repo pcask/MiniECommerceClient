@@ -2,24 +2,40 @@ table {
   width: 100%;
 }
 
-td.mat-cell:last-of-type {
+td.mat-mdc-cell:last-of-type {
   padding-right: 10px;
 }
 
-.seperator {
+
+.seperator{
+  vertical-align: middle;
   font-size: 25px;
   font-weight: lighter;
   text-align: center;
-  padding: 0px 3px 0px 3px;
+  padding: 0px 5px 0px 8px;
+  cursor: default;
+}
+
+.seperator-th{
+  width: 10px !important;
+}
+
+.seperator-td {
+  font-size: 25px;
+  font-weight: lighter;
+  text-align: center;
+  padding: 0px !important;
+  width: 10px !important;
 }
 
 .icon {
   cursor: pointer;
+  padding: 0px;
 }
 
 // Paginator içerisinde gelen mat-tooltip module'ının çıkardığı tooltip'ler son satırdaki icon'lara ulaşımı kısıtlıyordu
 // mat-tooltip'in default position değerlerini değiştiremediğimden css ile çözüm yoluna gittim.
-::ng-deep body .mat-tooltip-panel-above {
-  -webkit-transform: translateY(155%) !important; //if your div is 200px, this will move it down by 200px, if it is 100px it will down by 100px etc
-  transform: translateY(155%) !important; //if your div is 200px, this will move it down by 200px, if it is 100px it will down by 100px etc
+::ng-deep body .mat-mdc-tooltip-panel-above {
+  -webkit-transform: translateY(320%) !important; //if your div is 200px, this will move it down by 200px, if it is 100px it will down by 100px etc
+  transform: translateY(320%) !important; //if your div is 200px, this will move it down by 200px, if it is 100px it will down by 100px etc
 }

@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Son bir onay!</h1>
+<h1 mat-dialog-title>One final confirmation!</h1>
 <div mat-dialog-content>
-  <p>Seçili dosyaları yüklemek üzeresiniz</p>
+  <p>You are about to upload the selected files.</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="close()">Vazgeç</button>
-  <button mat-button class="dialog-button-yes" [mat-dialog-close]="'yes'" cdkFocusInitial id="deleteBtn">Yükle</button>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button class="dialog-button-yes" [mat-dialog-close]="'yes'" cdkFocusInitial id="deleteBtn">Upload</button>
 </div>

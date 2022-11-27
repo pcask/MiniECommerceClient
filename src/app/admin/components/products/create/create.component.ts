@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Injectable, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { Create_Product } from 'src/app/contracts/products/create_product';
@@ -7,7 +7,6 @@ import { DialogResults } from 'src/app/dialogs/base/base-dialog';
 import { UpdateDialogComponent } from 'src/app/dialogs/update-dialog/update-dialog.component';
 import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
-import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 declare var $: any;
@@ -17,10 +16,10 @@ declare var $: any;
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
+
 export class CreateComponent extends BaseComponent implements OnInit {
 
-  constructor(
-    spinner: NgxSpinnerService,
+  constructor(spinner: NgxSpinnerService,
     private alertify: AlertifyService,
     private productService: ProductService,
     private dialogService: DialogService) {
@@ -42,7 +41,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
 
     this.productService.create(createProduct, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
-      this.alertify.Notify("Ürün başarıyla eklendi.", {
+      this.alertify.Notify("The product has been successfully created.", {
         dismissOther: true,
         messageType: AlertifyMessageType.Success,
         position: AlertifyPosition.TopRight,
@@ -97,7 +96,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
     if (this.product) {
       this.dialogService.openDialog({
         componentType: UpdateDialogComponent,
-        data: [DialogResults.Yes, "Ürünü güncellemek üzeresiniz!"],
+        data: [DialogResults.Yes, "You are about to update the product!"],
         options: { width: "450px" },
         afterClosedCallBack: () => {
           this.showSpinner(SpinnerType.BallScaleMultiple);
@@ -112,7 +111,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
             this.updateProductEvent.emit();
             this.hideSpinner(SpinnerType.BallScaleMultiple);
 
-            this.alertify.Notify("Ürün başarıyla güncellendi.", {
+            this.alertify.Notify("The product has been successfully updated.", {
               dismissOther: true,
               messageType: AlertifyMessageType.Success,
               position: AlertifyPosition.TopRight,
@@ -120,7 +119,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
             });
           }, (errMessage: string) => {
             this.hideSpinner(SpinnerType.BallScaleMultiple);
-            this.alertify.Notify("Ürün güncelleme işlemi başarısız. Lütfen sayfayı yenileyip tekrar deneyiniz.", {
+            this.alertify.Notify("An unexpected error has occurred. Please refresh the page and try again.", {
               dismissOther: true,
               messageType: AlertifyMessageType.Error,
               position: AlertifyPosition.TopRight,

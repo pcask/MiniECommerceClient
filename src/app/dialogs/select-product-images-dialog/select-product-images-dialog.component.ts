@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Output } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
 import { List_Product_Image } from 'src/app/contracts/products/list_product_Image';
@@ -33,7 +33,7 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
     accept: ".png, .jpg, .jpeg, .gif",
     controller: "products",
     action: "upload",
-    explanation: "Ürün görsellerini buraya sürükleyin veya seçin. -->",
+    explanation: "Drag or select product images here.. -->",
     isAdminPage: true,
     queryString: `id=${this.data}`,
     successCallBack: async () => { return await this.loadImages() }
@@ -53,7 +53,7 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
       this.spinner.hide(SpinnerType.BallScaleMultiple);
     }, (errorMessage: string) => {
       this.spinner.hide(SpinnerType.BallScaleMultiple);
-      this.alertify.Notify("Ürün görselleri yüklenemedi. Lütfen sayfayı yenileyip tekrar deneyiniz.", {
+      this.alertify.Notify("An unexpected error has occurred. Please refresh the page and try again.", {
         dismissOther: true,
         messageType: AlertifyMessageType.Error,
         position: AlertifyPosition.TopRight,
@@ -66,7 +66,7 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
 
     this.dialogService.openDialog({
       componentType: DeleteDialogComponent,
-      data: [DialogResults.Yes, "Görseli kalıcı olarak silmek üzeresiniz!"],
+      data: [DialogResults.Yes, "You are about to permanently delete the image!"],
       afterClosedCallBack: async () => {
 
         this.spinner.show(SpinnerType.BallScaleMultiple);
@@ -76,7 +76,7 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
         await this.productService.deleteImage(this.data as string, imageId, async () => {
           // await this.loadImages();
           this.spinner.hide(SpinnerType.BallScaleMultiple);
-          this.alertify.Notify("Görsel başarıyla silindi.", {
+          this.alertify.Notify("The image has been successfully deleted.", {
             dismissOther: true,
             messageType: AlertifyMessageType.Success,
             position: AlertifyPosition.TopRight,
@@ -84,7 +84,7 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
           });
         }, (errorMessage: string) => {
           this.spinner.hide(SpinnerType.BallScaleMultiple);
-          this.alertify.Notify("Görsel silme işlemi başarısız. Lütfen sayfayı yenileyip tekrar deneyiniz.", {
+          this.alertify.Notify("An unexpected error has occurred. Please refresh the page and try again.", {
             dismissOther: true,
             messageType: AlertifyMessageType.Error,
             position: AlertifyPosition.TopRight,

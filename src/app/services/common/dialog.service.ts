@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { LegacyDialogPosition as DialogPosition, MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Injectable({
   providedIn: 'root'

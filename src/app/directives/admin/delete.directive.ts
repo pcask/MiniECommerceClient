@@ -41,7 +41,7 @@ export class DeleteDirective {
 
     this.dialogService.openDialog({
       componentType: DeleteDialogComponent,
-      data: [DialogResults.Yes, "Ürünü kalıcı olarak silmek üzeresiniz!"],
+      data: [DialogResults.Yes, "You are about to permanently delete the product!"],
       options: { width: "450px" },
       afterClosedCallBack: () => {
         this.httpClientService.delete({
@@ -51,7 +51,7 @@ export class DeleteDirective {
             $(td.parentElement).fadeOut(400);
 
             setTimeout(() => {
-              this.alertify.Notify("Ürün silme işlemi başarılı.", {
+              this.alertify.Notify("An unexpected error has occurred. Please refresh the page and try again.", {
                 dismissOther: true,
                 messageType: AlertifyMessageType.Success,
                 position: AlertifyPosition.TopRight,

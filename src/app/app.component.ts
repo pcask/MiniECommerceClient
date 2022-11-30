@@ -1,3 +1,4 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/common/auth.service';
@@ -11,7 +12,7 @@ declare var $: any
 })
 export class AppComponent {
 
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router, private socailAuthService: SocialAuthService) {
 
     authService.identityCheck();
 
@@ -20,6 +21,7 @@ export class AppComponent {
   signOut() {
     localStorage.removeItem("accessToken");
     this.authService.identityCheck();
+    this.socailAuthService.signOut();
     this.router.navigate([""]);
   }
 }

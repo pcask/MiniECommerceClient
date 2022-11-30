@@ -10,6 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LoginModule } from './ui/components/login/login.module';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,25 @@ import { JwtModule } from '@auth0/angular-jwt';
         tokenGetter : () => localStorage.getItem("accessToken"),
         allowedDomains: ["localhost:7234"]
       }
-    })
+    }),
+    LoginModule,
+    SocialLoginModule
   ],
   providers: [
-    { provide: "baseURL", useValue: "https://localhost:7234/api", multi: true }
+    { provide: "baseURL", useValue: "https://localhost:7234/api", multi: true },
+    {
+      provide: "SocialAuthServiceConfig",
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider("787458901010-pffq98ql1s5ha09jjfce75ht5o0qgsdo.apps.googleusercontent.com")
+          }
+        ],
+        onError: err => console.log(err)
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

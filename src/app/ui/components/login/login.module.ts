@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SocialLoginButtonDirective } from 'src/app/directives/ui/social-login-button.directive';
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SocialLoginButtonDirective
   ],
   imports: [
     CommonModule,

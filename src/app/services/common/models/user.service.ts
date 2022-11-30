@@ -1,3 +1,4 @@
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
@@ -47,6 +48,26 @@ export class UserService {
       }
     }).catch((err: HttpErrorResponse) => {
       errorCallBack?.("Your email and/or password is incorrect.");
+    })
+
+    await response;
+  }
+
+  async loginWithGoogle(user: SocialUser, successCallBack?: () => void, errorCallBack?: (errMessage: string) => void) {
+
+    const response = lastValueFrom(this.httpClientService.post<SocialUser | Login_User>({
+      controller: "users",
+      action: "login-with-google"
+    }, user));
+
+    response.then((r: Login_User) => {
+      if (r.token)
+      {
+        localStorage.setItem("accessToken", r.token.accessToken);
+        successCallBack?.();
+      }
+    }).catch((err: HttpErrorResponse) => {
+      errorCallBack?.(err.message);
     })
 
     await response;

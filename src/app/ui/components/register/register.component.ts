@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
@@ -17,7 +18,11 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   submitted: boolean = false;
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastrService: CustomToastrService, spinner: NgxSpinnerService) {
+  constructor(private formBuilder: FormBuilder, 
+    private userService: UserService, 
+    private toastrService: CustomToastrService, 
+    spinner: NgxSpinnerService,
+    private router: Router) {
     super(spinner)
   }
 
@@ -87,7 +92,8 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.userService.create(user, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
-      this.toastrService.Notify("Kayıt işleminiz başarıyla gerçekleştirildi.", "Tebrikler", {
+      this.router.navigate(["login"]);
+      this.toastrService.Notify("Welcome to the club :)", "Congrats", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,
         timeOut: 2000

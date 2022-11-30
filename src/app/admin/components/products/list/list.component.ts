@@ -75,7 +75,8 @@ export class ListComponent extends BaseComponent implements OnInit {
 
         this.hideSpinner(SpinnerType.BallScaleMultiple);
       }, (errorMessage) => {
-
+        
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
         this.alertify.Notify(errorMessage, {
           dismissOther: true,
           messageType: AlertifyMessageType.Error,

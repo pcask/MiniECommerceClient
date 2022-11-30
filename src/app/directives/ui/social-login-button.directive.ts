@@ -19,8 +19,9 @@ export class SocialLoginButtonDirective implements OnInit {
       google.accounts.id.renderButton(this.el.nativeElement, {
         type: 'standard',
         size: 'large',
-        text: 'signin_with',
+        text: 'Sign in with Google',
         theme: 'filled_blue',
+        with: '400'
       });
     });
   }

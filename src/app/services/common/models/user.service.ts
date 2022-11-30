@@ -73,4 +73,24 @@ export class UserService {
     await response;
   }
 
+  async loginWithFacebook(user: SocialUser, successCallBack?: () => void, errorCallBack?: (errMessage: string) => void) {
+
+    const response = lastValueFrom(this.httpClientService.post<SocialUser | Login_User>({
+      controller: "users",
+      action: "login-with-facebook"
+    }, user));
+
+    response.then((r: Login_User) => {
+      if (r.token)
+      {
+        localStorage.setItem("accessToken", r.token.accessToken);
+        successCallBack?.();
+      }
+    }).catch((err: HttpErrorResponse) => {
+      errorCallBack?.(err.message);
+    })
+
+    await response;
+  }
+
 }

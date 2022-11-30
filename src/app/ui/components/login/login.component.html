@@ -51,11 +51,18 @@
                             <label class="form-check-label" for="rememberMe">Remember Me</label>
                         </div>
 
-                        <div>
-                            <social-login-button [selectable]="true"></social-login-button>
+                        <div class="social-login-container">
+
+                            <button class="btn btn-facebook-login" type="button" (click)="facebookBtnClick()">
+                               <img src="../../../../assets/icons/facebook2.png"/>
+                              &nbsp; &nbsp; Sign In with Facebook
+                           </button>
+
+                           <social-login-button [selectable]="true"></social-login-button>
+
                         </div>
 
-                        <div class="d-grid gap-2 col-6 mx-auto" style="text-align: center;">
+                        <div class="d-grid gap-2 col-6 mx-auto mt-4" style="text-align: center;">
 
                             <button type="submit" class="btn btnSignIn">Sign In</button>
                             <span>Or</span>

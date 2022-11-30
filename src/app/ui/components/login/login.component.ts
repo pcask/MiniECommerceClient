@@ -1,4 +1,4 @@
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,6 +18,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
   submitted: boolean = false;
   errorMessage: string = null;
   loginForm: FormGroup;
+  loggedIn: boolean;
+  user: SocialUser;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,46 +29,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService
   ) {
     super(spinner);
-
-    var b = socialAuthService.initState;
-
-    socialAuthService.authState.subscribe(async (user: SocialUser) => {
-      
-      if(!user)
-      return;
-
-      this.showSpinner(SpinnerType.BallScaleMultiple);
-
-      await this.userService.loginWithGoogle(user, () => {
-
-        this.authService.identityCheck();
-        this.hideSpinner(SpinnerType.BallScaleMultiple);
-  
-        this.activatedRoute.queryParams.subscribe(params => {
-          const url = params["returnUrl"]
-          if (url)
-            this.router.navigate([url]);
-          else
-            this.router.navigate([""]);
-        });
-  
-        this.toastrService.Notify("", "Welcome!", {
-          messageType: ToastrMessageType.Info,
-          position: ToastrPosition.TopCenter,
-          timeOut: 1500
-        });
-      }, (errMessage: string) => {
-        this.loginForm.setErrors({ general: true });
-        this.errorMessage = errMessage;
-        this.hideSpinner(SpinnerType.BallScaleMultiple);
-      });
-
-      console.log(user);
-
-    });
   }
 
   get Controls() {
@@ -74,6 +39,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.loginWithSocial();
 
     this.loginForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
@@ -114,6 +81,76 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
     });
 
+  }
+
+  loginWithSocial() {
+    this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
+
+      this.user = user;
+      if (!user)
+        return;
+
+      this.showSpinner(SpinnerType.BallScaleMultiple);
+
+      switch (user.provider) {
+        case "GOOGLE":
+          this.loginWithGoogle(user);
+          break;
+        case "FACEBOOK":
+          this.loginWithFacebook(user);
+          break;
+        default:
+          break;
+      }
+
+      console.log(user);
+    });
+  }
+
+  async loginWithGoogle(user: SocialUser) {
+
+    await this.userService.loginWithGoogle(user, () => {
+      this.successCallback();
+    }, (errMessage: string) => {
+      this.errorCallback(errMessage);
+    });
+  }
+
+  loginWithFacebook(user: SocialUser) {
+    this.userService.loginWithFacebook(user, () => {
+      this.successCallback();
+    }, (errMessage: string) => {
+      this.errorCallback(errMessage);
+    });
+  }
+
+  facebookBtnClick() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
+  }
+
+  successCallback() {
+    this.authService.identityCheck();
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      const url = params["returnUrl"]
+      if (url)
+        this.router.navigate([url]);
+      else
+        this.router.navigate([""]);
+    });
+
+    this.toastrService.Notify("", "Welcome!", {
+      messageType: ToastrMessageType.Info,
+      position: ToastrPosition.TopCenter,
+      timeOut: 1500
+    });
+  }
+
+  errorCallback(message: string) {
+    this.loginForm.setErrors({ general: true });
+    this.errorMessage = message;
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
   }
 
 }

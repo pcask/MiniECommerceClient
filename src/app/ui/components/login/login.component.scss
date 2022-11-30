@@ -45,6 +45,39 @@
     font-size: 14px;
 }
 
+
+.social-login-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-facebook-login{
+    padding: 1px;
+    font-size: 14px;
+    background-color: #1a73e8;
+    color: white;
+    border-radius: 3px;
+    min-width: 225px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.btn-facebook-login:hover{
+    background-color: #5095f0;
+}
+
+.btn-facebook-login:hover{
+    color:white;
+    border-color: #1a73e8;
+}
+
+.btn-facebook-login img{
+    width: 36px;
+    background-color: white;
+}
+
 .btnSignIn {
     background-color: #673ab7;
     color: white;

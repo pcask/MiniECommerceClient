@@ -33,7 +33,7 @@
                         <div class="sign-in-container hmr-item">
                             <div class="sign-in-item login-dropdown">
 
-                                <a href="" routerLink="login" class="login-dropbtn hmr-item-btn">
+                                <a href="login" class="login-dropbtn hmr-item-btn">
                                     <i class="bi bi-person-up"></i>
                                     <span style="padding:16px;" *ngIf="!authService.isAuthenticated">Sign in</span>
                                     <span style="padding:16px;" *ngIf="authService.isAuthenticated">My Account</span>
@@ -43,7 +43,7 @@
                                     <div class="user-notloggedin-container" *ngIf="!authService.isAuthenticated">
                                         <span style="margin-bottom:10px;">We will be happy to see you among us</span>
 
-                                        <a href="register" class="user-notloggedin-item btn btn-register">Sign Up</a>
+                                        <a routerLink="register" class="user-notloggedin-item btn btn-register">Sign Up</a>
                                         <a href="login" class="user-notloggedin-item btn btn-login">Sign In</a>
 
                                     </div>

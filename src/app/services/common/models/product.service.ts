@@ -1,6 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, Observable } from 'rxjs';
+import { catchError, lastValueFrom, Observable, of, tap } from 'rxjs';
 import { Create_Product } from 'src/app/contracts/products/create_product';
 import { List_Product } from 'src/app/contracts/products/list_product';
 import { List_Product_Image } from 'src/app/contracts/products/list_product_Image';
@@ -47,21 +47,18 @@ export class ProductService {
   async read(page: number = 0, size: number = 5, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)
     : Promise<{ totalCount: number; products: List_Product[] }> {
 
-    const products$: Observable<{ totalCount: number; products: List_Product[] }> = this.httpClientService.get<{ totalCount: number; products: List_Product[] }>({
+    const allProducts = lastValueFrom(this.httpClientService.get<{ totalCount: number; products: List_Product[] }>({
       controller: "products",
       queryString: `page=${page}&size=${size}`
-    });
+    }));
 
-    var allProducts: { totalCount: number; products: List_Product[] };
-
-    try {
-      allProducts = await lastValueFrom(products$);
+    allProducts.then(r => {
       successCallBack?.();
-    } catch (error) {
-      errorCallBack?.(error.message);
-    }
+    }).catch((err: HttpErrorResponse) => {
+      errorCallBack?.(err.message);
+    })
 
-    return allProducts;
+    return await allProducts;
   }
 
   async delete(id: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {

@@ -8,10 +8,11 @@ import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginModule } from './ui/components/login/login.module';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleInitOptions, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter : () => localStorage.getItem("accessToken"),
+        tokenGetter: () => localStorage.getItem("accessToken"),
         allowedDomains: ["localhost:7234"]
       }
     }),
@@ -44,7 +45,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider("787458901010-pffq98ql1s5ha09jjfce75ht5o0qgsdo.apps.googleusercontent.com")
+            provider: new GoogleLoginProvider("787458901010-pffq98ql1s5ha09jjfce75ht5o0qgsdo.apps.googleusercontent.com", { oneTapEnabled: false })
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
@@ -53,8 +54,11 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
         ],
         onError: err => console.log(err)
       } as SocialAuthServiceConfig
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ 
+}

@@ -6,7 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
 import { AuthService } from 'src/app/services/common/auth.service';
-import { UserService } from 'src/app/services/common/models/user.service';
+import { UserAuthService } from 'src/app/services/common/models/user-auth.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private userAuthService: UserAuthService,
     private toastrService: CustomToastrService,
     spinner: NgxSpinnerService,
     private router: Router,
@@ -39,7 +39,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log("dsdsdsdsd");
     this.loginWithSocial();
 
     this.loginForm = this.formBuilder.group({
@@ -58,7 +58,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
 
-    await this.userService.login(user, () => {
+    await this.userAuthService.login(user, () => {
       this.authService.identityCheck();
       this.hideSpinner(SpinnerType.BallScaleMultiple);
 
@@ -73,7 +73,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.toastrService.Notify("", "Welcome!", {
         messageType: ToastrMessageType.Info,
         position: ToastrPosition.TopCenter,
-        timeOut: 1500
+        timeOut: 1500,
       });
     }, (errMessage: string) => {
       this.loginForm.setErrors({ general: true });
@@ -84,6 +84,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   loginWithSocial() {
+
     this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
 
       this.user = user;
@@ -109,7 +110,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   async loginWithGoogle(user: SocialUser) {
 
-    await this.userService.loginWithGoogle(user, () => {
+    await this.userAuthService.loginWithGoogle(user, () => {
       this.successCallback();
     }, (errMessage: string) => {
       this.errorCallback(errMessage);
@@ -117,7 +118,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   loginWithFacebook(user: SocialUser) {
-    this.userService.loginWithFacebook(user, () => {
+    this.userAuthService.loginWithFacebook(user, () => {
       this.successCallback();
     }, (errMessage: string) => {
       this.errorCallback(errMessage);

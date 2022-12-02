@@ -77,12 +77,14 @@ export class ListComponent extends BaseComponent implements OnInit {
       }, (errorMessage) => {
         
         this.hideSpinner(SpinnerType.BallScaleMultiple);
-        this.alertify.Notify(errorMessage, {
-          dismissOther: true,
-          messageType: AlertifyMessageType.Error,
-          position: AlertifyPosition.TopRight,
-          delay: 3
-        });
+        // Global error handler yazdığımız için hata ilk olarak orada yakalanacak ve product service'den bize hata olarak;
+        // EmptyError: no elements in sequence fırlatılacaktır.
+        // this.alertify.Notify(errorMessage, {
+        //   dismissOther: true,
+        //   messageType: AlertifyMessageType.Error,
+        //   position: AlertifyPosition.TopRight,
+        //   delay: 3
+        // });
       });
 
 

@@ -18,8 +18,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
   submitted: boolean = false;
   errorMessage: string = null;
   loginForm: FormGroup;
-  loggedIn: boolean;
-  user: SocialUser;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +37,14 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("dsdsdsdsd");
+
+    if (this.authService.isAuthenticated)
+      this.router.navigate([""]);
+    else {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+    }
+
     this.loginWithSocial();
 
     this.loginForm = this.formBuilder.group({
@@ -87,7 +92,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
 
-      this.user = user;
+      this.authService.currentUser = user;
       if (!user)
         return;
 

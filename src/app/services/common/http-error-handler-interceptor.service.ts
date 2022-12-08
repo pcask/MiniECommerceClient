@@ -1,25 +1,50 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, from, Observable, of, retry, switchMap } from 'rxjs';
+import { Tokens } from 'src/app/contracts/tokens';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
+import { AuthService } from './auth.service';
+import { UserAuthService } from './models/user-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
-  constructor(private toastr: CustomToastrService) { }
+  constructor(private toastr: CustomToastrService,
+    private userAuthService: UserAuthService,
+    private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(req).pipe(catchError(err => {
       switch (err.status) {
         case HttpStatusCode.Unauthorized:
-          this.toastr.Notify("You are not authorized. Please sign up first.", "Unauthorized", {
-            messageType: ToastrMessageType.Info,
-            position: ToastrPosition.TopCenter,
-            timeOut: 3000
-          });
+
+          if (this.authService.canRefreshTokens) {
+
+            const aToken = localStorage.getItem("accessToken");
+            const rToken = localStorage.getItem("refreshToken");
+
+            const result = this.userAuthService.loginWithRefreshToken(aToken, rToken).then(r => {
+              this.authService.identityCheck();
+            });
+
+            return from(result).pipe(switchMap(() => next.handle(req.clone({
+              setHeaders: {
+                'authorization': 'Bearer ' + localStorage.getItem('accessToken')
+              }
+            }))));
+
+          }
+          else {
+            this.toastr.Notify("You are not authorized. Please sign in first.", "Unauthorized", {
+              messageType: ToastrMessageType.Info,
+              position: ToastrPosition.TopCenter,
+              timeOut: 3000
+            });
+          }
+
           break;
         case HttpStatusCode.BadRequest:
           this.toastr.Notify("We couldn't load this page. Please try again. If the problem persists, let us know.", "Bad Request", {

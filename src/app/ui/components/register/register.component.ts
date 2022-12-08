@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
+import { AuthService } from 'src/app/services/common/auth.service';
 import { UserService } from 'src/app/services/common/models/user.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
 
@@ -18,15 +19,19 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   submitted: boolean = false;
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, 
-    private userService: UserService, 
-    private toastrService: CustomToastrService, 
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastrService: CustomToastrService,
     spinner: NgxSpinnerService,
-    private router: Router) {
+    private router: Router,
+    private authService: AuthService) {
     super(spinner)
   }
 
   ngOnInit(): void {
+
+    if (this.authService.isAuthenticated)
+      this.router.navigate([""]);
 
     this.registerForm = this.formBuilder.group({
       email: ["", [

@@ -4,5 +4,7 @@ export class Login_User {
 
 export class Token {
     accessToken: string;
-    expiration: Date
+    aTokenEndDate: Date;
+    refreshToken: string;
+    rTokenEndDate: Date;
 }

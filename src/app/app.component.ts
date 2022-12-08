@@ -12,16 +12,14 @@ declare var $: any
 })
 export class AppComponent {
 
-  constructor(public authService: AuthService, private router: Router, private socailAuthService: SocialAuthService) {
+  constructor(public authService: AuthService, private router: Router) {
 
     authService.identityCheck();
 
   }
 
   signOut() {
-    localStorage.removeItem("accessToken");
-    this.authService.identityCheck();
-    this.socailAuthService.signOut();
+    this.authService.signOut();
     this.router.navigate([""]);
   }
 }

@@ -24,7 +24,7 @@ export class SignalRService {
         .withUrl(hubURL)
         .withAutomaticReconnect([1000, 5000, 10000, 30000]) // Başarılı bir bağlantı ardından kopma olursa, otomatik olarak bağlantı koptuktan sonra 
         // 1. 5. 10. ve 30. saniyelerde tekrar bağlanmayı deneyecektir. Parametresiz kullanımda ise 0. 2. 10. 30. saniyelerde tekrar bağlantı deneyecektir.
-        // bu süreçlerde tekrar bağlantı sağlanamazsa bir daha bağlantı denemesi gerçekleşmeyecektir.
+        // bu süreçlerde tekrar bağlantı sağlanamazsa bir daha bağlantı denemesi gerçekleşmeyecek.
         .build();
 
       hubConnection.start()

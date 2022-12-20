@@ -11,7 +11,7 @@
         </div>
         <div class="header header-middle sticky-top" id="header-middle">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row px-5">
 
                     <div class="header-middle-left col-sm-3">
                         <a class="navbar-brand" routerLink="">Mini E-Commerce</a>
@@ -90,70 +90,80 @@
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
         <div class="header header-bottom">
             <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid" style="padding-left:22px;">
-                    <button class="navbar-toggler" type="button" style="padding-top: 0px;" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon">
-                            <span class="menu-txt">
-                                Menu
+                <div class="container-fluid">
+                    <div class="row px-5">
+                        <button class="navbar-toggler" type="button" style="padding-top: 0px;" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon">
+                                <span class="menu-txt">
+                                    Menu
+                                </span>
                             </span>
-                        </span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">WOMEN</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">MEN</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">CHILD</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">COSMETIC</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">ELEKTRONIC</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">SHOES</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">ACCESSORY</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="">SPORTS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" routerLink="">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="products">Products</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" routerLink="baskets">Baskets</a>
-                            </li>
-                            <li>
-                                <a class="btn btn-outline-warning" type="submit" routerLink="admin">Admin Panel</a>
-                            </li>
-                        </ul>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">WOMEN</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">MEN</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">CHILD</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">COSMETIC</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">ELEKTRONIC</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">SHOES</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">ACCESSORY</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="">SPORTS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" routerLink="">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="products">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" routerLink="baskets">Baskets</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-outline-warning" type="submit" routerLink="admin">Admin Panel</a>
+                                </li>
+                            </ul>
 
+                        </div>
                     </div>
+
                 </div>
             </nav>
         </div>
 
         <div>
             
-            <router-outlet></router-outlet>
+            <div class="container-fluid">
+                <div class="row px-4">
+
+                    <router-outlet></router-outlet>
+                    
+                </div>
+            </div>
 
         </div>
 

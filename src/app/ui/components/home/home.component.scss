@@ -1,0 +1,121 @@
+#brandSlider {
+    display: flex;
+    align-items: center;
+}
+
+.chevron {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #adadad;
+}
+
+.chevron:hover {
+    color: #000000;
+}
+
+#chevronLeft {
+    left: -24px;
+    visibility: hidden;
+    top: -12px;
+}
+
+#chevronLeft::after {
+    z-index: 1;
+    content: "";
+    display: block;
+    top: -38px;
+    left: 44px;
+    position: absolute;
+    height: 122px;
+    width: 50px;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+}
+
+#chevronRight {
+    left: 24px;
+    visibility: hidden;
+    top: -12px;
+}
+
+#chevronRight::before {
+    z-index: 1;
+    content: "";
+    display: block;
+    top: -38px;
+    left: -70px;
+    position: absolute;
+    height: 122px;
+    width: 50px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+}
+
+
+#brandSliderContainer {
+    position: relative;
+    overflow-x: clip;
+    margin: 24px 0px 24px 0px;
+}
+
+.brand-slider {
+    display: flex;
+}
+
+#draggable {
+    position: relative;
+}
+
+.brand-slider-item {
+    float: left;
+    padding: 10px 24px 10px 24px;
+}
+
+.brand-slider div:first-child {
+    padding-left: 1px;
+}
+
+.brand-slider div:last-child {
+    padding-right: 1px;
+}
+
+.brand-slider-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.brand-slider-item img {
+    width: 70px;
+    height: 70px;
+    border: 1px solid rgba(139, 139, 139, 0.432);
+    border-radius: 50%;
+    transition: all ease 0.1s;
+}
+
+.brand-slider-item img:hover {
+    border: 1px solid #673ab7;
+    outline: 1px solid #673ab7;
+}
+
+.brand-slider-item span{
+    transition: all ease 0.1s;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.brand-slider-item a{
+    color: black;
+    font-family: Tahoma, "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.brand-slider-item a:hover {
+    color: #673ab7;
+}

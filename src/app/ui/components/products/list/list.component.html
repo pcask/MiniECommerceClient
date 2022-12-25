@@ -1,0 +1,623 @@
+<div class="row">
+
+    <div id="categoryContainer" class="col-md-2">
+
+        <h2>Related Categories</h2>
+        <ul>
+            <li>Category 1</li>
+            <li>Category 2</li>
+            <li>Category 3</li>
+            <li>Category 4</li>
+            <li>Category 5</li>
+            <li>Category 6</li>
+        </ul>
+
+        <div style="margin-bottom: 1500px"></div>
+    </div>
+
+    <div id="productListContent" class="col-md-10">
+
+        <div id="productListHeader">
+            <div id="headerTop">
+                <span id="productCount">
+                    <h2>X products are listed</h2>
+                </span>
+                <div id="orderSelection">
+                    <select class="form-select" aria-label="Order">
+                        <option selected value="0">Best Selling</option>
+                        <option value="1">Lowest Price</option>
+                        <option value="2">Highest Price</option>
+                        <option value="3">The Newests</option>
+                    </select>
+                </div>
+            </div>
+            <div id="headerBottom">
+
+            </div>
+        </div>
+
+        <div id="productListContainer">
+
+
+            <div class="product-container card" *ngFor="let product of products">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+
+                        <img *ngIf="!product.productImageFiles.length" src="/assets/images/no-image.jpg"
+                            class="product-img card-img-top" alt="...">
+
+                        <img *ngIf="product.productImageFiles.length" [src]="product.imagePath"
+                            class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text"><b>{{product.name}}</b> Some quick example text to build on
+                            the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>{{product.price}} $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="product-container card">
+
+                <a class="product-link" routerLink="list">
+
+                    <div class="product-image-container">
+
+                        <div class="product-image-header"></div>
+                        <img src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
+                    </div>
+
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text">Some quick example text to build on the card title and
+                            make up
+                            the
+                            bulk of the
+                            card's content.</p>
+
+                        <span class="product-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>2300 $</p>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+
+        </div>
+
+        <span class="clearfix"></span>
+
+        <br>
+        <hr>
+
+        <div id="productListPagination">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center pagination-lg">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a routerLink="" class="page-link">1</a></li>
+                    <li class="page-item"><a routerLink="" class="page-link">2</a></li>
+                    <li class="page-item"><a routerLink="" class="page-link">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

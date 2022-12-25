@@ -19,7 +19,12 @@
                 <p><img src="/assets/icons/image.png">{{img.fileName}}</p>
             </div>
 
-            <button class="deleteBtn" (click)="deleteImage(img.id, $event)">Delete</button>
+            <div>
+                <mat-radio-button (change)="SetImageShowcase(img.id)" [checked]="img.showcase">Set
+                    showcase</mat-radio-button>
+                <button id="deleteBtn" (click)="deleteImage(img.id, $event)">Delete</button>
+            </div>
+
         </mat-card-actions>
     </mat-card>
 

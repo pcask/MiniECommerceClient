@@ -44,12 +44,15 @@ export class ProductService {
       .catch((err: HttpErrorResponse) => errorCallBack(err.message))
   }
 
-  async read(page: number = 0, size: number = 5, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)
-    : Promise<{ totalCount: number; products: List_Product[] }> {
+  /**
+   * @param withImages 0 = false, 1 = true
+   */
+  async read(page: number = 0, size: number = 5, withImages: number = 0, filterBrand?: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)
+    : Promise<{ totalProductCount: number; products: List_Product[] }> {
 
-    const allProducts = lastValueFrom(this.httpClientService.get<{ totalCount: number; products: List_Product[] }>({
+    const allProducts = lastValueFrom(this.httpClientService.get<{ totalProductCount: number; products: List_Product[] }>({
       controller: "products",
-      queryString: `page=${page}&size=${size}`
+      queryString: `page=${page}&size=${size}&wi=${withImages}${filterBrand ? `&fb=${filterBrand}` : ""}`
     }));
 
     allProducts.then(r => {
@@ -96,5 +99,24 @@ export class ProductService {
     await lastValueFrom(delete$)
       .then(r => successCallBack?.())
       .catch((err: HttpErrorResponse) => errorCallBack(err.message));
+  }
+
+  async setImageShowcase(imgId: string, prId: string, successCallBack?: () => void, errorCallBack?: (err) => void) {
+
+    const result$ = this.httpClientService.put({
+      controller: "products",
+      action: "SetImageShowcase"
+    }, {
+      imageId: imgId,
+      productId: prId
+    });
+
+    try {
+      await lastValueFrom(result$);
+      successCallBack?.();
+
+    } catch (error) {
+      errorCallBack?.(error);
+    }
   }
 }

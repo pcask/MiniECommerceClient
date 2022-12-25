@@ -3,4 +3,5 @@ export class List_Product_Image {
     fileName: string = "";
     path: string = "";
     createdDate: Date = new Date();
+    showcase: boolean = false;
 }

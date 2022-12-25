@@ -70,7 +70,8 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
       afterClosedCallBack: async () => {
 
         this.spinner.show(SpinnerType.BallScaleMultiple);
-        var card = $(event.srcElement).parent().parent();
+        var card = $(event.srcElement).parent().parent().parent();
+
         card.fadeOut(600);
 
         await this.productService.deleteImage(this.data as string, imageId, async () => {
@@ -95,5 +96,16 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
     });
 
 
+  }
+
+  async SetImageShowcase(imageId: string) {
+    this.spinner.show(SpinnerType.BallScaleMultiple);
+
+    await this.productService.setImageShowcase(imageId, this.data as string, () => {
+
+      this.spinner.hide(SpinnerType.BallScaleMultiple);
+    }, (error) => {
+      this.spinner.hide(SpinnerType.BallScaleMultiple);
+    });
   }
 }

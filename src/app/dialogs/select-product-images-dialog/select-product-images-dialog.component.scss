@@ -14,7 +14,7 @@
   height: 99%;
 }
 
-.deleteBtn {
+#deleteBtn {
   background-color: rgb(226, 73, 73);
   color: white;
   border: none;
@@ -30,7 +30,7 @@
   float: right;
 }
 
-.deleteBtn:hover {
+#deleteBtn:hover {
   background-color: rgb(212, 68, 68);
   color: white;
 }
@@ -57,8 +57,17 @@ mat-card-actions p {
   display: block;
 }
 
-.btn-cancel{
+.btn-cancel {
   background-color: rgb(150, 150, 150);
   color: white;
   margin: 10px;
 }
+
+::ng-deep .mdc-radio {
+  padding-left: 0px !important;
+  padding-right: 5px !important;
+}
+
+::ng-deep .mdc-form-field label{
+  cursor: pointer;
+} 

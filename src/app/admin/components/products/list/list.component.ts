@@ -43,7 +43,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   @Output() updateProductEvent: EventEmitter<Update_Product> = new EventEmitter();
 
   updateProduct(_id: string, event: any) {
-    
+
     var tr = $(event.srcElement).parent().parent().parent();
 
     var _name = tr[0].children[0].innerText;
@@ -70,12 +70,12 @@ export class ListComponent extends BaseComponent implements OnInit {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
 
-    const allProducts: { totalCount: number; products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0,
-      this.paginator ? this.paginator.pageSize : 5, () => {
+    const allProducts: { totalProductCount: number; products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0,
+      this.paginator ? this.paginator.pageSize : 5, 0, null, () => {
 
         this.hideSpinner(SpinnerType.BallScaleMultiple);
       }, (errorMessage) => {
-        
+
         this.hideSpinner(SpinnerType.BallScaleMultiple);
         // Global error handler yazdığımız için hata ilk olarak orada yakalanacak ve product service'den bize hata olarak;
         // EmptyError: no elements in sequence fırlatılacaktır.
@@ -89,7 +89,7 @@ export class ListComponent extends BaseComponent implements OnInit {
 
 
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
-    this.paginator.length = allProducts.totalCount;
+    this.paginator.length = allProducts.totalProductCount;
 
   }
 }

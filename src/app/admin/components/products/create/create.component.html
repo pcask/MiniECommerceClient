@@ -1,24 +1,35 @@
 <div class="container">
 
-        <h3 id="title">Create Product</h3>
+    <h3 id="title">Create Product</h3>
 
-        <mat-form-field class="input-full-width" appearance="fill">
-            <mat-label>Name</mat-label>
-            <input id="txtName" matInput required #txtName>
-        </mat-form-field>
+    <mat-form-field class="input-full-width" appearance="fill">
+        <mat-label>Select a brand</mat-label>
+        <mat-select [(value)]="selectedBrand">
+            <mat-option [value]="brand.code" *ngFor="let brand of brands">{{brand.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-        <mat-form-field class="input-full-width" appearance="fill">
-            <mat-label>Amount of Stock</mat-label>
-            <input id="txtStock" matInput type="number" min="0" value="0" #txtStock>
-        </mat-form-field>
 
-        <mat-form-field class="input-full-width" appearance="fill">
-            <mat-label>Price</mat-label>
-            <input id="txtPrice" matInput type="number" min="0" value="0" #txtPrice>
-        </mat-form-field>
 
-        <button id="btnCreate" mat-raised-button color="primary" (click)="createProduct(txtName, txtStock, txtPrice)">Create</button>
+    <mat-form-field class="input-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input id="txtName" matInput required #txtName>
+    </mat-form-field>
 
-        <button id="btnUpdate" class="invisible" mat-raised-button (click)="updateProduct(txtName, txtStock, txtPrice)">Update</button>
-        <button id="btnCancel" class="invisible" mat-raised-button (click)="cancelProductUpdate()">Cancel</button>
+    <mat-form-field class="input-full-width" appearance="fill">
+        <mat-label>Amount of Stock</mat-label>
+        <input id="txtStock" matInput type="number" min="0" value="0" #txtStock>
+    </mat-form-field>
+
+    <mat-form-field class="input-full-width" appearance="fill">
+        <mat-label>Price</mat-label>
+        <input id="txtPrice" matInput type="number" min="0" value="0" #txtPrice>
+    </mat-form-field>
+
+    <button id="btnCreate" mat-raised-button color="primary"
+        (click)="createProduct(txtName, txtStock, txtPrice)">Create</button>
+
+    <button id="btnUpdate" class="invisible" mat-raised-button
+        (click)="updateProduct(txtName, txtStock, txtPrice)">Update</button>
+    <button id="btnCancel" class="invisible" mat-raised-button (click)="cancelProductUpdate()">Cancel</button>
 </div>

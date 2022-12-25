@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Inject, Injectable, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+import { List_Brand } from 'src/app/contracts/brands/list_brand';
 import { Create_Product } from 'src/app/contracts/products/create_product';
 import { Update_Product } from 'src/app/contracts/products/update_product';
 import { DialogResults } from 'src/app/dialogs/base/base-dialog';
 import { UpdateDialogComponent } from 'src/app/dialogs/update-dialog/update-dialog.component';
 import { AlertifyService, AlertifyMessageType, AlertifyPosition } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
+import { BrandService } from 'src/app/services/common/models/brand.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 declare var $: any;
@@ -22,11 +24,19 @@ export class CreateComponent extends BaseComponent implements OnInit {
   constructor(spinner: NgxSpinnerService,
     private alertify: AlertifyService,
     private productService: ProductService,
-    private dialogService: DialogService) {
+    private dialogService: DialogService,
+    private brandService: BrandService) {
+
     super(spinner);
+
   }
 
-  ngOnInit(): void {
+  selectedBrand: number;
+  brands: List_Brand[];
+
+  async ngOnInit(): Promise<void> {
+
+    this.brands = await this.brandService.read();
 
   }
 
@@ -38,6 +48,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
     createProduct.name = name.value;
     createProduct.amountOfStock = parseInt(stock.value);
     createProduct.price = parseFloat(price.value);
+    createProduct.brandCode = this.selectedBrand;
 
     this.productService.create(createProduct, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);

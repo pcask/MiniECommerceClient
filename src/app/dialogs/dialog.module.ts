@@ -7,6 +7,7 @@ import { SelectProductImagesDialogComponent } from './select-product-images-dial
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
 import {MatCardModule} from '@angular/material/card';
 import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
   imports: [
     CommonModule,
     MatDialogModule, MatButtonModule, MatCardModule,
-    FileUploadModule
+    FileUploadModule,
+    MatRadioModule
   ]
 })
 export class DialogModule { }

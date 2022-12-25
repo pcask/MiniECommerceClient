@@ -75,11 +75,11 @@
     padding: 10px 24px 10px 24px;
 }
 
-.brand-slider div:first-child {
+.brand-slider div.brand-slider-item:first-child {
     padding-left: 1px;
 }
 
-.brand-slider div:last-child {
+.brand-slider div.brand-slider-item:last-child {
     padding-right: 1px;
 }
 

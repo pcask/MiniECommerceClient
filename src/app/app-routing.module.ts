@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: "", component: HomeComponent, canActivate: [UiAuthGuard] },
   { path: "baskets", loadChildren: () => import("./ui/components/baskets/baskets.module").then(module => module.BasketsModule), canActivate: [UiAuthGuard] },
   { path: "products", loadChildren: () => import("./ui/components/products/products.module").then(module => module.ProductsModule), canActivate: [UiAuthGuard] },
+  { path: "product", loadChildren: () => import("./ui/components/product-details/product-details.module").then(module => module.ProductDetailsModule), canActivate: [UiAuthGuard] },
   { path: "register", loadChildren: () => import("./ui/components/register/register.module").then(module => module.RegisterModule), canActivate: [UiAuthGuard] },
   { path: "login", loadChildren: () => import("./ui/components/login/login.module").then(module => module.LoginModule), canActivate: [UiAuthGuard] }
 ];

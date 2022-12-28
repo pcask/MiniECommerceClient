@@ -8,7 +8,6 @@
 
 .header-top {
     line-height: 35px;
-    padding: 0px 30px 0px 30px;
     background-color: rgb(241, 241, 241);
 }
 
@@ -34,7 +33,6 @@
 }
 
 .header-middle-left {
-    padding-left: 30px;
     display: flex;
     align-items: center;
 }
@@ -101,6 +99,11 @@
     justify-content: flex-end;
 }
 
+.header-middle-right div.hmr-item:last-child{
+    width: 22px;
+    margin-left: 25px;
+}
+
 .hmr-item {
     float: right;
     width: 100px;
@@ -126,6 +129,10 @@
 
 .hmr-item-btn{
     color: #333;
+}
+
+.hmr-text{
+    white-space: nowrap;
 }
 
 .login-dropdown {
@@ -242,6 +249,22 @@
 
 .nav-item{
     padding: 0px 10px 0px 10px;
+}
+
+.navbar-nav li.nav-item:first-child {
+    padding-left: 0px;
+}
+
+.navbar-nav li.nav-item:first-child a {
+    padding-left: 0px;
+}
+
+.navbar-nav li.nav-item:last-child {
+    padding-right: 0px;
+}
+
+.navbar-nav li.nav-item:last-child a {
+    padding-right: 0px;
 }
 
 .nav-item a:not(.dropdown-item) {

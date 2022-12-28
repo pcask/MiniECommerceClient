@@ -47,21 +47,24 @@ export class ProductService {
   /**
    * @param withImages 0 = false, 1 = true
    */
-  async read(page: number = 0, size: number = 5, withImages: number = 0, filterBrand?: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)
+  async read(page: number = 0, size: number = 5, withImages: number = 0, filterBrand?: string, orderBy?: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void)
     : Promise<{ totalProductCount: number; products: List_Product[] }> {
 
-    const allProducts = lastValueFrom(this.httpClientService.get<{ totalProductCount: number; products: List_Product[] }>({
+    const allProducts$ = this.httpClientService.get<{ totalProductCount: number; products: List_Product[] }>({
       controller: "products",
-      queryString: `page=${page}&size=${size}&wi=${withImages}${filterBrand ? `&fb=${filterBrand}` : ""}`
-    }));
+      queryString: `page=${page}&size=${size}&wi=${withImages}${filterBrand ? `&fb=${filterBrand}` : ""}${orderBy ? `&ob=${orderBy}` : ""}`
+    });
 
-    allProducts.then(r => {
+    let allProducts;
+
+    try {
+      allProducts = await lastValueFrom(allProducts$);
       successCallBack?.();
-    }).catch((err: HttpErrorResponse) => {
-      errorCallBack?.(err.message);
-    })
+    } catch (error) {
+      errorCallBack?.(error);
+    }
 
-    return await allProducts;
+    return allProducts;
   }
 
   async delete(id: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {

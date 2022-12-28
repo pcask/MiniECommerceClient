@@ -20,7 +20,8 @@
 }
 
 #chevronLeft {
-    left: -24px;
+    width: 0px;
+    left: -13px;
     visibility: hidden;
     top: -12px;
 }
@@ -30,7 +31,7 @@
     content: "";
     display: block;
     top: -38px;
-    left: 44px;
+    left: 13px;
     position: absolute;
     height: 122px;
     width: 50px;
@@ -38,7 +39,8 @@
 }
 
 #chevronRight {
-    left: 24px;
+    width: 0px;
+    left: 16px;
     visibility: hidden;
     top: -12px;
 }
@@ -48,7 +50,7 @@
     content: "";
     display: block;
     top: -38px;
-    left: -70px;
+    left: -56px;
     position: absolute;
     height: 122px;
     width: 50px;

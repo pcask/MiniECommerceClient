@@ -70,8 +70,9 @@ export class ListComponent extends BaseComponent implements OnInit {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
 
-    const allProducts: { totalProductCount: number; products: List_Product[] } = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0,
-      this.paginator ? this.paginator.pageSize : 5, 0, null, () => {
+    const allProducts: { totalProductCount: number; products: List_Product[] } = await this.productService.read(
+      this.paginator ? this.paginator.pageIndex : 0,
+      this.paginator ? this.paginator.pageSize : 5, 0, null, null, () => {
 
         this.hideSpinner(SpinnerType.BallScaleMultiple);
       }, (errorMessage) => {

@@ -1,7 +1,6 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, from, Observable, of, retry, switchMap } from 'rxjs';
-import { Tokens } from 'src/app/contracts/tokens';
+import { catchError, from, Observable, of, switchMap } from 'rxjs';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
 import { AuthService } from './auth.service';
 import { UserAuthService } from './models/user-auth.service';

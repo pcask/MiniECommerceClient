@@ -2,10 +2,12 @@ import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
+import { BaseURL } from 'src/app/contracts/baseUrl';
 import { List_Product_Image } from 'src/app/contracts/products/list_product_Image';
 import { AlertifyMessageType, AlertifyPosition, AlertifyService } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
+import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 import { BaseDialog, DialogResults } from '../base/base-dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -25,7 +27,8 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     private alertify: AlertifyService,
-    private dialogService: DialogService) {
+    private dialogService: DialogService,
+    private fileService: FileService) {
     super(dialogRef);
   }
 
@@ -40,8 +43,11 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
   };
 
   productImages: List_Product_Image[];
+  storageBaseUrl: string;
 
   async ngOnInit() {
+
+    this.storageBaseUrl = (await this.fileService.getStorageBaseUrl()).url;
 
     return await this.loadImages();
 
@@ -49,10 +55,14 @@ export class SelectProductImagesDialogComponent extends BaseDialog<SelectProduct
 
   async loadImages() {
     this.spinner.show(SpinnerType.BallScaleMultiple);
+
     this.productImages = await this.productService.getImagesByProductId(this.data as string, () => {
+
       this.spinner.hide(SpinnerType.BallScaleMultiple);
     }, (errorMessage: string) => {
+
       this.spinner.hide(SpinnerType.BallScaleMultiple);
+
       this.alertify.Notify("An unexpected error has occurred. Please refresh the page and try again.", {
         dismissOther: true,
         messageType: AlertifyMessageType.Error,

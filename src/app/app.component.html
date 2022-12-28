@@ -1,18 +1,25 @@
-<div class="container-fluid">
+<div class="app-container">
 
     <div class="row">
         <div class="header header-top">
-            <div style="float: left;">
-                <p style="margin: 0;">Free Shipping on Purchases of 100 $ or More</p>
-            </div>
-            <div style="float: right;">
-                <a href="#"><i class="bi bi-truck"></i> &nbsp;Order Tracking</a>
+            <div class="section-wrapper">
+
+                <div style="float: left;">
+                    <p style="margin: 0;">Free Shipping on Purchases of 100 $ or More</p>
+                </div>
+                <div style="float: right;">
+                    <a href="#"><i class="bi bi-truck"></i> &nbsp;Order Tracking</a>
+                </div>
+
             </div>
         </div>
-        <div class="header header-middle sticky-top" id="header-middle">
-            <div class="container-fluid">
-                <div class="row px-5">
+    </div>
 
+    <div class="row sticky-top">
+        <div class="header header-middle" id="header-middle">
+            <div class="section-wrapper">
+
+                <div class="row">
                     <div class="header-middle-left col-sm-3">
                         <a class="navbar-brand" routerLink="">Mini E-Commerce</a>
                     </div>
@@ -35,15 +42,16 @@
 
                                 <a href="login" class="login-dropbtn hmr-item-btn">
                                     <i class="bi bi-person-up"></i>
-                                    <span style="padding:16px;" *ngIf="!authService.isAuthenticated">Sign in</span>
-                                    <span style="padding:16px;" *ngIf="authService.isAuthenticated">My Account</span>
+                                    <span class="hmr-text" style="padding: 16px;" *ngIf="!authService.isAuthenticated">Sign in</span>
+                                    <span class="hmr-text" style="padding: 16px 4px 16px 4px;" *ngIf="authService.isAuthenticated">My Account</span>
                                 </a>
 
                                 <div class="login-dropdown-content">
                                     <div class="user-notloggedin-container" *ngIf="!authService.isAuthenticated">
                                         <span style="margin-bottom:10px;">We will be happy to see you among us</span>
 
-                                        <a routerLink="register" class="user-notloggedin-item btn btn-register">Sign Up</a>
+                                        <a routerLink="register" class="user-notloggedin-item btn btn-register">Sign
+                                            Up</a>
                                         <a href="login" class="user-notloggedin-item btn btn-login">Sign In</a>
 
                                     </div>
@@ -79,95 +87,89 @@
                         <div class="my-favorite hmr-item">
                             <a href="" class="hmr-item-btn">
                                 <i class="bi bi-heart"></i>
-                                <span>Favorites</span>
+                                <span class="hmr-text">Favorites</span>
                             </a>
                         </div>
 
                         <div class="my-cart hmr-item">
                             <a href="" class="hmr-item-btn">
                                 <i class="bi bi-cart3"></i>
-                                <span>Cart</span>
+                                <span class="hmr-text">Cart</span>
                             </a>
                         </div>
                     </div>
-
                 </div>
+
+
             </div>
         </div>
+    </div>
 
-        <div class="header header-bottom">
-            <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <div class="row px-5">
-                        <button class="navbar-toggler" type="button" style="padding-top: 0px;" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon">
-                                <span class="menu-txt">
-                                    Menu
-                                </span>
-                            </span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">WOMEN</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">MEN</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">CHILD</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">COSMETIC</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">ELECTRONIC</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">SHOES</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">ACCESSORY</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="">SPORTS</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" routerLink="">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="products">Products</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" routerLink="baskets">Baskets</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-outline-warning" type="submit" routerLink="admin">Admin Panel</a>
-                                </li>
-                            </ul>
 
-                        </div>
-                    </div>
+    <div class="header header-bottom">
+        <nav class="navbar navbar-expand-lg bg-light">
+
+            <div class="section-wrapper">
+
+                <button class="navbar-toggler" type="button" style="padding-top: 0px;" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <span class="menu-txt">
+                            Menu
+                        </span>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">WOMEN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">MEN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">CHILD</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">COSMETIC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">ELECTRONIC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">SHOES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">ACCESSORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="">SPORTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" routerLink="">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" routerLink="products">Products</a>
+                        </li>
+                        <li *ngIf="authService.isAuthenticated">
+                            <a class="btn btn-outline-warning" type="submit" routerLink="admin">Admin Panel</a>
+                        </li>
+                    </ul>
 
                 </div>
-            </nav>
-        </div>
 
-        <div>
-            
-            <div class="container-fluid">
-                <div class="row px-4">
-
-                    <router-outlet></router-outlet>
-                    
-                </div>
             </div>
 
-        </div>
+        </nav>
+    </div>
+
+    <div class="app-content">
+
+            <router-outlet></router-outlet>
 
     </div>
+
 </div>
 
 

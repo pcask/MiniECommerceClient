@@ -1,12 +1,11 @@
-
 <div class="section-wrapper">
 
-    <div class="row">
+    <div class="header">
 
         <div id="breadcrumb-container">
             <div id="breadcrumbs-wrapper">
                 <ul id="breadcrumbs">
-    
+
                     <li class="breadcrumbs-item">
                         <a class="breadcrumbs-link" routerLink="">Home</a>
                         <span><i class="bi bi-chevron-right"></i></span>
@@ -26,13 +25,246 @@
                     <li class="breadcrumbs-item">
                         <a class="breadcrumbs-link" routerLink="">Sub Category 3</a>
                     </li>
-                   
+
                 </ul>
             </div>
-    
+
         </div>
     </div>
 
+
+    <div class="row" id="content" *ngIf="product; let p">
+
+        <div id="productContainer" class="card">
+
+            <div id="productImageGallery">
+
+                <div id="productThumbnails">
+                    <div class="thumbnail">
+                    </div>
+                    <div class="thumbnail">
+                    </div>
+                    <div class="thumbnail">
+                    </div>
+                    <div class="thumbnail">
+                    </div>
+                    <div class="thumbnail">
+                    </div>
+                </div>
+
+
+                <div id="productImageWrapper">
+
+                    <div id="imgLens" class="img-zoom-lens"></div>
+                    <img id="productImage" src="{{p.imagePath}}">
+
+                </div>
+
+
+            </div>
+
+
+            <div id="productDetailContainer">
+
+
+                <div id="imageZoomedArea" class="img-zoom-result"></div>
+
+
+                <div class="pr-detail-top">
+
+                    <div class="pr-name">
+                        <h1> {{p.name}} </h1>
+                    </div>
+
+                    <div class="pr-br-name">
+                        <a routerLink="/products" [queryParams]="{ fb:p.brandCode }">{{p.brandName.toLowerCase()}}</a>
+                    </div>
+
+                    <div class="pr-se-name">
+                        <span style="font-size: 13px;">Seller : </span>
+                        <a href="">modalead</a>
+                    </div>
+
+                    <div class="pr-raiting">
+
+                        <span class="rating-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half">&nbsp;</i>
+                        </span>
+
+                        <a href="">
+                            <span class="product-rating-count">1532 Rating &nbsp;</span>
+
+                            <span><i class="bi bi-camera-fill"></i></span>
+                        </a>
+                        <span>&nbsp;|&nbsp;</span>
+                        <span><a href="">96 answered questions</a> </span>
+
+                    </div>
+
+                    <div class="pr-price">
+                        <span>{{p.price |currency:'USD'}} </span>
+                    </div>
+
+                    <div class="pr-price-detail">
+                        <span>$130 Shipping & Import Fees Deposit to Türkiye</span>
+                    </div>
+
+
+                </div>
+
+                <hr>
+
+                <div class="pr-detail-middle">
+
+                    <div class="pr-color">
+                        <h3>Color</h3>
+                        <div class="pr-color-wrapper">
+                            <div class="pr-color-item">
+                            </div>
+                            <div class="pr-color-item" style="background-color: chartreuse;">
+                            </div>
+                            <div class="pr-color-item" style="background-color: rgb(10, 165, 255);">
+                            </div>
+                            <div class="pr-color-item" style="background-color: rgb(255, 6, 234);">
+                            </div>
+                            <div class="pr-color-item" style="background-color: rgb(141, 0, 0);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pr-size">
+                        <h3>Size</h3>
+                        <div class="pr-size-wrapper">
+                            <div class="pr-size-item">37</div>
+                            <div class="pr-size-item">38</div>
+                            <div class="pr-size-item">39</div>
+                            <div class="pr-size-item">40</div>
+                            <div class="pr-size-item">41</div>
+                            <div class="pr-size-item">42</div>
+                            <div class="pr-size-item">43</div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <hr>
+
+                <div class="pr-detail-bottom">
+                    <div class="pr-add-to-cart">
+                        <input id="addToCart" type="button" value="Add to Cart" class="btn btn-lg">
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div id="rightSidebar" class="card">
+
+            <div>
+                <h2>Campaings</h2>
+                <p>Free Shipping on Purchases of 100 $ or More</p>
+            </div>
+
+            <hr>
+
+            <div class="r-sidebar-seller">
+                <h2>Seller</h2>
+                <a href="">Modalead</a>
+                <span id="ratingScore">9.9</span>
+                <span> visit the seller's store</span>
+            </div>
+
+            <hr>
+
+            <div>
+                <h2 style="margin-bottom: 20px;">Featured Comments</h2>
+
+
+                <div class="r-sidebar-rating">
+
+                    <div class="avatar">
+                        <img src="/assets/images/avatar.jpg" alt="">
+                        <span>Adams</span>
+                    </div>
+
+                    <div>
+                        <span class="rating-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="rating-comment">
+                            Works well so far! Looks nice with new band and glass front
+                        </span>
+                    </div>
+
+
+                </div>
+
+                <div class="r-sidebar-rating">
+
+                    <div class="avatar">
+                        <img src="/assets/images/avatar.jpg" alt="">
+                        <span>Emilly</span>
+                    </div>
+
+                    <div>
+                        <span class="rating-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="rating-comment">
+                            Works well so far! Looks nice with new band and glass front
+                        </span>
+                    </div>
+
+
+                </div>
+
+                <div class="r-sidebar-rating">
+
+                    <div class="avatar">
+                        <img src="/assets/images/avatar.jpg" alt="">
+                        <span>Rachel</span>
+                    </div>
+
+                    <div>
+                        <span class="rating-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="rating-comment">
+                            Works well so far! Looks nice with new band and glass front
+                        </span>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-
-

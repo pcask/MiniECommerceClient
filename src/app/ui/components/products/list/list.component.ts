@@ -66,6 +66,7 @@ export class ListComponent implements OnInit {
           id: p.id,
           name: p.name,
           brandCode: p.brandCode,
+          brandName: p.brandName,
           amountOfStock: p.amountOfStock,
           price: p.price,
           imagePath: path,
@@ -138,5 +139,12 @@ export class ListComponent implements OnInit {
       // skipLocationChange: true
     });
 
+  }
+
+  generateLink(product: List_Product): string {
+
+    let link = "/product/" + (product.brandName.replace(/[\W_]+/g, "-") + "/" + product.name.replace(/[\W_]+/g, "-")).toLowerCase() + "-i-" + product.id;
+
+    return link;
   }
 }

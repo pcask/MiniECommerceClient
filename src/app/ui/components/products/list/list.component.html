@@ -43,48 +43,49 @@
 
                 <div class="card">
 
-                    <a class="product-link" routerLink="/product">
+                    <a class="product-link" [routerLink]="generateLink(product)">
 
                         <div class="product-image-container">
-    
+
                             <div class="product-image-header"></div>
-    
-                            <img class="img-fluid" *ngIf="!product.productImageFiles.length" src="/assets/images/no-image.jpg"
-                                class="product-img card-img-top" alt="...">
-    
+
+                            <img class="img-fluid" *ngIf="!product.productImageFiles.length"
+                                src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+
                             <img class="img-fluid" *ngIf="product.productImageFiles.length" [src]="product.imagePath"
                                 class="product-img card-img-top" alt="...">
-    
+
                         </div>
-    
+
                         <div class="product-body card-body">
-    
-                            <p class="product-text card-text"><b>{{product.name}}</b> Some quick example text to build on
+
+                            <p class="product-text card-text"><b>{{product.name}}</b> Some quick example text to build
+                                on
                                 the card title and
                                 make up
                                 the...</p>
-    
-                            <span class="product-evaluation-stars">
+
+                            <span class="pr-evaluation-stars">
                                 <i class="bi bi-star-fill"></i>
                                 <i class="bi bi-star-fill"></i>
                                 <i class="bi bi-star-fill"></i>
                                 <i class="bi bi-star-fill"></i>
                                 <i class="bi bi-star-half"></i>
                             </span>
-    
+
                             <span class="product-evaluation-count"> (1532) </span>
-    
+
                             <span> <i class="bi bi-camera-fill"></i></span>
-    
+
                             <div class="product-price">
                                 <p>{{product.price}} $</p>
                             </div>
                         </div>
-    
+
                     </a>
 
                 </div>
-                
+
 
             </div>
 
@@ -93,7 +94,7 @@
         <div class="clear"></div>
 
         <br>
-        
+
         <div id="productListPagination" *ngIf="totalPageCount > 1">
 
             <hr>

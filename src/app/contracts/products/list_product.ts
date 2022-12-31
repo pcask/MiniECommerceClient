@@ -5,6 +5,7 @@ export class List_Product {
     name: string = "";
     amountOfStock: number = 0;
     price: number = 0;
+    brandName: string = "";
     brandCode: number = 1;
     productImageFiles?: List_Product_Image[] = new List_Product_Image[0];
     createdDate: Date = new Date();

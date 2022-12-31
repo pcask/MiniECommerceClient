@@ -122,4 +122,16 @@ export class ProductService {
       errorCallBack?.(error);
     }
   }
+
+  async getProductById(id: string): Promise<List_Product> {
+
+    const product$ = this.httpClientService.get<List_Product>({
+      controller: "products",
+      action: "getById"
+    }, id);
+
+    const product = await lastValueFrom(product$);
+
+    return product;
+  }
 }

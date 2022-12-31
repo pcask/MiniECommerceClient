@@ -37,9 +37,12 @@
     align-items: center;
 }
 
-.header-middle-left a {
-    font-size: 35px;
-    color: #673ab7;
+#logo {
+    font-size: 38px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .search {
@@ -269,11 +272,6 @@
 
 .nav-item a:not(.dropdown-item) {
     color: white;
-}
-
-.navbar-brand {
-    color: white;
-    font-weight: 500;
 }
 
 .navbar-toggler {

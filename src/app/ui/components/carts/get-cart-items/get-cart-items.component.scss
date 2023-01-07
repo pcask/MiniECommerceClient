@@ -1,0 +1,237 @@
+.noItemCont {
+    margin-top: 20px;
+    display: flex;
+    padding: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#noItemText {
+    display: block;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+#iLucky {
+    color: white;
+    font-size: 18px;
+    width: 250px;
+    height: 60px;
+    background-color: var(--deepPurple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#iLucky:hover {
+    background-color: #491c97e8;
+}
+
+.content {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#myCartContainer {
+    padding: 20px 0px;
+    width: 78%;
+    height: 100%;
+    margin-right: 20px;
+}
+
+
+#header {
+    padding-left: 20px;
+}
+
+.seller-container {
+    display: flex;
+    align-items: center;
+    background-color: rgb(231, 231, 231);
+}
+
+.checkbox {
+    min-width: 60px;
+    width: 60px;
+    text-align: center;
+}
+
+.seller-info {
+    position: relative;
+    top: 1px;
+}
+
+#ratingScore {
+    background-color: rgb(5 153 37);
+    font-family: sans-serif;
+    color: white;
+    font-size: 11px;
+    padding: 3px 4px;
+    border-radius: 5px;
+    margin: 0px 5px;
+    position: relative;
+    top: -2px;
+    font-weight: 600;
+    width: 20px;
+}
+
+.seller-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+.cart-items-container {
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.cart-item-left {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.cart-item-right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ci-detail {
+    display: flex;
+}
+
+.pr-image {
+    width: 80px;
+    height: 140px;
+    margin-right: 10px;
+}
+
+.pr-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
+.pr-detail span {
+    font-weight: 400;
+}
+
+.ci-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-text {
+    height: 36px;
+    width: 40px;
+    text-align: center;
+    border: none;
+    border-top: 1px solid rgb(207, 207, 207);
+    border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+.number-btn {
+    cursor: pointer;
+    height: 36px;
+    width: 26px;
+    border: 1px solid rgb(207, 207, 207);
+    background-color: rgb(248, 248, 248);
+}
+
+
+.ci-price span {
+    font-size: 20px;
+    font-weight: 500;
+    color: #B12704;
+}
+
+.btn-delete {
+    cursor: pointer;
+}
+
+.ci-hr {
+    margin: 0px;
+    color: rgb(139, 139, 139);
+}
+
+#orderSummaryContainer {
+    float: right !important;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 20.8%;
+    position: relative;
+    min-width: 240px;
+}
+
+.priceText {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+#subtotalCont {
+    display: flex;
+    justify-content: space-between;
+}
+
+#shippingCont {
+    display: flex;
+    justify-content: space-between;
+}
+
+#totalCont {
+    display: flex;
+    justify-content: space-between;
+}
+
+#btnCheckout {
+    margin: 10px 0px;
+    width: 100%;
+    height: 50px;
+    min-width: 200px;
+    background-color: var(--deepPurple);
+    color: white;
+}
+
+#btnCheckout:hover {
+    background-color: #491c97e8;
+}
+
+#discountHeader {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.discount-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+#txtDiscount {
+    width: 100%;
+    height: 50px;
+    border: 1px solid rgb(136, 136, 136);
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+#btnDiscount {
+    background-color: var(--deepPurple);
+    color: white;
+    height: 50px;
+}
+
+#btnDiscount:hover {
+    background-color: #491c97e8;
+}

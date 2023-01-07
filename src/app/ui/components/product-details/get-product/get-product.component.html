@@ -85,7 +85,7 @@
                         <a href="">modalead</a>
                     </div>
 
-                    <div class="pr-raiting">
+                    <div class="pr-rating">
 
                         <span class="rating-stars">
                             <i class="bi bi-star-fill"></i>
@@ -156,7 +156,7 @@
 
                 <div class="pr-detail-bottom">
                     <div class="pr-add-to-cart">
-                        <input id="addToCart" type="button" value="Add to Cart" class="btn btn-lg">
+                        <input id="addToCart" type="button" value="Add to Cart" class="btn btn-lg" (click)="addToCart(p.id, $event)">
                     </div>
                 </div>
 
@@ -178,7 +178,7 @@
 
             <div class="r-sidebar-seller">
                 <h2>Seller</h2>
-                <a href="">Modalead</a>
+                <a href="">modalead</a>
                 <span id="ratingScore">9.9</span>
                 <span> visit the seller's store</span>
             </div>
@@ -196,7 +196,7 @@
                         <span>Adams</span>
                     </div>
 
-                    <div>
+                    <div class="rating-comment-container">
                         <span class="rating-stars">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
@@ -220,7 +220,7 @@
                         <span>Emilly</span>
                     </div>
 
-                    <div>
+                    <div class="rating-comment-container">
                         <span class="rating-stars">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
@@ -244,7 +244,7 @@
                         <span>Rachel</span>
                     </div>
 
-                    <div>
+                    <div class="rating-comment-container">
                         <span class="rating-stars">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>

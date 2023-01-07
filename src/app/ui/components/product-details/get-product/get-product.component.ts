@@ -1,8 +1,13 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
+import { CreateCartItem } from 'src/app/contracts/cart/create-cart-item';
 import { List_Product } from 'src/app/contracts/products/list_product';
+import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+import { CustomToastrService } from 'src/app/services/ui/custom-toastr.service';
 
 declare var $: any
 declare function imageZoom(imgId, lensId, resultId): any
@@ -18,7 +23,10 @@ export class GetProductComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private fileService: FileService
+    private fileService: FileService,
+    private cartService: CartService,
+    private spinnerService: NgxSpinnerService,
+    private toastrService: CustomToastrService
   ) {
 
   }
@@ -61,6 +69,30 @@ export class GetProductComponent implements OnInit {
 
     });
 
+  }
+
+  async addToCart(productId: string, event: any) {
+    var button = $(event.target)
+
+    this.spinnerService.show(SpinnerType.BallScaleMultiple);
+    const cartItem: CreateCartItem = {
+      ProductId: productId,
+      Quantity: 1
+    };
+
+    await this.cartService.createCartItem(cartItem)
+
+    this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+
+    button.css("pointer-events","none");
+    button.css("background-color", "#059925");
+    button.val("Added to Cart");
+
+    setTimeout(() => {
+      button.css("pointer-events","unset");
+      button.css("background-color", "#673ab7");
+      button.val("Add to Cart");
+    }, 2500);
   }
 
 

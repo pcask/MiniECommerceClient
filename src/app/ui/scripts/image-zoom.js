@@ -18,7 +18,6 @@ function imageZoom(imgId, lensId, resultId) {
         const xRatio = imgOrgWidth / imgRenWidth;
         const yRatio = imgOrgHeight / imgRenHeight;
 
-        console.log(xRatio)
         // 2 oranın aşağısını zoomlamaya gerek yok
         if (xRatio < 2 || yRatio < 2)
             return;
@@ -28,8 +27,6 @@ function imageZoom(imgId, lensId, resultId) {
         /*calculate the ratio between img DIV and lens:*/
         cx = imgRenWidth / lens.offsetWidth;
         cy = imgRenHeight / lens.offsetHeight;
-
-        console.log(cx + " " + cy);
 
         /*set background properties for the result DIV:*/
         result.style.backgroundImage = "url('" + img.src + "')";

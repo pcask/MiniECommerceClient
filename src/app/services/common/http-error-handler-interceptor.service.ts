@@ -1,6 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, from, Observable, of, switchMap } from 'rxjs';
+import { SpinnerType } from 'src/app/base/base.component';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
 import { AuthService } from './auth.service';
 import { UserAuthService } from './models/user-auth.service';
@@ -12,7 +14,8 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
   constructor(private toastr: CustomToastrService,
     private userAuthService: UserAuthService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private spinnerService: NgxSpinnerService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -74,6 +77,9 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
           });
           break;
       }
+
+      this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+
       return of(err);
     }));
 

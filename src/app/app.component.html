@@ -43,7 +43,7 @@
                                 <a href="login" class="login-dropbtn hmr-item-btn">
                                     <i class="bi bi-person-up"></i>
                                     <span class="hmr-text" style="padding: 16px;" *ngIf="!authService.isAuthenticated">Sign in</span>
-                                    <span class="hmr-text" style="padding: 16px 4px 16px 4px;" *ngIf="authService.isAuthenticated">My Account</span>
+                                    <span class="hmr-text" style="padding: 16px 4px;" *ngIf="authService.isAuthenticated">My Account</span>
                                 </a>
 
                                 <div class="login-dropdown-content">
@@ -92,9 +92,9 @@
                         </div>
 
                         <div class="my-cart hmr-item">
-                            <a href="" class="hmr-item-btn">
+                            <a routerLink="/my-cart" class="hmr-item-btn">
                                 <i class="bi bi-cart3"></i>
-                                <span class="hmr-text">Cart</span>
+                                <span class="hmr-text" style="padding: 16px 4px;">Cart</span>
                             </a>
                         </div>
                     </div>

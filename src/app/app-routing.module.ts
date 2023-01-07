@@ -18,7 +18,7 @@ const routes: Routes = [
     canActivate: [AdminAuthGuard]
   },
   { path: "", component: HomeComponent, canActivate: [UiAuthGuard] },
-  { path: "baskets", loadChildren: () => import("./ui/components/baskets/baskets.module").then(module => module.BasketsModule), canActivate: [UiAuthGuard] },
+  { path: "my-cart", loadChildren: () => import("./ui/components/carts/carts.module").then(module => module.CartsModule), canActivate: [UiAuthGuard] },
   { path: "products", loadChildren: () => import("./ui/components/products/products.module").then(module => module.ProductsModule), canActivate: [UiAuthGuard] },
   { path: "product/:brand/:productName&id", loadChildren: () => import("./ui/components/product-details/product-details.module").then(module => module.ProductDetailsModule), canActivate: [UiAuthGuard] },
   { path: "register", loadChildren: () => import("./ui/components/register/register.module").then(module => module.RegisterModule), canActivate: [UiAuthGuard] },

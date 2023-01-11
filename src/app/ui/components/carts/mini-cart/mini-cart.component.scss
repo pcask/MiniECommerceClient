@@ -1,0 +1,134 @@
+
+#myCartTotalCount {
+    background-color: var(--orange);
+    padding: 0px 3px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 900;
+    color: white;
+    position: absolute;
+    top: 14px;
+    right: 34px;
+}
+
+.my-cart-dropdown-content {
+    padding: 16px;
+    display: flex;
+    width: 300px;
+    height: auto;
+    background-color: white;
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 11;
+    background-color: #fff;
+    box-shadow: 0 3px 10px 0 #00000012;
+    border: solid 1px #e6e6e6;
+    border-radius: 6px;
+    position: absolute;
+    top: 70px;
+    right: 25px;
+}
+
+.my-cart-content-top {
+    margin-bottom: 16px;
+}
+
+.my-cart-header {
+    font-weight: 500;
+    color: var(--deepPurple);
+}
+
+.cart-items-wrapper {
+    width: 100%;
+}
+
+.cart-items-wrapper a {
+    text-decoration: none;
+    color: black;
+    margin-bottom: 22px;
+    width: 100%;
+    display: flex;
+}
+
+.cart-items-wrapper a:hover {
+    color: black;
+}
+
+.my-cart-pr-img {
+    width: 80px;
+    height: 100px;
+}
+
+.my-cart-pr-details {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.my-cart-brand-name{
+    font-weight: 600;
+}
+
+.pr-name-wrapper {
+    max-height: 40px;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.my-cart-pr-size {
+    font-size: 12px;
+    color: #6d6d6d;
+}
+
+.my-cart-pr-price {
+    color: var(--orange);
+    font-weight: 500;
+}
+
+.my-cart-content-bottom {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+#btnGoCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 14px;
+    border: 1px solid;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+}
+
+#btnGoCart:hover {
+    background-color: var(--darkOrange);
+    color: white;
+}
+
+#btnCheckout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--deepPurple);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+}
+
+#btnCheckout:hover {
+    background-color: var(--darkPurple);
+}

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { List_Brand } from 'src/app/contracts/brands/list_brand';
 import { ListCartItem } from 'src/app/contracts/cart/list-cart-item';
 import { UpdateCartItem } from 'src/app/contracts/cart/update-cart-item';
+import { AuthService } from 'src/app/services/common/auth.service';
+import { BrandService } from 'src/app/services/common/models/brand.service';
 import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 
 declare var $: any;
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-get-cart-items',
@@ -15,61 +19,99 @@ export class GetCartItemsComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private fileService: FileService
+    private fileService: FileService,
+    private brandService: BrandService,
+    private authService: AuthService
   ) { }
 
   cartItems: ListCartItem[] = [];
   storageUrl: string;
-  totalItemCount: number = 0;
+  totalItemCount: number;
   subTotalPrice: number;
 
   async ngOnInit(): Promise<void> {
 
-    setTimeout(() => {
-      this.setElementsEvent();
-    }, 150);
+    if (this.authService.isAuthenticated) {
 
-    this.storageUrl = await this.getStorageURL();
+      this.storageUrl = await this.getStorageURL();
 
-    await this.loadCartItems();
+      await this.loadCartItems();
 
+      setTimeout(() => {
+        this.setElementsEvent();
+      }, 150);
+
+    }
+    
   }
 
   async loadCartItems() {
 
+    this.totalItemCount = 0;
+    this.subTotalPrice = 0
+
     this.cartItems = await this.cartService.getCartItems();
 
-    let _itemCount: number = 0;
-    let _subTotal: number = 0;
+    this.cartItems.forEach(async ci => {
 
-    this.cartItems.forEach(function (value) {
-      _itemCount += value.quantity;
-      _subTotal += value.quantity * value.price;
+      if (ci.isActive == true) {
+        this.totalItemCount += ci.quantity;
+        this.subTotalPrice += ci.quantity * ci.price;
+      }
+
+      const brand: List_Brand = await this.brandService.getBrandByProductId(ci.productId);
+
+      ci.brandCode = brand.code;
+      ci.brandName = brand.name;
+
+      ci.productLink = this.generateLink(ci);
+
     });
 
-    this.totalItemCount = _itemCount;
-    this.subTotalPrice = _subTotal;
+
   }
 
- 
+  async updateCartItem(item: ListCartItem, _quantity?: number, _isActive?: boolean) {
 
-  async updateQuantity(item: ListCartItem, quantity:number){
+    let beUpdated: UpdateCartItem = new UpdateCartItem();
+    beUpdated.cartItemId = item.cartItemId;
 
-    const beUpdated: UpdateCartItem = {
-      cartItemId: item.cartItemId,
-      quantity: quantity
+    if (_quantity && _quantity > 0) {
+      beUpdated.quantity = _quantity;
+      beUpdated.isActive = item.isActive;
+    }
+    else {
+      beUpdated.isActive = !_isActive;
+      beUpdated.quantity = item.quantity;
     }
 
     await this.cartService.updateCartItem(beUpdated);
     await this.ngOnInit();
+  }
 
+  async remevoCartItem(item: ListCartItem) {
+
+    await this.cartService.deleteCartItem(item.cartItemId);
+    await this.ngOnInit();
   }
 
   async getStorageURL(): Promise<string> {
-    return (await this.fileService.getStorageBaseUrl()).url
+    return (await this.fileService.getStorageBaseUrl()).url;
   }
 
-  async onButtonClick(item, event){
+  generateLink(cartItem: ListCartItem): string {
+
+    let link = "/product/"
+      + (cartItem.brandName.replace(/[\W_]+/g, "-")
+        + "/"
+        + cartItem.productName.replace(/[\W_]+/g, "-")).toLowerCase()
+      + "-i-"
+      + cartItem.productId;
+
+    return link;
+  }
+
+  async onButtonClick(item, event) {
 
     var text = event.target.innerText;
     var numberText = $(event.target).siblings("input");
@@ -92,32 +134,58 @@ export class GetCartItemsComponent implements OnInit {
     if (flag) {
 
       numberText.val(value).change();
-      await this.updateQuantity(item,value);
+      await this.updateCartItem(item, value);
     }
 
   }
 
   async onQuantityChange(item: ListCartItem, event: any) {
 
-    var numberText = $(event.target);
-    var value = parseInt(numberText.val());
+    var valueText = event.target.oldValue;
+
+    if (valueText == "" || valueText == " ") {
+      valueText = "1";
+      $(event.target).val(valueText);
+    }
+
+    var value = parseInt(valueText);
 
     if (value !== item.quantity && !Number.isNaN(value))
-     await this.updateQuantity(item,value);
+      await this.updateCartItem(item, value);
   }
+
+  showDeleteModal(item: ListCartItem, event: any) {
+
+    const deleteModal = new bootstrap.Modal('#deleteModal');
+
+    $("#mbb-pr-name").text(item.productName);
+
+    $("#modalRemoveBtn").bind("click", () => {
+      this.remevoCartItem(item);
+    });
+
+    $("#btnRemoveAddFavorites").bind("click", () => {
+      this.remevoCartItem(item);
+
+      // todo: Add this item to favorites
+
+      deleteModal.hide();
+
+    });
+
+    deleteModal.show();
+
+  }
+
 
   setElementsEvent() {
 
     $.each($(".number-text"), function (i, e) {
-      setInputFocusOut(e);
+
       setInputFilter(e, function (value) {
         return /^[0-9\s]*$/.test(value);
       })
     });
-
-    // $.each($(".number-btn"), function (i, e) {
-    //   setButtonClick(e);
-    // });
 
   }
 
@@ -159,44 +227,3 @@ function setInputFilter(textbox: Element, inputFilter: (value: string) => boolea
   });
 }
 
-function setInputFocusOut(textbox: Element) {
-  textbox.addEventListener("focusout", (event: any) => {
-    var value = event.target.oldValue;
-    if (value == "" || value == " ") {
-      $(event.target).val("1");
-    }
-  })
-}
-
-// function setButtonClick(button: Element) {
-//   button.addEventListener("click", (event: any) => {
-
-//     var text = event.target.innerText;
-//     var numberText = $(event.target).siblings("input");
-//     var value = parseInt(numberText.val());
-//     var flag: boolean = false;
-
-//     if (text == "+") {
-//       if (value < 10) {
-//         value++;
-//         flag = true;
-//       }
-//     }
-//     else {
-//       if (value > 1) {
-//         value--;
-//         flag = true;
-//       }
-//     }
-
-//     if (flag) {
-
-//       numberText.bind("change", function () {
-        
-//       });
-
-//       numberText.val(value).change();
-//     }
-
-//   });
-// }

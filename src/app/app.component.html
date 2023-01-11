@@ -42,8 +42,10 @@
 
                                 <a href="login" class="login-dropbtn hmr-item-btn">
                                     <i class="bi bi-person-up"></i>
-                                    <span class="hmr-text" style="padding: 16px;" *ngIf="!authService.isAuthenticated">Sign in</span>
-                                    <span class="hmr-text" style="padding: 16px 4px;" *ngIf="authService.isAuthenticated">My Account</span>
+                                    <span class="hmr-text" style="padding: 16px;"
+                                        *ngIf="!authService.isAuthenticated">Sign in</span>
+                                    <span class="hmr-text" style="padding: 16px 4px;"
+                                        *ngIf="authService.isAuthenticated">My Account</span>
                                 </a>
 
                                 <div class="login-dropdown-content">
@@ -92,14 +94,24 @@
                         </div>
 
                         <div class="my-cart hmr-item">
-                            <a routerLink="/my-cart" class="hmr-item-btn">
-                                <i class="bi bi-cart3"></i>
-                                <span class="hmr-text" style="padding: 16px 4px;">Cart</span>
-                            </a>
+
+                            <div class="my-cart-container">
+                                <a routerLink="/my-cart" class="hmr-item-btn my-cart-dropdown">
+                                    <div>
+                                        <i class="bi bi-cart3"></i>
+                                        <span class="hmr-text">Cart</span>
+                                    </div>
+                                </a>
+
+                                <div id="miniCart">
+                                    <app-mini-cart></app-mini-cart>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -166,7 +178,7 @@
 
     <div class="app-content">
 
-            <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
 
     </div>
 
@@ -177,3 +189,4 @@
 <ngx-spinner name="s1" size="medium" type="ball-scale-multiple"></ngx-spinner>
 <ngx-spinner name="s2" size="medium" type="ball-spin-clockwise"></ngx-spinner>
 <ngx-spinner name="s3" size="medium" type="line-scale"></ngx-spinner>
+

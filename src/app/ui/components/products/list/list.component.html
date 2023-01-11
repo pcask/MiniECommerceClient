@@ -37,55 +37,50 @@
         </div>
 
 
-        <div id="productListContainer col-xxl-12">
+        <div id="productListContainer">
 
             <div class="product-container col-xxl-3 col-xl-4 col-md-6 col-sm-6" *ngFor="let product of products">
 
-                <div class="card">
+                <a class="product-link card" [routerLink]="generateLink(product)">
 
-                    <a class="product-link" [routerLink]="generateLink(product)">
+                    <div class="product-image-container">
 
-                        <div class="product-image-container">
+                        <div class="product-image-header"></div>
 
-                            <div class="product-image-header"></div>
+                        <img class="img-fluid" *ngIf="!product.productImageFiles.length"
+                            src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
 
-                            <img class="img-fluid" *ngIf="!product.productImageFiles.length"
-                                src="/assets/images/no-image.jpg" class="product-img card-img-top" alt="...">
+                        <img class="img-fluid" *ngIf="product.productImageFiles.length" [src]="product.imagePath"
+                            class="product-img card-img-top" alt="...">
 
-                            <img class="img-fluid" *ngIf="product.productImageFiles.length" [src]="product.imagePath"
-                                class="product-img card-img-top" alt="...">
+                    </div>
 
+                    <div class="product-body card-body">
+
+                        <p class="product-text card-text"><b>{{product.name}}</b> Some quick example text to build
+                            on
+                            the card title and
+                            make up
+                            the...</p>
+
+                        <span class="pr-evaluation-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+
+                        <span class="product-evaluation-count"> (1532) </span>
+
+                        <span> <i class="bi bi-camera-fill"></i></span>
+
+                        <div class="product-price">
+                            <p>{{product.price}} $</p>
                         </div>
+                    </div>
 
-                        <div class="product-body card-body">
-
-                            <p class="product-text card-text"><b>{{product.name}}</b> Some quick example text to build
-                                on
-                                the card title and
-                                make up
-                                the...</p>
-
-                            <span class="pr-evaluation-stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                            </span>
-
-                            <span class="product-evaluation-count"> (1532) </span>
-
-                            <span> <i class="bi bi-camera-fill"></i></span>
-
-                            <div class="product-price">
-                                <p>{{product.price}} $</p>
-                            </div>
-                        </div>
-
-                    </a>
-
-                </div>
-
+                </a>
 
             </div>
 
@@ -108,8 +103,10 @@
                         </a>
                     </li>
                     <li class="page-item" *ngFor="let pageNo of pageNumberList">
-                        <a *ngIf="pageNo == currentPageNo" class="page-link active" [accessKey]="pageNo" (click)="onPageChangeEvent($event)">{{pageNo}}</a>
-                        <a *ngIf="pageNo != currentPageNo" class="page-link" [accessKey]="pageNo" (click)="onPageChangeEvent($event)">{{pageNo}}</a>
+                        <a *ngIf="pageNo == currentPageNo" class="page-link active" [accessKey]="pageNo"
+                            (click)="onPageChangeEvent($event)">{{pageNo}}</a>
+                        <a *ngIf="pageNo != currentPageNo" class="page-link" [accessKey]="pageNo"
+                            (click)="onPageChangeEvent($event)">{{pageNo}}</a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"

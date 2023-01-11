@@ -156,7 +156,8 @@
 
                 <div class="pr-detail-bottom">
                     <div class="pr-add-to-cart">
-                        <input id="addToCart" type="button" value="Add to Cart" class="btn btn-lg" (click)="addToCart(p.id, $event)">
+                        <input id="addToCart" type="button" value="Add to Cart" class="btn btn-lg"
+                            (click)="addToCart(p.id, $event)">
                     </div>
                 </div>
 
@@ -268,3 +269,7 @@
     </div>
 
 </div>
+
+<span id="miniCartWrapper" (mouseleave)="hideMiniCart()">
+    <ng-container #viewContainerRef></ng-container>
+</span>

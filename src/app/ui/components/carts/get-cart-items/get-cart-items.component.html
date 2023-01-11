@@ -8,7 +8,7 @@
         </a>
     </div>
 
-    <div class="content">
+    <div class="content" *ngIf="cartItems.length > 0">
 
         <div id="myCartContainer" class="card">
 
@@ -16,41 +16,52 @@
                 <h1>Shopping Cart ({{totalItemCount > 1 ? totalItemCount + " items" : totalItemCount +" item"}})</h1>
             </div>
 
-            <div *ngFor="let item of cartItems">
 
-                <div class="seller-container">
+            <div class="seller-container">
 
-                    <div class="checkbox">
-                        <mat-checkbox color="primary" name="modalead"></mat-checkbox>
-                    </div>
-
-                    <div class="seller-info">
-                        <span>Seller: </span>
-                        <a class="seller-link" href="">modalead</a>
-                        <span id="ratingScore">9.9</span>
-                    </div>
-
+                <div class="checkbox">
+                    <mat-checkbox color="primary" name="modalead"></mat-checkbox>
                 </div>
+
+                <div class="seller-info">
+                    <span>Seller: </span>
+                    <a class="seller-link" href="">modalead</a>
+                    <span id="ratingScore">9.9</span>
+                </div>
+
+            </div>
+
+            <div class="wrapper" *ngFor="let item of cartItems">
 
                 <div class="cart-items-container">
                     <div class="cart-item-left">
 
                         <div class="ci-checkbox checkbox">
-                            <mat-checkbox color="primary" name="modalead-item"></mat-checkbox>
+                            <mat-checkbox color="primary" name="modalead-item" [checked]="item.isActive"
+                                (change)="updateCartItem(item, null, item.isActive)"></mat-checkbox>
                         </div>
 
-                        <div class="ci-detail">
-                            <div class="pr-image">
-                                <img class="pr-image" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
-                            </div>
-                            <div class="pr-detail">
-                                <h2>{{item.name}}</h2>
-                                <div class="pr-color">Color: <span>Black</span></div>
-                                <div class="pr-size">Size: <span>XL</span> </div>
-                                <div class="pr-delivery-time">Estimated Delivery Time: <span>15 January</span>
+                        <a class="productLink" [routerLink]="item.productLink">
+
+                            <div class="ci-detail">
+
+                                <div class="pr-image">
+                                    <img class="pr-image" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
+                                </div>
+
+                                <div class="pr-detail">
+                                    <div class="pr-name">
+                                        <span class="brandName">{{item.brandName}} </span>
+                                        <span class="productName">{{item.productName}}</span>
+                                    </div>
+                                    <div class="pr-color">Color: <span>Black</span></div>
+                                    <div class="pr-size">Size: <span>XL</span> </div>
+                                    <div class="pr-delivery-time">Delivered until <span>15 January</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        </a>
 
                     </div>
 
@@ -60,7 +71,8 @@
                             <button class="number-btn" value="-" (click)="onButtonClick(item, $event)">-</button>
 
                             <input class="number-text" [accessKey]="item.cartItemId" type="text"
-                                value="{{item.quantity}}" (change)="onQuantityChange(item, $event)">
+                                value="{{item.quantity}}" (change)="onQuantityChange(item, $event)"
+                                (focusout)="onQuantityChange(item, $event)">
 
                             <button class="number-btn" value="+" (click)="onButtonClick(item, $event)">+</button>
                         </div>
@@ -69,7 +81,7 @@
                             <span>{{item.price | currency:'USD'}}</span>
                         </div>
 
-                        <div class="delete-btn">
+                        <div class="ci-delete-btn" (click)="showDeleteModal(item, $event)">
                             <img class="btn-delete" src="/assets/icons/delete.png" width="25" height="25" />
                         </div>
                     </div>
@@ -86,21 +98,23 @@
 
             <h1>Order Summary</h1>
             <div id="subtotalCont">
-                <h3>Subtotal (<span id="subtotalCount">{{totalItemCount > 1 ? totalItemCount + " items" : totalItemCount
-                        +" item"}}</span>)</h3>
-                <span class="priceText" id="subtotalPrice">{{subTotalPrice |currency :'USD'}}</span>
+                <span class="right-price-explain">Subtotal (<span id="subtotalCount">{{totalItemCount > 1 ?
+                        totalItemCount + " items" :
+                        totalItemCount
+                        +" item"}}</span>)</span>
+                <span class="right-price-text" id="subtotalPrice">{{subTotalPrice |currency :'USD'}}</span>
             </div>
 
             <div id="shippingCont">
-                <h3>Shipping</h3>
-                <span class="priceText" id="shippingPrice">Free</span>
+                <span class="right-price-explain">Shipping</span>
+                <span class="right-price-text" id="shippingPrice">Free</span>
             </div>
 
             <hr>
 
             <div id="totalCont">
                 <h1>Total</h1>
-                <span class="priceText" id="totalPrice">{{subTotalPrice |currency :'USD'}}</span>
+                <span class="right-price-text" id="totalPrice">{{subTotalPrice |currency :'USD'}}</span>
             </div>
 
             <div>
@@ -114,6 +128,33 @@
                 <div class="discount-content">
                     <input id="txtDiscount" type="text">
                     <button id="btnDiscount" class="btn">Redeem</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+                        <div class="modal-body-top">
+                            <img class="mbt-icon" src="/assets/images/add-to-favorites.png" alt="">
+                            <span class="mbt-text">Would you like to add this product to your favorites?</span>
+                        </div>
+                        <div class="modal-body-bottom">
+                            <span id="mbb-pr-name">Product Name</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button id="modalCancelBtn" type="button" class="btn" data-bs-dismiss="modal">Cancel</button>
+                            <button id="modalRemoveBtn" type="button" class="btn" data-bs-dismiss="modal">Remove</button>
+                        </div>
+
+                        <button id="btnRemoveAddFavorites" type="button" class="btn">Remove and Add to
+                            Favorites</button>
+                    </div>
                 </div>
             </div>
         </div>

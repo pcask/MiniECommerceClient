@@ -21,7 +21,7 @@ export class UiAuthGuard implements CanActivate {
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
+    
     this.spinnerService.show(SpinnerType.BallScaleMultiple);
 
     this.authService.identityCheck();
@@ -33,8 +33,7 @@ export class UiAuthGuard implements CanActivate {
         const rToken = localStorage.getItem("refreshToken");
 
         let result: boolean = await this.userAuthService.loginWithRefreshToken(aToken, rToken);
-        if (result)
-        {
+        if (result) {
           this.spinnerService.hide(SpinnerType.BallScaleMultiple);
           return true;
         }

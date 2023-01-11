@@ -19,6 +19,9 @@ import { CartsModule } from './carts/carts.module';
     RegisterModule,
     LoginModule,
     CartsModule
+  ],
+  exports: [
+    CartsModule
   ]
 })
 export class ComponentsModule { }

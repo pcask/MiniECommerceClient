@@ -1,13 +1,13 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
 import { CreateCartItem } from 'src/app/contracts/cart/create-cart-item';
 import { List_Product } from 'src/app/contracts/products/list_product';
+import { ComponentType, DynamicLoadComponentService } from 'src/app/services/common/dynamic-load-component.service';
 import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
-import { CustomToastrService } from 'src/app/services/ui/custom-toastr.service';
 
 declare var $: any
 declare function imageZoom(imgId, lensId, resultId): any
@@ -20,13 +20,16 @@ declare function imageZoom(imgId, lensId, resultId): any
 
 export class GetProductComponent implements OnInit {
 
+  @ViewChild('viewContainerRef', { read: ViewContainerRef, static: true })
+  public myViewContainer: ViewContainerRef
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private fileService: FileService,
     private cartService: CartService,
     private spinnerService: NgxSpinnerService,
-    private toastrService: CustomToastrService
+    private dynamicLoadComponentService: DynamicLoadComponentService
   ) {
 
   }
@@ -84,21 +87,30 @@ export class GetProductComponent implements OnInit {
 
     this.spinnerService.hide(SpinnerType.BallScaleMultiple);
 
-    button.css("pointer-events","none");
+    this.loadMiniCart();
+
+    button.css("pointer-events", "none");
     button.css("background-color", "#059925");
     button.val("Added to Cart");
 
     setTimeout(() => {
-      button.css("pointer-events","unset");
+      button.css("pointer-events", "unset");
       button.css("background-color", "#673ab7");
       button.val("Add to Cart");
     }, 2500);
   }
 
-
   async getStorageURL(): Promise<string> {
     return (await this.fileService.getStorageBaseUrl()).url
   }
 
+  loadMiniCart() {
+    this.dynamicLoadComponentService.loadComponent(ComponentType.MiniCartComponent, this.myViewContainer);
+    $("#miniCartWrapper").fadeIn();
+  }
+
+  hideMiniCart() {
+    $("#miniCartWrapper").fadeOut();
+  }
 }
 

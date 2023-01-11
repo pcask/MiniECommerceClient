@@ -1,29 +1,32 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-.section-wrapper{
+.section-wrapper {
   padding: 0px 30px;
   margin: 0;
   height: 100%;
 }
 
-.row{
+.row {
   margin: 0px;
   padding: 0px;
   --bs-gutter-x: 0px !important;
 }
 
-.container{
+.container {
   margin: 0px;
   padding: 0px;
 }
 
 :root {
   --deepPurple: #673ab7;
+  --darkPurple: #4f2992;
+  --orange: #ff6000;
+  --darkOrange: #B12704;
 }
 
-body{
-    font-family: "Open Sans", sans-serif;
-    background-color: #faf9f9;
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #faf9f9;
 }
 
 select:focus,
@@ -42,7 +45,7 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
+.uneditable-input:focus {
   border-color: var(--deepPurple) rgba(104, 58, 183, 0.8) !important;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--deepPurple) !important;
   outline: 0 none;

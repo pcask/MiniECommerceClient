@@ -102,15 +102,11 @@
     justify-content: flex-end;
 }
 
-.header-middle-right div.hmr-item:last-child{
-    width: 30px;
-    margin-left: 25px;
-}
-
 .hmr-item {
     float: right;
     width: 100px;
     text-align: center;
+    margin-left: 10px;
 }
 
 .hmr-item i {
@@ -130,11 +126,12 @@
     color: #673ab7;
 }
 
-.hmr-item-btn{
+.hmr-item-btn {
     color: #333;
 }
 
-.hmr-text{
+.hmr-text {
+    font-weight: 600;
     white-space: nowrap;
 }
 
@@ -191,11 +188,11 @@
 }
 
 
-.user-notloggedin-container{
+.user-notloggedin-container {
     padding: 16px;
 }
 
-.user-notloggedin-container span{
+.user-notloggedin-container span {
     font-size: 12px;
     font-weight: normal;
     display: block;
@@ -207,6 +204,7 @@
     display: block;
     font-weight: 600 !important;
 }
+
 .btn-login:active {
     background-color: #5f2db6;
     color: white;
@@ -246,11 +244,29 @@
     box-sizing: border-box;
 }
 
-.bg-light {
-    background-color: #673ab7 !important;
+.my-cart {
+    width: 40px;
+    height: 54px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.nav-item{
+#miniCart {
+    display: none;
+}
+
+.my-cart:hover #miniCart {
+    display: flex;
+}
+
+.bg-light {
+    background-color: var(--deepPurple) !important;
+}
+
+.nav-item {
     padding: 0px 10px 0px 10px;
 }
 

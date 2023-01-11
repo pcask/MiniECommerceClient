@@ -6,6 +6,8 @@ import { List_Product } from 'src/app/contracts/products/list_product';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -21,7 +23,6 @@ export class ListComponent implements OnInit {
     private fileService: FileService
   ) { }
 
-
   products: List_Product[];
   totalProductCount: number;
   totalPageCount: number;
@@ -30,6 +31,7 @@ export class ListComponent implements OnInit {
   productCountInPage: number = 16;
   storageBaseUrl: string;
   currentUrl: string;
+
   async ngOnInit() {
 
     this.storageBaseUrl = (await this.fileService.getStorageBaseUrl()).url;

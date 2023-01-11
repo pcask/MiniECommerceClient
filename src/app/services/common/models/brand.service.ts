@@ -21,4 +21,13 @@ export class BrandService {
 
     return brands;
   }
+
+  async getBrandByProductId(productId: string) {
+    const brand$ = this.httpClientService.get<List_Brand>({
+      controller: "brands",
+      action: "GetBrandByProductId"
+    }, productId);
+
+    return await lastValueFrom(brand$);
+  }
 }

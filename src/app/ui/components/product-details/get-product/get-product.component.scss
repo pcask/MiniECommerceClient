@@ -121,7 +121,7 @@ h2{
 
 .r-sidebar-seller a {
     text-decoration: none;
-    color: rgba(11, 80, 209, 0.7607843137);
+    color: #0b50d1c2;
     font-weight: 500;
     font-size: 16px;
     letter-spacing: -0.4px;
@@ -174,7 +174,7 @@ h2{
     margin: 30px 0px;
     font-size: 32px;
     font-weight: 500;
-    color: #B12704;
+    color: var(--darkOrange);
 }
 
 .pr-se-name {
@@ -263,7 +263,7 @@ h2{
 }
 
 #ratingScore{
-    background-color: rgb(5 153 37);
+    background-color: #059925;
     font-family: sans-serif;
     color: white;
     font-size: 11px;
@@ -279,4 +279,11 @@ h2{
     overflow: hidden;
     height: 40px;
     text-overflow: ellipsis;
+}
+
+#miniCartWrapper{
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    z-index: 1021;
 }

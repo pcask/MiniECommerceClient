@@ -29,18 +29,21 @@
 }
 
 .content {
-    margin-top: 20px;
+    margin: 20px 0px;
     display: flex;
     justify-content: space-between;
 }
 
 #myCartContainer {
-    padding: 20px 0px;
+    padding-top: 20px;
     width: 78%;
     height: 100%;
     margin-right: 20px;
 }
 
+#myCartContainer div.wrapper:last-child hr.ci-hr {
+    display: none;
+}
 
 #header {
     padding-left: 20px;
@@ -94,6 +97,7 @@
     width: 50%;
     display: flex;
     align-items: center;
+    margin-right: 20px;
 }
 
 .cart-item-right {
@@ -107,9 +111,16 @@
     display: flex;
 }
 
+
+.productLink {
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
 .pr-image {
     width: 80px;
-    height: 140px;
+    height: 120px;
     margin-right: 10px;
 }
 
@@ -117,12 +128,29 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    min-width: 177px;
     font-weight: 600;
     font-family: sans-serif;
 }
 
 .pr-detail span {
     font-weight: 400;
+}
+
+.brandName {
+    font-weight: 600 !important;
+}
+
+.pr-name {
+    max-height: 58px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.productName {
+    color: var(--orange);
+    font-size: 14px;
+    font-weight: 600 !important;
 }
 
 .ci-quantity {
@@ -152,10 +180,14 @@
 .ci-price span {
     font-size: 20px;
     font-weight: 500;
-    color: #B12704;
 }
 
-.btn-delete {
+.ci-delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 40px;
     cursor: pointer;
 }
 
@@ -173,7 +205,11 @@
     min-width: 240px;
 }
 
-.priceText {
+.right-price-explain {
+    font-size: 16px;
+}
+
+.right-price-text {
     font-size: 20px;
     font-weight: 500;
 }
@@ -182,6 +218,7 @@
 #subtotalCont {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 #shippingCont {
@@ -192,6 +229,7 @@
 #totalCont {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 }
 
 #btnCheckout {
@@ -204,7 +242,7 @@
 }
 
 #btnCheckout:hover {
-    background-color: #491c97e8;
+    background-color: var(--darkPurple);
 }
 
 #discountHeader {
@@ -233,5 +271,84 @@
 }
 
 #btnDiscount:hover {
-    background-color: #491c97e8;
+    background-color: var(--darkPurple);
+}
+
+.modal-dialog {
+    width: 600px !important;
+}
+
+.modal-body-top {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.mbt-icon {
+    margin-bottom: 15px;
+    width: 80px;
+    height: 80px;
+}
+
+.modal-body-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.mbt-text {
+    font-size: 14px;
+}
+
+
+#mbb-pr-name {
+    text-align: center;
+    color: #ff6000;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
+.modal-footer {
+    justify-content: space-between;
+    border: none;
+}
+
+#btnRemoveAddFavorites {
+    background-color: var(--deepPurple);
+    color: white;
+    font-size: 14px;
+    height: 40px;
+    padding: 0px 30px;
+}
+
+#modalCancelBtn {
+    margin-right: 10px;
+    border: 1px solid #adadad;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    width: 80px;
+}
+
+#modalCancelBtn:hover {
+    border-color: var(--deepPurple);
+    color: var(--deepPurple);
+}
+
+#modalRemoveBtn {
+    border: 1px solid #adadad;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    width: 80px;
+}
+
+#modalRemoveBtn:hover {
+    border-color: var(--deepPurple);
+    color: var(--deepPurple);
 }

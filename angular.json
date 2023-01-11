@@ -41,8 +41,8 @@
               "src/icon.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "./node_modules/alertifyjs/build/alertify.min.js",
               "src/app/ui/scripts/logo-slider.js",
               "src/app/ui/scripts/image-zoom.js"

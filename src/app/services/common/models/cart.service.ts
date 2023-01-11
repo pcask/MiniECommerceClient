@@ -42,7 +42,7 @@ export class CartService {
     await lastValueFrom(beUpdated$);
   }
 
-  async delete(cartItemId: string) {
+  async deleteCartItem(cartItemId: string) {
     const beDeleted$ = this.httpClientService.delete({
       controller: "carts",
       action: "DeleteCartItem",

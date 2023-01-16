@@ -40,6 +40,7 @@ export class AuthService {
     localStorage.removeItem("refreshToken");
     this.identityCheck();
     this.socialAuthService.signOut();
+    window.location.reload();
   }
 
   get canRefreshTokens(): boolean {

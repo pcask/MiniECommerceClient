@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
-import { CreateCartItem } from 'src/app/contracts/cart/create-cart-item';
+import { CartItem } from 'src/app/contracts/cart/cart-item';
 import { List_Product } from 'src/app/contracts/products/list_product';
+import { CartRepo } from 'src/app/repositories/ui/cartRepo';
 import { ComponentType, DynamicLoadComponentService } from 'src/app/services/common/dynamic-load-component.service';
-import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
@@ -20,23 +20,24 @@ declare function imageZoom(imgId, lensId, resultId): any
 
 export class GetProductComponent implements OnInit {
 
-  @ViewChild('viewContainerRef', { read: ViewContainerRef, static: true })
-  public myViewContainer: ViewContainerRef
+  // Dynamic Component Reload kullanımı için
+  // @ViewChild('viewContainerRef', { read: ViewContainerRef, static: true })
+  // public myViewContainer: ViewContainerRef
+
+  product: List_Product = null;
+  storageBaseUrl: string = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private fileService: FileService,
-    private cartService: CartService,
     private spinnerService: NgxSpinnerService,
-    private dynamicLoadComponentService: DynamicLoadComponentService
+    private dynamicLoadComponentService: DynamicLoadComponentService,
+    private cartRepo: CartRepo,
+    private router: Router
   ) {
 
   }
-
-
-  product: List_Product = null;
-  storageBaseUrl: string = null;
 
   async ngOnInit(): Promise<void> {
 
@@ -50,7 +51,6 @@ export class GetProductComponent implements OnInit {
     });
 
   }
-
 
   async loadProduct() {
 
@@ -69,25 +69,33 @@ export class GetProductComponent implements OnInit {
       p.imagePath = path;
 
       this.product = p;
-
     });
 
   }
 
-  async addToCart(productId: string, event: any) {
+  async addToCart(product: List_Product, event: any) {
     var button = $(event.target)
 
     this.spinnerService.show(SpinnerType.BallScaleMultiple);
-    const cartItem: CreateCartItem = {
-      ProductId: productId,
-      Quantity: 1
-    };
 
-    await this.cartService.createCartItem(cartItem)
+    const cartItem: CartItem = {
+      productId: product.id,
+      productName: product.name,
+      brandCode: product.brandCode,
+      brandName: product.brandName,
+      imagePath: product.imagePath,
+      productLink: this.router.url,
+      quantity: 1,
+      isActive: true,
+      price: product.price,
+    }
+
+    this.cartRepo.addCartItem(cartItem);
 
     this.spinnerService.hide(SpinnerType.BallScaleMultiple);
 
-    this.loadMiniCart();
+    $(".my-cart-dropdown-content").addClass("active");
+    // this.loadMiniCart();
 
     button.css("pointer-events", "none");
     button.css("background-color", "#059925");
@@ -104,13 +112,15 @@ export class GetProductComponent implements OnInit {
     return (await this.fileService.getStorageBaseUrl()).url
   }
 
-  loadMiniCart() {
-    this.dynamicLoadComponentService.loadComponent(ComponentType.MiniCartComponent, this.myViewContainer);
-    $("#miniCartWrapper").fadeIn();
-  }
+  // MiniCartComponent'ini yeniden yüklemek gibi bir fikir ile yola çıktığım için yazmıştım. 
+  // Bu senaryo için gereksiz bir düşünceydi fakat Dynamic Component Reload 'a çalışan bir örnek teşkil ettiği için silmiyorum.
+  // loadMiniCart() {
+  //   this.dynamicLoadComponentService.loadComponent(ComponentType.MiniCartComponent, this.myViewContainer);
+  //   $("#miniCartWrapper").fadeIn();
+  // }
 
-  hideMiniCart() {
-    $("#miniCartWrapper").fadeOut();
-  }
+  // hideMiniCart() {
+  //   $("#miniCartWrapper").fadeOut();
+  // }
 }
 

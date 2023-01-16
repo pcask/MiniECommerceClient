@@ -254,13 +254,15 @@
     cursor: pointer;
 }
 
-#miniCart {
-    display: none;
-}
+// ::ng-deep kullanımdan kaldırılacağı belirtilmiş (deprecated) bu yüzden child veya host component içerisindeki bir elemente css ataması yapmak istersek;
+// jQeury ile doğrudan ilgili element'e erişebilir ve istediğimiz değişikliği yapabiliriz (ilgili elemente .active class'ını eklemek gibi) 
+// ::ng-deep .my-cart-dropdown-content{
+//     display: none !important;
+// }
 
-.my-cart:hover #miniCart {
-    display: flex;
-}
+// .my-cart:hover ::ng-deep .my-cart-dropdown-content {
+//     display: flex !important;
+// }
 
 .bg-light {
     background-color: var(--deepPurple) !important;

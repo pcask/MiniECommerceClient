@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ListCartItem } from './contracts/cart/list-cart-item';
 import { AuthService } from './services/common/auth.service';
 
 declare var $: any;
@@ -20,19 +19,22 @@ export class AppComponent implements OnInit {
     authService.identityCheck();
   }
 
-  cartItems: ListCartItem[] = [];
-  storageUrl: string;
-  totalItemCount: number;
+  async ngOnInit() {
 
-  async ngOnInit(): Promise<void> {
-    
   }
 
   signOut() {
     this.authService.signOut();
     this.router.navigate([""]);
   }
-  
+
+  showMiniCart() {
+    $(".my-cart-dropdown-content").addClass("active");
+  }
+
+  hideMiniCart(){
+    $(".my-cart-dropdown-content").removeClass("active");
+  }
 }
 
 $(window).scroll(function (event) {

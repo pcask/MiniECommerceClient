@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
-import { CreateCartItem } from 'src/app/contracts/cart/create-cart-item';
-import { ListCartItem } from 'src/app/contracts/cart/list-cart-item';
-import { UpdateCartItem } from 'src/app/contracts/cart/update-cart-item';
+import { CartItem } from 'src/app/contracts/cart/cart-item';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({
@@ -14,40 +11,39 @@ export class CartService {
 
   }
 
-  async getCartItems() {
-    const allCartItems$ = this.httpClientService.get<ListCartItem[]>({
+  getCartItems() {
+    const allCartItems$ = this.httpClientService.get<CartItem[]>({
       controller: "carts",
       action: "GetCartItems"
     });
 
-    const allCartItems = await lastValueFrom(allCartItems$);
-    return allCartItems;
+    return allCartItems$;
   }
 
-  async createCartItem(cartItem: CreateCartItem) {
+  createCartItem(cartItem: CartItem) {
     const beCreated$ = this.httpClientService.post({
       controller: "carts",
       action: "AddCartItem"
     }, cartItem);
 
-    await lastValueFrom(beCreated$);
+    return beCreated$;
   }
 
-  async updateCartItem(cartItem: UpdateCartItem) {
+  updateCartItem(cartItem: CartItem) {
     const beUpdated$ = this.httpClientService.put({
       controller: "carts",
       action: "UpdateCartItem"
     }, cartItem);
 
-    await lastValueFrom(beUpdated$);
+    return beUpdated$;
   }
 
-  async deleteCartItem(cartItemId: string) {
+  deleteCartItem(cartItemId: string) {
     const beDeleted$ = this.httpClientService.delete({
       controller: "carts",
       action: "DeleteCartItem",
     }, cartItemId);
 
-    await lastValueFrom(beDeleted$);
+    return beDeleted$;
   }
 }

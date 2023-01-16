@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { List_Brand } from 'src/app/contracts/brands/list_brand';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CartItem } from 'src/app/contracts/cart/cart-item';
 import { ListCartItem } from 'src/app/contracts/cart/list-cart-item';
 import { UpdateCartItem } from 'src/app/contracts/cart/update-cart-item';
+import { CartRepo } from 'src/app/repositories/ui/cartRepo';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { BrandService } from 'src/app/services/common/models/brand.service';
 import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
+import { List } from 'immutable';
+import { BehaviorSubject, Observable, Subscription, switchMap } from 'rxjs';
 
 declare var $: any;
 declare var bootstrap: any;
@@ -13,67 +16,39 @@ declare var bootstrap: any;
 @Component({
   selector: 'app-get-cart-items',
   templateUrl: './get-cart-items.component.html',
-  styleUrls: ['./get-cart-items.component.scss']
+  styleUrls: ['./get-cart-items.component.scss'],
 })
 export class GetCartItemsComponent implements OnInit {
 
   constructor(
-    private cartService: CartService,
     private fileService: FileService,
-    private brandService: BrandService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartRepo: CartRepo,
   ) { }
 
-  cartItems: ListCartItem[] = [];
+  cartItems$: Observable<List<CartItem>>;
   storageUrl: string;
-  totalItemCount: number;
-  subTotalPrice: number;
 
-  async ngOnInit(): Promise<void> {
+  async ngOnInit() {
 
     if (this.authService.isAuthenticated) {
 
       this.storageUrl = await this.getStorageURL();
 
-      await this.loadCartItems();
+      this.cartItems$ = this.cartRepo.cartItems;
 
       setTimeout(() => {
         this.setElementsEvent();
       }, 150);
 
     }
-    
-  }
-
-  async loadCartItems() {
-
-    this.totalItemCount = 0;
-    this.subTotalPrice = 0
-
-    this.cartItems = await this.cartService.getCartItems();
-
-    this.cartItems.forEach(async ci => {
-
-      if (ci.isActive == true) {
-        this.totalItemCount += ci.quantity;
-        this.subTotalPrice += ci.quantity * ci.price;
-      }
-
-      const brand: List_Brand = await this.brandService.getBrandByProductId(ci.productId);
-
-      ci.brandCode = brand.code;
-      ci.brandName = brand.name;
-
-      ci.productLink = this.generateLink(ci);
-
-    });
-
 
   }
 
-  async updateCartItem(item: ListCartItem, _quantity?: number, _isActive?: boolean) {
 
-    let beUpdated: UpdateCartItem = new UpdateCartItem();
+  async updateCartItem(item: CartItem, _quantity?: number, _isActive?: boolean) {
+
+    let beUpdated: CartItem = new CartItem();
     beUpdated.cartItemId = item.cartItemId;
 
     if (_quantity && _quantity > 0) {
@@ -85,14 +60,12 @@ export class GetCartItemsComponent implements OnInit {
       beUpdated.quantity = item.quantity;
     }
 
-    await this.cartService.updateCartItem(beUpdated);
-    await this.ngOnInit();
+    this.cartRepo.updateCartItem(beUpdated);
   }
 
-  async remevoCartItem(item: ListCartItem) {
+  remevoCartItem(item: CartItem) {
 
-    await this.cartService.deleteCartItem(item.cartItemId);
-    await this.ngOnInit();
+    this.cartRepo.deleteCartItem(item.cartItemId);
   }
 
   async getStorageURL(): Promise<string> {
@@ -139,7 +112,7 @@ export class GetCartItemsComponent implements OnInit {
 
   }
 
-  async onQuantityChange(item: ListCartItem, event: any) {
+  async onQuantityChange(item: CartItem, event: any) {
 
     var valueText = event.target.oldValue;
 
@@ -154,7 +127,7 @@ export class GetCartItemsComponent implements OnInit {
       await this.updateCartItem(item, value);
   }
 
-  showDeleteModal(item: ListCartItem, event: any) {
+  showDeleteModal(item: CartItem, event: any) {
 
     const deleteModal = new bootstrap.Modal('#deleteModal');
 
@@ -174,9 +147,7 @@ export class GetCartItemsComponent implements OnInit {
     });
 
     deleteModal.show();
-
   }
-
 
   setElementsEvent() {
 

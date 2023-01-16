@@ -1,164 +1,176 @@
 <div class="section-wrapper">
 
-
-    <div class="card noItemCont" *ngIf="cartItems.length <=0">
+    <div class="card noItemCont" *ngIf="((cartItems$ |async) |totalCount) == 0">
         <span id="noItemText">There are no items in your shopping cart.</span>
         <a id="iLucky" routerLink="" class="btn">
             <span>I'm Feeling Lucky</span>
         </a>
     </div>
 
-    <div class="content" *ngIf="cartItems.length > 0">
+    <ng-container *ngIf="(cartItems$ |async) |totalCount let tCount">
 
-        <div id="myCartContainer" class="card">
+        <div class="content" *ngIf="tCount> 0">
 
-            <div id="header">
-                <h1>Shopping Cart ({{totalItemCount > 1 ? totalItemCount + " items" : totalItemCount +" item"}})</h1>
-            </div>
+            <div id="myCartContainer" class="card">
 
-
-            <div class="seller-container">
-
-                <div class="checkbox">
-                    <mat-checkbox color="primary" name="modalead"></mat-checkbox>
+                <div id="header">
+                    <h1>Shopping Cart ({{tCount > 1 ? tCount + " items" : tCount +" item"}})
+                    </h1>
                 </div>
 
-                <div class="seller-info">
-                    <span>Seller: </span>
-                    <a class="seller-link" href="">modalead</a>
-                    <span id="ratingScore">9.9</span>
+
+                <div class="seller-container">
+
+                    <div class="checkbox">
+                        <mat-checkbox color="primary" name="modalead"></mat-checkbox>
+                    </div>
+
+                    <div class="seller-info">
+                        <span>Seller: </span>
+                        <a class="seller-link" href="">modalead</a>
+                        <span id="ratingScore">9.9</span>
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="wrapper" *ngFor="let item of cartItems$ |async">
 
-            <div class="wrapper" *ngFor="let item of cartItems">
+                    <div class="cart-items-container">
+                        <div class="cart-item-left">
 
-                <div class="cart-items-container">
-                    <div class="cart-item-left">
-
-                        <div class="ci-checkbox checkbox">
-                            <mat-checkbox color="primary" name="modalead-item" [checked]="item.isActive"
-                                (change)="updateCartItem(item, null, item.isActive)"></mat-checkbox>
-                        </div>
-
-                        <a class="productLink" [routerLink]="item.productLink">
-
-                            <div class="ci-detail">
-
-                                <div class="pr-image">
-                                    <img class="pr-image" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
-                                </div>
-
-                                <div class="pr-detail">
-                                    <div class="pr-name">
-                                        <span class="brandName">{{item.brandName}} </span>
-                                        <span class="productName">{{item.productName}}</span>
-                                    </div>
-                                    <div class="pr-color">Color: <span>Black</span></div>
-                                    <div class="pr-size">Size: <span>XL</span> </div>
-                                    <div class="pr-delivery-time">Delivered until <span>15 January</span>
-                                    </div>
-                                </div>
+                            <div class="ci-checkbox checkbox">
+                                <mat-checkbox color="primary" name="modalead-item" [checked]="item.isActive"
+                                    (change)="updateCartItem(item, null, item.isActive)"></mat-checkbox>
                             </div>
 
-                        </a>
+                            <a class="productLink" [routerLink]="item.productLink">
+
+                                <div class="ci-detail">
+
+                                    <div class="pr-image">
+                                        <img class="pr-image" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
+                                    </div>
+
+                                    <div class="pr-detail">
+                                        <div class="pr-name">
+                                            <span class="brandName">{{item.brandName}} </span>
+                                            <span class="productName">{{item.productName}}</span>
+                                        </div>
+                                        <div class="pr-color">Color: <span>Black</span></div>
+                                        <div class="pr-size">Size: <span>XL</span> </div>
+                                        <div class="pr-delivery-time">Delivered until <span>15 January</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                        <div class="cart-item-right">
+
+                            <div class="ci-quantity">
+                                <button class="number-btn" value="-" (click)="onButtonClick(item, $event)">-</button>
+
+                                <input class="number-text" [accessKey]="item.cartItemId" type="text"
+                                    value="{{item.quantity}}" (change)="onQuantityChange(item, $event)"
+                                    (focusout)="onQuantityChange(item, $event)">
+
+                                <button class="number-btn" value="+" (click)="onButtonClick(item, $event)">+</button>
+                            </div>
+
+                            <div class="ci-price">
+                                <span>{{item.price | currency:'USD'}}</span>
+                            </div>
+
+                            <div class="ci-delete-btn" (click)="showDeleteModal(item, $event)">
+                                <img class="btn-delete" src="/assets/icons/delete.png" width="25" height="25" />
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="cart-item-right">
-
-                        <div class="ci-quantity">
-                            <button class="number-btn" value="-" (click)="onButtonClick(item, $event)">-</button>
-
-                            <input class="number-text" [accessKey]="item.cartItemId" type="text"
-                                value="{{item.quantity}}" (change)="onQuantityChange(item, $event)"
-                                (focusout)="onQuantityChange(item, $event)">
-
-                            <button class="number-btn" value="+" (click)="onButtonClick(item, $event)">+</button>
-                        </div>
-
-                        <div class="ci-price">
-                            <span>{{item.price | currency:'USD'}}</span>
-                        </div>
-
-                        <div class="ci-delete-btn" (click)="showDeleteModal(item, $event)">
-                            <img class="btn-delete" src="/assets/icons/delete.png" width="25" height="25" />
-                        </div>
-                    </div>
+                    <hr class="ci-hr">
 
                 </div>
 
-                <hr class="ci-hr">
+            </div>
 
+            <div id="orderSummaryContainer" class="card">
+
+                <h1>Order Summary</h1>
+                <div id="subtotalCont">
+                    <span class="right-price-explain">Subtotal (<span id="subtotalCount">{{tCount > 1 ?
+                            tCount + " items" :
+                            tCount
+                            +" item"}}</span>)</span>
+                    <span class="right-price-text" id="subtotalPrice">{{((cartItems$ |async) |subTotal) |currency
+                        :'USD'}}</span>
+                </div>
+
+                <div id="shippingCont">
+                    <span class="right-price-explain">Shipping</span>
+                    <span class="right-price-text" id="shippingPrice">Free</span>
+                </div>
+
+                <hr>
+
+                <div id="totalCont">
+                    <h1>Total</h1>
+                    <span class="right-price-text" id="totalPrice">{{((cartItems$ |async) |subTotal) |currency
+                        :'USD'}}</span>
+                </div>
+
+                <div>
+                    <button id="btnCheckout" class="btn">Proceed to Checkout</button>
+                </div>
+
+                <hr>
+
+                <div id="discountCont">
+                    <span id="discountHeader">Discount Code</span>
+                    <div class="discount-content">
+                        <input id="txtDiscount" type="text">
+                        <button id="btnDiscount" class="btn">Redeem</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="modal-body-top">
+                                <img class="mbt-icon" src="/assets/images/add-to-favorites.png" alt="">
+                                <span class="mbt-text">Would you like to add this product to your favorites?</span>
+                            </div>
+                            <div class="modal-body-bottom">
+                                <span id="mbb-pr-name">Product Name</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button id="modalCancelBtn" type="button" class="btn"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button id="modalRemoveBtn" type="button" class="btn"
+                                    data-bs-dismiss="modal">Remove</button>
+                            </div>
+
+                            <button id="btnRemoveAddFavorites" type="button" class="btn">Remove and Add to
+                                Favorites</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div id="orderSummaryContainer" class="card">
 
-            <h1>Order Summary</h1>
-            <div id="subtotalCont">
-                <span class="right-price-explain">Subtotal (<span id="subtotalCount">{{totalItemCount > 1 ?
-                        totalItemCount + " items" :
-                        totalItemCount
-                        +" item"}}</span>)</span>
-                <span class="right-price-text" id="subtotalPrice">{{subTotalPrice |currency :'USD'}}</span>
-            </div>
+    </ng-container>
 
-            <div id="shippingCont">
-                <span class="right-price-explain">Shipping</span>
-                <span class="right-price-text" id="shippingPrice">Free</span>
-            </div>
-
-            <hr>
-
-            <div id="totalCont">
-                <h1>Total</h1>
-                <span class="right-price-text" id="totalPrice">{{subTotalPrice |currency :'USD'}}</span>
-            </div>
-
-            <div>
-                <button id="btnCheckout" class="btn">Proceed to Checkout</button>
-            </div>
-
-            <hr>
-
-            <div id="discountCont">
-                <span id="discountHeader">Discount Code</span>
-                <div class="discount-content">
-                    <input id="txtDiscount" type="text">
-                    <button id="btnDiscount" class="btn">Redeem</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    
-                    <div class="modal-body">
-                        <div class="modal-body-top">
-                            <img class="mbt-icon" src="/assets/images/add-to-favorites.png" alt="">
-                            <span class="mbt-text">Would you like to add this product to your favorites?</span>
-                        </div>
-                        <div class="modal-body-bottom">
-                            <span id="mbb-pr-name">Product Name</span>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button id="modalCancelBtn" type="button" class="btn" data-bs-dismiss="modal">Cancel</button>
-                            <button id="modalRemoveBtn" type="button" class="btn" data-bs-dismiss="modal">Remove</button>
-                        </div>
-
-                        <button id="btnRemoveAddFavorites" type="button" class="btn">Remove and Add to
-                            Favorites</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
 </div>

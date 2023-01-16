@@ -75,6 +75,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
           this.router.navigate([""]);
       });
 
+      window.location.reload();
+
       this.toastrService.Notify("", "Welcome!", {
         messageType: ToastrMessageType.Info,
         position: ToastrPosition.TopCenter,
@@ -146,6 +148,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
         this.router.navigate([""]);
     });
 
+    window.location.reload();
+    
     this.toastrService.Notify("", "Welcome!", {
       messageType: ToastrMessageType.Info,
       position: ToastrPosition.TopCenter,

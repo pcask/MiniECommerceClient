@@ -1,40 +1,46 @@
+<ng-container *ngIf="(cartItems |async) |totalCount let tCount">
+    <span id="myCartTotalCount" *ngIf="tCount>0">{{tCount}}</span>
 
+    <div class="my-cart-dropdown-content">
+        <div class="my-cart-content-top">
+            <span class="my-cart-header" *ngIf="tCount == 1">My Cart
+                ({{tCount}} item)</span>
+            <span class="my-cart-header" *ngIf="tCount > 1">My Cart
+                ({{tCount}} items)</span>
+        </div>
 
-<span id="myCartTotalCount" *ngIf="totalItemCount >0">{{totalItemCount}}</span>
+        <div class="cart-items-wrapper">
 
-<div class="my-cart-dropdown-content" *ngIf="totalItemCount >0">
-    <div class="my-cart-content-top">
-        <span class="my-cart-header" *ngIf="totalItemCount ==1">My Cart
-            ({{totalItemCount}} item)</span>
-        <span class="my-cart-header" *ngIf="totalItemCount >1">My Cart
-            ({{totalItemCount}} item)</span>
-    </div>
-
-    <div class="cart-items-wrapper" *ngFor="let item of cartItems">
-        <a [routerLink]="item.productLink">
-            <img class="my-cart-pr-img" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
-            <div class="my-cart-pr-details">
-                <div class="pr-name-wrapper">
-                    <span class="my-cart-brand-name">{{item.brandName}} </span>
-                    <span class="my-cart-pr-name">{{item.productName}}</span>
-                </div>
-
-                <div>
-                    <span class="my-cart-pr-size">Size: XL</span>
-                </div>
-
-                <div>
-                    <span class="my-cart-pr-price">{{item.price |
-                        currency:'USD'}}</span>
-                </div>
+            <div class="cart-item" *ngFor="let item of cartItems|async">
+                <a [routerLink]="item.productLink">
+                    <img class="my-cart-pr-img" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
+                    <div class="my-cart-pr-details">
+                        <div class="pr-name-wrapper">
+                            <span class="my-cart-brand-name">{{item.brandName}} </span>
+                            <span class="my-cart-pr-name">{{item.productName}}</span>
+                        </div>
+    
+                        <div>
+                            <span class="my-cart-pr-size">Size: XL</span>
+                            <span class="my-cart-pr-quantity">Adet: {{item.quantity}}</span>
+                        </div>
+    
+                        <div>
+                            <span class="my-cart-pr-price">{{item.price |
+                                currency:'USD'}}</span>
+                        </div>
+                    </div>
+                </a>
+    
+                <hr>
             </div>
-        </a>
 
-        <hr class="ddd">
-    </div>
+        </div>
+        
 
-    <div class="my-cart-content-bottom">
-        <a routerLink="/my-cart" id="btnGoCart" class="btn">Go To Cart</a>
-        <a id="btnCheckout" class="btn">Checkout</a>
+        <div class="my-cart-content-bottom">
+            <a routerLink="/my-cart" id="btnGoCart" class="btn">Go To Cart</a>
+            <a id="btnCheckout" class="btn">Checkout</a>
+        </div>
     </div>
-</div>
+</ng-container>

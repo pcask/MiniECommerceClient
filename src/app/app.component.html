@@ -93,7 +93,7 @@
                             </a>
                         </div>
 
-                        <div class="my-cart hmr-item">
+                        <div class="my-cart hmr-item" (mouseenter)="showMiniCart()" (mouseleave)="hideMiniCart()">
 
                             <div class="my-cart-container">
                                 <a routerLink="/my-cart" class="hmr-item-btn my-cart-dropdown">
@@ -103,9 +103,7 @@
                                     </div>
                                 </a>
 
-                                <div id="miniCart">
-                                    <app-mini-cart></app-mini-cart>
-                                </div>
+                                <app-mini-cart id="miniCart"></app-mini-cart>
 
                             </div>
 
@@ -189,4 +187,3 @@
 <ngx-spinner name="s1" size="medium" type="ball-scale-multiple"></ngx-spinner>
 <ngx-spinner name="s2" size="medium" type="ball-spin-clockwise"></ngx-spinner>
 <ngx-spinner name="s3" size="medium" type="line-scale"></ngx-spinner>
-

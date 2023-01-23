@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, filter, from, map, mergeMap, Observable, of, pipe } from "rxjs";
+import { BehaviorSubject, filter, from, map, mergeMap, Observable, of, pipe, reduce } from "rxjs";
 import { CartService } from "src/app/services/common/models/cart.service";
 import { List } from 'immutable';
 import { CartItem } from "src/app/contracts/cart/cart-item";
@@ -9,7 +9,7 @@ import { CartItem } from "src/app/contracts/cart/cart-item";
     providedIn: 'root'
 })
 export class CartRepo {
-    
+
     private _cartItems: BehaviorSubject<List<CartItem>> = new BehaviorSubject(List([]));
 
     constructor(private cartService: CartService) {
@@ -23,6 +23,20 @@ export class CartRepo {
     get activeCartItems() {
 
         return this.cartItems.pipe(map(items => items.filter(item => item.isActive)));
+    }
+
+    get subTotal() {
+
+        return this.activeCartItems.pipe(map(items => items.reduce((a, ci) => a + (ci.quantity * ci.price), 0)));
+    }
+
+    get totalItemCount(){
+        return this.cartItems.pipe(map(items => items.reduce((a, ci) => a + ci.quantity, 0)));
+    }
+    get totalActiveItemCount(){
+        
+        return this.activeCartItems.pipe(map(items => items.reduce((a, ci) => a + ci.quantity, 0)));
+       
     }
 
     loadInitialData() {

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { List_Brand } from 'src/app/contracts/brands/list_brand';
-import { ListCartItem } from 'src/app/contracts/cart/list-cart-item';
 import { CartRepo } from 'src/app/repositories/ui/cartRepo';
 import { AuthService } from 'src/app/services/common/auth.service';
-import { BrandService } from 'src/app/services/common/models/brand.service';
-import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
+
+declare function imageZoom(imgId, lensId, resultId): any
 
 @Component({
   selector: 'app-mini-cart',
@@ -16,6 +14,8 @@ export class MiniCartComponent implements OnInit {
 
   cartItems = this.cartRepo.activeCartItems;
   storageUrl: string;
+  totalCount;
+  
  
   constructor(
     public authService: AuthService,
@@ -29,6 +29,7 @@ export class MiniCartComponent implements OnInit {
   async ngOnInit(): Promise<void> {
 
     this.storageUrl = await this.getStorageURL();
+    this.totalCount = this.cartRepo.totalActiveItemCount;
    
   }
 
@@ -36,4 +37,9 @@ export class MiniCartComponent implements OnInit {
     return (await this.fileService.getStorageBaseUrl()).url;
   }
 
+  loadImageZoom(){
+    setTimeout(() => {
+      imageZoom("productImage", "imgLens", "imageZoomedArea");
+    }, 300);
+  }
 }

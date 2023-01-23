@@ -1,15 +1,15 @@
 <div class="section-wrapper">
 
-    <div class="card noItemCont" *ngIf="((cartItems$ |async) |totalCount) == 0">
+    <div class="card noItemCont" *ngIf="(totalItemCount$ |async) == 0">
         <span id="noItemText">There are no items in your shopping cart.</span>
         <a id="iLucky" routerLink="" class="btn">
             <span>I'm Feeling Lucky</span>
         </a>
     </div>
 
-    <ng-container *ngIf="(cartItems$ |async) |totalCount let tCount">
+    <ng-container *appCustomNgIf="(totalActiveItemCount$ |async) let tCount = count">
 
-        <div class="content" *ngIf="tCount> 0">
+        <div class="content" *ngIf="(totalItemCount$ |async) > 0">
 
             <div id="myCartContainer" class="card">
 
@@ -73,7 +73,7 @@
                                 <button class="number-btn" value="-" (click)="onButtonClick(item, $event)">-</button>
 
                                 <input class="number-text" [accessKey]="item.cartItemId" type="text"
-                                    value="{{item.quantity}}" (change)="onQuantityChange(item, $event)"
+                                    value="{{item.quantity}}" (input)="onQuantityChange(item, $event)"
                                     (focusout)="onQuantityChange(item, $event)">
 
                                 <button class="number-btn" value="+" (click)="onButtonClick(item, $event)">+</button>
@@ -104,8 +104,7 @@
                             tCount + " items" :
                             tCount
                             +" item"}}</span>)</span>
-                    <span class="right-price-text" id="subtotalPrice">{{((cartItems$ |async) |subTotal) |currency
-                        :'USD'}}</span>
+                    <span class="right-price-text" id="subtotalPrice">{{(subTotal$ |async) |currency:'USD'}}</span>
                 </div>
 
                 <div id="shippingCont">
@@ -117,12 +116,11 @@
 
                 <div id="totalCont">
                     <h1>Total</h1>
-                    <span class="right-price-text" id="totalPrice">{{((cartItems$ |async) |subTotal) |currency
-                        :'USD'}}</span>
+                    <span class="right-price-text" id="totalPrice">{{(subTotal$ |async) |currency:'USD'}}</span>
                 </div>
 
                 <div>
-                    <button id="btnCheckout" class="btn">Proceed to Checkout</button>
+                    <a routerLink="payment" id="btnCheckout" class="btn">Proceed to Checkout</a>
                 </div>
 
                 <hr>
@@ -135,7 +133,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
@@ -168,7 +165,6 @@
             </div>
 
         </div>
-
 
     </ng-container>
 

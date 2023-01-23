@@ -1,14 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/contracts/cart/cart-item';
 import { ListCartItem } from 'src/app/contracts/cart/list-cart-item';
-import { UpdateCartItem } from 'src/app/contracts/cart/update-cart-item';
 import { CartRepo } from 'src/app/repositories/ui/cartRepo';
 import { AuthService } from 'src/app/services/common/auth.service';
-import { BrandService } from 'src/app/services/common/models/brand.service';
-import { CartService } from 'src/app/services/common/models/cart.service';
 import { FileService } from 'src/app/services/common/models/file.service';
 import { List } from 'immutable';
-import { BehaviorSubject, Observable, Subscription, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 declare var $: any;
 declare var bootstrap: any;
@@ -28,6 +25,9 @@ export class GetCartItemsComponent implements OnInit {
 
   cartItems$: Observable<List<CartItem>>;
   storageUrl: string;
+  subTotal$:Observable<number>;
+  totalActiveItemCount$:Observable<number>;
+  totalItemCount$:Observable<number>;
 
   async ngOnInit() {
 
@@ -36,6 +36,9 @@ export class GetCartItemsComponent implements OnInit {
       this.storageUrl = await this.getStorageURL();
 
       this.cartItems$ = this.cartRepo.cartItems;
+      this.subTotal$ = this.cartRepo.subTotal;
+      this.totalActiveItemCount$ = this.cartRepo.totalActiveItemCount;
+      this.totalItemCount$ = this.cartRepo.totalItemCount;
 
       setTimeout(() => {
         this.setElementsEvent();
@@ -114,6 +117,8 @@ export class GetCartItemsComponent implements OnInit {
 
   async onQuantityChange(item: CartItem, event: any) {
 
+    this.setElementsEvent();
+
     var valueText = event.target.oldValue;
 
     if (valueText == "" || valueText == " ") {
@@ -167,7 +172,13 @@ function setInputFilter(textbox: Element, inputFilter: (value: string) => boolea
     textbox.addEventListener(event, function (this: (HTMLInputElement | HTMLTextAreaElement) & { oldValue: string; oldSelectionStart: number | null, oldSelectionEnd: number | null }) {
 
       if (this.value.length > 1 && this.value.includes(" ")) {
-        this.value = this.value.replace(/\s/g, "")
+        this.value = this.value.replace(/\s/g, "");
+        if (this.value == "")
+          this.value = "1"
+      }
+
+      if (this.value.length > 1 && this.value[0] == "0") {
+        this.value = this.value[1];
       }
 
       if (parseInt(this.value) > 10) {
@@ -192,7 +203,7 @@ function setInputFilter(textbox: Element, inputFilter: (value: string) => boolea
         }
       }
       else {
-        this.value = "";
+        this.value = "1";
       }
     });
   });

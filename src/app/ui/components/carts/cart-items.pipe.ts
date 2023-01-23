@@ -2,6 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { List } from 'immutable';
 import { CartItem } from 'src/app/contracts/cart/cart-item';
 
+
+// Şuan için herhangi bir yerde kullanılmıyor. Custom Pipe kullanımına çalışan bir örnek oluşturmasını açısından silmiyorum.
 @Pipe({
     name: 'totalCount'
 })

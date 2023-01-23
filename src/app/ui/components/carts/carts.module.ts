@@ -5,16 +5,15 @@ import { RouterModule } from '@angular/router';
 import { GetCartItemsComponent } from './get-cart-items/get-cart-items.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MiniCartComponent } from './mini-cart/mini-cart.component';
-import { SubTotalPipe, TotalCountPipe } from './cart-items.pipe';
+import { CustomNgIfDirective } from 'src/app/directives/ui/custom-ng-if.directive';
 
 
 @NgModule({
   declarations: [
     CartsComponent,
     GetCartItemsComponent,
-    TotalCountPipe,
-    SubTotalPipe,
     MiniCartComponent,
+    CustomNgIfDirective,
   ],
   imports: [
     CommonModule,

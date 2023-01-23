@@ -13,10 +13,11 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginModule } from './ui/components/login/login.module';
 import { FacebookLoginProvider, GoogleInitOptions, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import { CustomNgIfDirective } from './directives/ui/custom-ng-if.directive';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

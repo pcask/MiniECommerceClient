@@ -42,11 +42,11 @@ export class GetProductComponent implements OnInit {
   async ngOnInit(): Promise<void> {
 
     await this.loadProduct().then(d => {
-      // Zoom Js dosyasının tüm sayfa yüklendikten sonra yüklenmesi gerekiyor angular lifecycle daki eventler ihtiyacımı karşılamadığı için
+      // Zoom Js dosyasının tüm sayfa yüklendikten sonra yüklenmesi gerekiyor angular life-cycle daki eventler ihtiyacımı karşılamadığı için
       // küçük bir ms bekledikten sonra js func'ı çağırıyorum. 
       setTimeout(() => {
         imageZoom("productImage", "imgLens", "imageZoomedArea");
-      }, 200);
+      }, 300);
 
     });
 

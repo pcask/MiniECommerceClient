@@ -1,0 +1,108 @@
+<div class="section-wrapper">
+
+    <div class="content" *ngIf="totalActiveItemCount$ |async let tCount">
+
+
+        <div id="myCartContainer" class="card">
+
+
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                <div class="accordion-item" style="margin:4px">
+                    <h2 class="accordion-header" id="flush-headingOne" style="margin: 0px;">
+                        <button class="accordion-button" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                            aria-controls="flush-collapseOne">
+
+                        <!-- <div class="address-nav"> -->
+
+                            <h1 class="addressNavH1">Delivery address</h1>
+
+                            <div id="adressNavText">
+                                <span>Ev</span>
+                                <span>Şahintepe Mah. Uğurmumcu Cad. Ersin Sok. No:57</span>
+                                <span>Başakşehir/İstanbul</span>
+                            </div>
+
+                            <!-- <div class="address-nav-buttons">
+                                <button id="btnAddressOperations" type="button" class="collapsed btn btn-primary"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne"
+                                    (click)="doAddressOperations($event)">Change</button>
+                            </div> -->
+
+                        <!-- </div> -->
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+
+                            <div id="addNewAddressCont">
+                                <button id="btnAddNewAddress" type="button" data-bs-toggle="modal" data-bs-target="#modalAddNewAddress">
+                                    <i class="bi bi-plus-circle" style="font-size: 18px;"></i>
+                                    <span style="font-size: 14px; font-weight: 500; margin-left: 5px;">
+                                        Add a new address
+                                    </span>
+                                </button>
+                            </div>
+                            
+                            <div class="address-container">
+                                <app-add-user-address></app-add-user-address>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item" style="margin:4px">
+                    <h2 class="accordion-header" id="flush-headingTwo" style="margin: 0px;">
+                        <button style="padding: 16px;" class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                            aria-controls="flush-collapseTwo">
+                            <h1 class="addressNavH1">Payment options</h1>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                            demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion
+                            body. Let's imagine this being filled with some actual content.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="orderSummaryContainer" class="card">
+            <h1>Order Summary</h1>
+            <div id="subtotalCont">
+                <span class="right-price-explain">Subtotal (<span id="subtotalCount">{{tCount > 1 ?
+                        tCount + " items" :
+                        tCount
+                        +" item"}}</span>)</span>
+                <span class="right-price-text" id="subtotalPrice">{{ (subTotal$ |async) |currency:'USD' }}</span>
+            </div>
+
+            <div id="shippingCont">
+                <span class="right-price-explain">Shipping</span>
+                <span class="right-price-text" id="shippingPrice">Free</span>
+            </div>
+
+            <hr>
+
+            <div id="totalCont">
+                <h1>Total</h1>
+                <span class="right-price-text" id="totalPrice">{{ (subTotal$ |async) |currency:'USD' }}</span>
+            </div>
+
+            <div>
+                <a id="btnCheckout" class="btn">Proceed to Checkout</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

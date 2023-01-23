@@ -19,6 +19,7 @@ const routes: Routes = [
   },
   { path: "", component: HomeComponent, canActivate: [UiAuthGuard] },
   { path: "my-cart", loadChildren: () => import("./ui/components/carts/carts.module").then(module => module.CartsModule), canActivate: [UiAuthGuard] },
+  { path: "my-cart/payment", loadChildren: () => import("./ui/components/payment/payment.module").then(module => module.PaymentModule), canActivate: [UiAuthGuard] },
   { path: "products", loadChildren: () => import("./ui/components/products/products.module").then(module => module.ProductsModule), canActivate: [UiAuthGuard] },
   { path: "product/:brand/:productName&id", loadChildren: () => import("./ui/components/product-details/product-details.module").then(module => module.ProductDetailsModule), canActivate: [UiAuthGuard] },
   { path: "register", loadChildren: () => import("./ui/components/register/register.module").then(module => module.RegisterModule), canActivate: [UiAuthGuard] },

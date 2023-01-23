@@ -1,4 +1,4 @@
-<ng-container *ngIf="(cartItems |async) |totalCount let tCount">
+<ng-container *ngIf="totalCount |async let tCount">
     <span id="myCartTotalCount" *ngIf="tCount>0">{{tCount}}</span>
 
     <div class="my-cart-dropdown-content">
@@ -13,7 +13,7 @@
 
             <div class="cart-item" *ngFor="let item of cartItems|async">
                 <a [routerLink]="item.productLink">
-                    <img class="my-cart-pr-img" src="{{storageUrl + '/'+ item.imagePath}}" alt="">
+                    <img class="my-cart-pr-img" src="{{storageUrl + '/'+ item.imagePath}}" alt="" (click)="loadImageZoom()">
                     <div class="my-cart-pr-details">
                         <div class="pr-name-wrapper">
                             <span class="my-cart-brand-name">{{item.brandName}} </span>
@@ -40,7 +40,7 @@
 
         <div class="my-cart-content-bottom">
             <a routerLink="/my-cart" id="btnGoCart" class="btn">Go To Cart</a>
-            <a id="btnCheckout" class="btn">Checkout</a>
+            <a routerLink="/my-cart/payment" id="btnCheckout" class="btn">Checkout</a>
         </div>
     </div>
 </ng-container>

@@ -42,13 +42,13 @@ export class RegisterComponent extends BaseComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(6),
-          CustomValidators.patternValidator(new RegExp("(?=.*[0-9])"), {
+          RegisterCustomValidators.patternValidator(new RegExp("(?=.*[0-9])"), {
             requiresDigit: true
           }),
-          CustomValidators.patternValidator(new RegExp("(?=.*[A-Z])"), {
+          RegisterCustomValidators.patternValidator(new RegExp("(?=.*[A-Z])"), {
             requiresUppercase: true
           }),
-          CustomValidators.patternValidator(new RegExp("(?=.*[a-z])"), {
+          RegisterCustomValidators.patternValidator(new RegExp("(?=.*[a-z])"), {
             requiresLowercase: true
           })
         ])
@@ -59,7 +59,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       termOfUse: ["", [
         Validators.requiredTrue
       ]]
-    }, { validators: CustomValidators.MatchValidator });
+    }, { validators: RegisterCustomValidators.MatchValidator });
 
   }
 
@@ -115,12 +115,12 @@ export class RegisterComponent extends BaseComponent implements OnInit {
 
 }
 
-export class CustomValidators {
+export class RegisterCustomValidators {
   static MatchValidator(control: AbstractControl) {
     const password: string = control.get("password").value; // get password from our password form control
     const rePassword: string = control.get("rePassword").value; // get password from our confirmPassword form control
 
-
+    debugger;
     // if the confirmPassword value is null or empty, don't return an error.
     if (!rePassword?.length) {
       return null;

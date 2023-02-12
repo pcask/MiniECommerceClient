@@ -70,9 +70,9 @@ function imageZoom(imgId, lensId, resultId) {
                 y = pos.y - (lens.offsetHeight / 2);
 
                 /*prevent the lens from being positioned outside the image:*/
-                if (x > prImg.width - lens.offsetWidth) { x = prImg.width - lens.offsetWidth; }
+                if (x > imgRenWidth - lens.offsetWidth) { x = imgRenWidth - lens.offsetWidth; }
                 if (x < 0) { x = 0; }
-                if (y > prImg.height - lens.offsetHeight) { y = prImg.height - lens.offsetHeight; }
+                if (y > imgRenHeight - lens.offsetHeight) { y = imgRenHeight - lens.offsetHeight; }
                 if (y < 0) { y = 0; }
                 /*set the position of the lens:*/
                 lens.style.left = x + "px";

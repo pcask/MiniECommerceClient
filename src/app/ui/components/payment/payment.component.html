@@ -6,50 +6,86 @@
         <div id="myCartContainer" class="card">
 
 
-
             <div class="accordion accordion-flush" id="accordionFlushExample">
 
                 <div class="accordion-item" style="margin:4px">
                     <h2 class="accordion-header" id="flush-headingOne" style="margin: 0px;">
-                        <button class="accordion-button" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 
-                        <!-- <div class="address-nav"> -->
 
                             <h1 class="addressNavH1">Delivery address</h1>
 
                             <div id="adressNavText">
-                                <span>Ev</span>
-                                <span>Şahintepe Mah. Uğurmumcu Cad. Ersin Sok. No:57</span>
-                                <span>Başakşehir/İstanbul</span>
+                                <span>{{activeUserAddress.addressTitle}}</span>
+                                <span>{{activeUserAddress.neighborhoodName + " " +
+                                    activeUserAddress.addressDetail}}</span>
+                                <span>{{activeUserAddress.districtName + "/" +
+                                    activeUserAddress.provinceName}}</span>
                             </div>
 
-                            <!-- <div class="address-nav-buttons">
-                                <button id="btnAddressOperations" type="button" class="collapsed btn btn-primary"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                    aria-controls="flush-collapseOne"
-                                    (click)="doAddressOperations($event)">Change</button>
-                            </div> -->
-
-                        <!-- </div> -->
                         </button>
                     </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
 
                             <div id="addNewAddressCont">
-                                <button id="btnAddNewAddress" type="button" data-bs-toggle="modal" data-bs-target="#modalAddNewAddress">
+                                <button id="btnAddNewAddress" type="button" (click)="loadUserAddressModalToAdd()">
                                     <i class="bi bi-plus-circle" style="font-size: 18px;"></i>
-                                    <span style="font-size: 14px; font-weight: 500; margin-left: 5px;">
+                                    <span>
                                         Add a new address
                                     </span>
                                 </button>
                             </div>
-                            
+
                             <div class="address-container">
-                                <app-add-user-address></app-add-user-address>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mt-4" *ngFor="let add of userAddresses; let i = index">
+                                        <div class="card address-card" [ngClass]="{'selected' : add.showcase}">
+                                            <div class="card-body address-card-body"
+                                                (click)="setDeliveryAddress(add.id)">
+                                                <div class="address-header">
+                                                    <h2>{{add.addressTitle}}</h2>
+                                                </div>
+                                                <div class="address-content-header">
+                                                    <div>
+                                                        <i class="bi bi-person-fill"></i>
+                                                        <span>{{add.firstName +" "+ add.lastName}}</span>
+                                                    </div>
+
+                                                    <div>
+                                                        <i class="bi bi-phone-fill"></i>
+                                                        <span>{{add.phoneNumber}}</span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="address-content-body">
+                                                    <span>{{add.addressDetail}}</span>
+                                                    <span>{{ add.neighborhoodName+ " (" + add.zipCode + "), " +
+                                                        add.districtName + "/" +
+                                                        add.provinceName}}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-footer address-card-footer">
+                                                <div class="radio-container">
+                                                    <input type="radio" name="deliveryAddress" id="{{i}}"
+                                                        [checked]="add.showcase" (click)="setDeliveryAddress(add.id)">
+                                                    <label for="{{i}}">Set delivery address</label>
+                                                </div>
+                                                <div class="edit-container">
+                                                    <i class="bi bi-pencil-square"
+                                                        (click)="loadUserAddressModalToEdit(add)"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <app-user-address-modal
+                                    (userAddressModalSubmitEvent)="loadUserAddresses()"></app-user-address-modal>
                             </div>
 
                         </div>

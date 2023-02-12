@@ -10,11 +10,12 @@
     margin-right: 20px;
 }
 
-.accordion-button{
+.accordion-button {
     padding: 0px 16px;
     height: 60px;
     transition: all .5s;
 }
+
 .address-nav {
     padding: 0px 16px;
     display: flex;
@@ -27,18 +28,18 @@
     font-weight: 500;
 }
 
-.accordion-button.collapsed{
+.accordion-button.collapsed {
     background-color: #f3f3f3;
     box-shadow: none;
 }
 
-.accordion-button:not(.collapsed){
+.accordion-button:not(.collapsed) {
     color: var(--bs-body-color);
     background-color: white;
     box-shadow: 0 4px 0px 0px var(--deepPurple);
 }
 
-.accordion-button:not(.collapsed) .addressNavH1{
+.accordion-button:not(.collapsed) .addressNavH1 {
     color: #ff6000;
 }
 
@@ -51,16 +52,17 @@
     padding-left: 40px;
 }
 
-.accordion-body{
+.accordion-body {
     padding: 20px 16px 16px 16px;
 }
 
-#addNewAddressCont{
+#addNewAddressCont {
     display: flex;
     justify-content: flex-end;
+    margin-top: 4px;
 }
 
-#btnAddNewAddress{
+#btnAddNewAddress {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,6 +71,12 @@
     background-color: white;
     padding: 0px;
     color: #ff6000;
+}
+
+#addNewAddressCont span {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 5px;
 }
 
 #orderSummaryContainer {
@@ -121,4 +129,108 @@
 
 #btnCheckout:hover {
     background-color: var(--darkPurple);
+}
+
+.address-card {
+    background-color: #f3f3f3;
+}
+
+.address-card.selected {
+    border: 2px solid var(--orange);
+    background-color: #ffe8dd;
+}
+
+.address-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.address-card-body {
+    cursor: pointer;
+}
+
+.address-content-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.address-content-header i {
+    font-size: 18px;
+    color: var(--orange);
+}
+
+.address-content-header span {
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: text-bottom;
+    margin-left: 5px;
+}
+
+.address-content-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-content-body span {
+    margin-top: 10px;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-card-footer {
+    background-color: #f3f3f3;
+}
+
+.radio-container {
+    display: flex;
+}
+
+.radio-container label {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+[type=radio] {
+    cursor: pointer;
+    content: "";
+    width: 18px;
+    height: 18px;
+    background-color: #ffa500;
+}
+
+[type=radio]:checked {
+    /* The native appearance is hidden */
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* For a circular appearance we need a border-radius. */
+    border-radius: 50%;
+
+    /* The background will be the radio dot's color. */
+    background: #FF572233;
+
+    /* The border will be the spacing between the dot and the outer circle */
+    border: 4px solid #FFF;
+
+    /* And by creating a box-shadow with no offset and no blur, we have an outer circle */
+    box-shadow: 0 0 0 1px var(--orange);
+    background-color: var(--orange);
+}
+
+
+.edit-container {
+    display: flex;
+}
+
+.edit-container i {
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--orange);
 }

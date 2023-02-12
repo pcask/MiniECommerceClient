@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaymentComponent } from './payment.component';
 import { RouterModule } from '@angular/router';
-import { AddUserAddressModule } from 'src/app/services/ui/add-user-address/add-user-address.module';
+import { UserAddressModalModule } from 'src/app/services/ui/user-address-modal/user-address-modal.module';
 
 
 
@@ -12,7 +12,7 @@ import { AddUserAddressModule } from 'src/app/services/ui/add-user-address/add-u
   ],
   imports: [
     CommonModule,
-    AddUserAddressModule,
+    UserAddressModalModule,
     RouterModule.forChild([{
       path: "", component: PaymentComponent
     }])

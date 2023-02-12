@@ -1,0 +1,166 @@
+<!-- Modal -->
+<div class="modal fade" id="userAddressModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalTitle">Add Address</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form [formGroup]="addressForm" (ngSubmit)="onSubmit(addressForm.value)"
+                    class="row g-3 needs-validation" novalidate id="addressForm">
+
+                    <div class="col-md-6">
+                        <label for="inputFirstName" class="form-label">First name</label>
+                        <input formControlName="firstName" type="text" class="form-control" id="inputFirstName" required
+                            maxlength="30">
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputLastName" class="form-label">Last name</label>
+                        <input formControlName="lastName" type="text" class="form-control" id="inputLastName" required
+                            maxlength="30">
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputPhoneNumber" class="form-label">Phone Number</label>
+                        <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhoneNumber"
+                            value="0(5__) ___ __ __" required maxLength="16" minlength="16"
+                            pattern="[0][(][5][0-9]{2}[)]\s[0-9]{3}\s[0-9]{2}\s[0-9]{2}">
+                        <div class="invalid-feedback">
+                            Please enter a valid phone number.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="selectCity" class="form-label">City</label>
+                        <select formControlName="provinceId" class="form-select" id="selectCity" required
+                            (change)="onCitySelectedChange($event)"
+                            [ngClass]="{'is-valid': submitted && !Controls['provinceId'].errors, 
+                                                'is-invalid': submitted && Controls['provinceId'].errors}">
+                            <option selected disabled value="">Choose</option>
+                            <option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid city.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="selectDistrict" class="form-label">District</label>
+                        <select formControlName="districtId" class="form-select select-disabled" id="selectDistrict"
+                            required (change)="onDistrictSelectedChange($event)">
+                            <option selected disabled value="">Choose</option>
+                            <option *ngFor="let district of districts" value="{{district.id}}">{{district.name}}
+                            </option>
+
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid district.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="selectNeighborhood" class="form-label">Neighborhood</label>
+                        <select formControlName="neighborhoodId" class="form-select select-disabled"
+                            id="selectNeighborhood" required>
+                            <option selected disabled value="">Choose</option>
+                            <option *ngFor="let neighborhood of neighborhoods" value="{{neighborhood.id}}">
+                                {{neighborhood.name}}</option>
+
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid neighborhood.
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <label for="textareaAddress" class="form-label">Address</label>
+                        <textarea formControlName="addressDetail" class="form-control" id="textareaAddress"
+                            required maxlength="250"></textarea>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputAddressTitle" class="form-label">Address Title</label>
+                        <input formControlName="addressTitle" type="text" class="form-control" id="inputAddressTitle"
+                            required maxlength="30">
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="checkboxInvoiceType" class="form-label">Invoice Type</label>
+                        <div class="switch-container form-control">
+                            <div id="btnIndividual" class="switch-selected switch-btn" (click)="hideCorporateSection()">
+                                Individual</div>
+                            <div id="btnCorporate" class="switch-btn" (click)="showCorporateSection()">Corporate</div>
+                            <div class="toggle" id="btnToggle"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row g-3" id="corporate-section">
+
+                        <div class="col-md-6">
+                            <label for="inputCompanyName" class="form-label">Company Name</label>
+                            <input formControlName="companyName" type="text" class="form-control" id="inputCompanyName" maxlength="120">
+                            <div class="invalid-feedback">
+                                This field is required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputTin" class="form-label">Tax Identification Number</label>
+                            <input formControlName="tin" type="text" class="form-control" id="inputTin" maxlength="11">
+                            <div class="invalid-feedback">
+                                This field is required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputTaxOffice" class="form-label">Tax Office</label>
+                            <input formControlName="taxOffice" type="text" class="form-control" id="inputTaxOffice" maxlength="120">
+                            <div class="invalid-feedback">
+                                This field is required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 e-invoice-check-cont">
+                            <div class="form-check">
+                                <input formControlName="isEInvoicePayer" class="form-check-input" type="checkbox"
+                                    id="checkEInvoicePayer">
+                                <label class="form-check-label" for="checkEInvoicePayer">
+                                    I'm an e-Invoice Payer.
+                                </label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+                        <button id="btnSave" class="btn app-btn-primary" type="submit">Save</button>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
